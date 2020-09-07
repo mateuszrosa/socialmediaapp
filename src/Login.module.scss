@@ -23,12 +23,30 @@
 
     form {
       display: flex;
-      flex-direction: column;
+      width: 40%;
+      //   flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
+
+      label {
+        margin-bottom: 2.5px;
+        width: 60%;
+        text-align: center;
+      }
 
       input {
         margin-bottom: 7.5px;
+        width: 70%;
+
+        &[type="submit"] {
+          margin-right: 20px;
+        }
+
+        &[type="submit"],
+        &[type="button"] {
+          width: 30%;
+        }
       }
     }
   }
