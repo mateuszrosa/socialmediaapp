@@ -26,8 +26,17 @@
                 text-align: center;
                 margin-bottom: 20px;
 
+                &:first-of-type {
+                    position: absolute;
+                    top: 0;
+                }
+
                 &:nth-last-child(1) {
                     justify-self: flex-end;
+                }
+
+                img {
+                    width: 100%;
                 }
 
                 a {

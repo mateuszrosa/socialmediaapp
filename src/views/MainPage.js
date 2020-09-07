@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../assets/logo.png";
 import styles from "./MainPage.module.scss";
 
 const MainPage = () => {
@@ -6,6 +7,9 @@ const MainPage = () => {
     <div className={styles.container}>
       <div className={styles.menu}>
         <ul>
+          <li>
+            <img src={logo} alt="" />
+          </li>
           <li>
             <a href="">home</a>
           </li>
