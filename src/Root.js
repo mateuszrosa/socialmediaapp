@@ -1,7 +1,8 @@
 import React from "react";
+import Login from "./Login";
 
 function Root() {
-  return <h1 > Hello < /h1>;
+  return <Login />;
 }
 
 export default Root;
