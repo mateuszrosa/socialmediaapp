@@ -1,15 +1,11 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import styles from "./mobile.module.scss";
-
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "./MainPage.module.scss";
 
 const MainPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
-        <FontAwesomeIcon icon={faHome} className={styles.icon} />
         <ul>
           <li>
             <a href="">home</a>
@@ -27,7 +23,6 @@ const MainPage = () => {
       </div>
       <div className={styles.main}>
         <header>
-          <img src={logo} alt="" />
           <form action="">
             <input
               type="search"
@@ -37,7 +32,25 @@ const MainPage = () => {
             />
             <input type="submit" value="Search" />
           </form>
+          <img src={logo} alt="" />
         </header>
+        <div className={styles.window}>
+          <div className={styles.text}>
+            <h1>Welcome to SocialMediaApp</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consequatur voluptatibus omnis alias sunt. Blanditiis enim esse
+              dignissimos iure officia veritatis nulla alias nostrum reiciendis.
+              Nemo ducimus error consequatur ab consectetur?
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
+              numquam minima ea consectetur earum quas ex incidunt aperiam
+              ratione sequi minus, non doloremque deleniti ullam quo. Tenetur
+              consequatur molestias rerum?
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

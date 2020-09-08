@@ -6,7 +6,7 @@
 
     .menu {
         height: 100%;
-        width: 100%;
+        width: 150px;
         border-right: 1px solid black;
         background-color: #fff;
         position: fixed;
@@ -47,6 +47,8 @@
     }
 
     .main {
+        display: flex;
+        flex-direction: column;
         margin-left: 150px;
         height: 100%;
         background-color: #d3d9;
@@ -54,13 +56,14 @@
 
         header {
             display: flex;
-            // justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             height: 120px;
             background-color: #dedede;
 
             img {
                 width: 120px;
+                margin-right: 10px;
             }
 
             form {
@@ -68,6 +71,34 @@
 
                 input {
                     font-size: 30px;
+                }
+            }
+        }
+
+        .window {
+            background-color: #fff;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+
+            .text {
+                width: 55%;
+                height: 70%;
+                display: flex;
+                flex-direction: column;
+                align-self: center;
+
+                h1 {
+                    text-align: center;
+                    font-size: 45px;
+                }
+
+                p {
+                    margin-top: 25px;
+
+                    &:nth-last-of-type(1) {
+                        margin-top: 15px;
+                    }
                 }
             }
         }
