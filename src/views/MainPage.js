@@ -8,9 +8,6 @@ const MainPage = () => {
       <div className={styles.menu}>
         <ul>
           <li>
-            <img src={logo} alt="" />
-          </li>
-          <li>
             <a href="">home</a>
           </li>
           <li>
@@ -25,7 +22,18 @@ const MainPage = () => {
         </ul>
       </div>
       <div className={styles.main}>
-        <header></header>
+        <header>
+          <img src={logo} alt="" />
+          <form action="">
+            <input
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Write here"
+            />
+            <input type="submit" value="Search" />
+          </form>
+        </header>
       </div>
     </div>
   );

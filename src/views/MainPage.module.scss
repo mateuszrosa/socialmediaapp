@@ -26,11 +26,6 @@
                 text-align: center;
                 margin-bottom: 20px;
 
-                &:first-of-type {
-                    position: absolute;
-                    top: 0;
-                }
-
                 &:nth-last-child(1) {
                     justify-self: flex-end;
                 }
@@ -58,11 +53,22 @@
         flex-grow: 1;
 
         header {
+            display: flex;
+            // justify-content: space-between;
+            align-items: center;
             height: 120px;
             background-color: #dedede;
 
-            h1 {
-                margin-top: 0;
+            img {
+                width: 120px;
+            }
+
+            form {
+                margin-left: 50px;
+
+                input {
+                    font-size: 30px;
+                }
             }
         }
     }
