@@ -1,10 +1,17 @@
 import React from "react";
+import Sidebar from "./Sidebar";
+import Page from "./Page";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
-import MainPage from "./MainPage";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 function Root() {
-  return <MainPage />;
+  return (
+    <div className="container">
+      <Sidebar />
+      <Page />
+    </div>
+  );
 }
 
 export default Root;
