@@ -1,11 +1,15 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import styles from "./MainPage.module.scss";
+import styles from "./mobile.module.scss";
+
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MainPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
+        <FontAwesomeIcon icon={faHome} className={styles.icon} />
         <ul>
           <li>
             <a href="">home</a>
