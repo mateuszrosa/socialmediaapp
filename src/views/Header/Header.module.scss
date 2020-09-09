@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100vw - 150px);
+    background-color: #dedede;
+    position: fixed;
+    margin-left: 150px;
+
+    img {
+        width: 120px;
+        margin-right: 50px;
+    }
+
+    form {
+        margin-left: 50px;
+
+        input {
+            font-size: 30px;
+        }
+    }
+}

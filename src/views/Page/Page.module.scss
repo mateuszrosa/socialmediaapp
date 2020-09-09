@@ -6,27 +6,6 @@
     background-color: #d3d9;
     flex-grow: 1;
 
-    header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 120px;
-        background-color: #dedede;
-
-        img {
-            width: 120px;
-            margin-right: 10px;
-        }
-
-        form {
-            margin-left: 50px;
-
-            input {
-                font-size: 30px;
-            }
-        }
-    }
-
     .window {
         background-color: #fff;
         flex-grow: 1;

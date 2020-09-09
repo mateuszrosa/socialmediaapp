@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/logo.png";
 import styles from "./Sidebar.module.scss";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 

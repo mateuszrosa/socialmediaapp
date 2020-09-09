@@ -1,22 +1,10 @@
 import React from "react";
 import styles from "./Page.module.scss";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 const Page = () => {
   return (
     <div className={styles.main}>
-      <header>
-        <form action="">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Write here"
-          />
-          <input type="submit" value="Search" />
-        </form>
-        <img src={logo} alt="" />
-      </header>
       <div className={styles.window}>
         <div className={styles.text}>
           <h1>Welcome to SocialMediaApp</h1>
