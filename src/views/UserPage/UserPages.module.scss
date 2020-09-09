@@ -4,11 +4,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
+    background-color: #fff;
 
     .login {
         position: relative;
         height: 50%;
-        width: 40%;
+        width: 50%;
         border: 1px solid black;
         display: flex;
         flex-direction: column;
