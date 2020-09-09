@@ -8,8 +8,17 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 function Root() {
   return (
     <div className="container">
-      <Sidebar />
-      <Page />
+      <Router>
+        <Sidebar />
+        <Switch>
+          <Route exact path="/">
+            <Page />
+          </Route>
+          <Route path="/logout">
+            <LoginPage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
