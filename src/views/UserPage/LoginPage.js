@@ -21,7 +21,7 @@ class LoginPage extends Component {
       .post(url)
       .then((res) => {
         console.log(`statusCode: ${res.status}`);
-        console.log(res);
+        console.log(res.request.response);
       })
       .catch((error) => {
         console.error(error);
@@ -30,12 +30,14 @@ class LoginPage extends Component {
     e.target.reset();
   }
 
+  // onSubmit={(e) => this.sendForm(e)}
+
   render() {
     return (
       <div className={styles.container}>
         <div className={styles.login}>
           <h1>Just Log In</h1>
-          <form onSubmit={(e) => this.sendForm(e)}>
+          <form action="http://localhost:3500" method="post">
             <label htmlFor="login">Login</label>
             <input type="text" name="login" id="login" />
             <label htmlFor="password">Password</label>
