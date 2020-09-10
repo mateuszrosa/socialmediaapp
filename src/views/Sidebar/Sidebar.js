@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Sidebar.module.scss";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (

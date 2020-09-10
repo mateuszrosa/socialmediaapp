@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Page.module.scss";
-import logo from "../../assets/logo.png";
 
 const Page = () => {
   return (
