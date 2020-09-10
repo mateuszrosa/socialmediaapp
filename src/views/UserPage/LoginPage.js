@@ -20,10 +20,13 @@ class LoginPage extends Component {
     axios
       .post(url)
       .then((res) => {
+        console.log(`statusCode: ${res.status}`);
         console.log(res);
-        console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.error(error);
+      });
+
     e.target.reset();
   }
 

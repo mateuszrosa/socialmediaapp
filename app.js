@@ -6,8 +6,15 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/", (req, res) => {
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Content-Type", "text/plain");
+  next();
+});
+
+app.all("/", (req, res) => {
   console.log(req.query);
+  res.end("Succes");
 });
 
 app.listen(port, () => {
