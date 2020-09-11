@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
 import Page from "../Page/Page";
 import LoginPage from "../UserPage/LoginPage";
+import RegisterPage from "../UserPage/RegisterPage";
 import Profile from "../Profile/Profile";
 import Friends from "../Friends/Friends";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -25,6 +26,9 @@ function Root() {
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/register">
+          <RegisterPage />
         </Route>
       </Switch>
     </Router>

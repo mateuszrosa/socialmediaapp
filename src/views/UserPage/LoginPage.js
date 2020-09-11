@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import styles from "./UserPages.module.scss";
 import axios from "axios";
 
@@ -30,20 +31,18 @@ class LoginPage extends Component {
     e.target.reset();
   }
 
-  // onSubmit={(e) => this.sendForm(e)}
-
   render() {
     return (
       <div className={styles.container}>
         <div className={styles.login}>
           <h1>Just Log In</h1>
-          <form action="http://localhost:3500" method="post">
+          <form action="http://localhost:3500/login" method="post">
             <label htmlFor="login">Login</label>
             <input type="text" name="login" id="login" />
             <label htmlFor="password">Password</label>
             <input type="password" name="password" id="password" />
             <input type="submit" value="Log In" />
-            <input type="button" value="Register" />
+            <Link to="/register">I want my account!</Link>
           </form>
         </div>
       </div>

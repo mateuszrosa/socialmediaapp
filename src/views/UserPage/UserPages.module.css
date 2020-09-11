@@ -39,5 +39,8 @@
   width: 70%;
 }
 .container .login form input[type=submit] {
-  width: 50%;
+  margin-right: 20px;
+}
+.container .login form input[type=submit], .container .login form input[type=button] {
+  width: 30%;
 }

@@ -16,13 +16,32 @@ MongoClient.connect(baseUrl, {
     const usersCollection = db.collection("users");
     app.use(bodyParser.urlencoded({ extended: true }));
 
+    // app.use(function(req, res, next) {
+    //   res.header("Access-Control-Allow-Origin", "*");
+    //   res.header("Content-Type", "text/plain");
+    //   next();
+    // });
+
     app.get("/", (req, res) => {
+      const cursor = db
+        .collection("users")
+        .find()
+        .toArray()
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err));
       res.send("Hello World!");
     });
-    app.all("/", (req, res) => {
-      const { login, password } = req.body;
+    app.post("/login", (req, res) => {
       usersCollection
-        .insertOne({ login, password })
+        .insertOne(req.body)
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err));
+      res.redirect("http://localhost:3000");
+    });
+
+    app.post("/register", (req, res) => {
+      usersCollection
+        .insertOne(req.body)
         .then((res) => console.log(res))
         .catch((err) => console.error(err));
       res.redirect("http://localhost:3000");
@@ -33,9 +52,3 @@ MongoClient.connect(baseUrl, {
     });
   })
   .catch((error) => console.error(error));
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Content-Type", "text/plain");
-//   next();
-// });

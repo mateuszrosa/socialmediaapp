@@ -19,18 +19,30 @@ MongoClient.connect(baseUrl, {
   var usersCollection = db.collection("users");
   app.use(bodyParser.urlencoded({
     extended: true
-  }));
+  })); // app.use(function(req, res, next) {
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   res.header("Content-Type", "text/plain");
+  //   next();
+  // });
+
   app.get("/", function (req, res) {
+    var cursor = db.collection("users").find().toArray().then(function (res) {
+      return console.log(res);
+    })["catch"](function (err) {
+      return console.error(err);
+    });
     res.send("Hello World!");
   });
-  app.all("/", function (req, res) {
-    var _req$body = req.body,
-        login = _req$body.login,
-        password = _req$body.password;
-    usersCollection.insertOne({
-      login: login,
-      password: password
-    }).then(function (res) {
+  app.post("/login", function (req, res) {
+    usersCollection.insertOne(req.body).then(function (res) {
+      return console.log(res);
+    })["catch"](function (err) {
+      return console.error(err);
+    });
+    res.redirect("http://localhost:3000");
+  });
+  app.post("/register", function (req, res) {
+    usersCollection.insertOne(req.body).then(function (res) {
       return console.log(res);
     })["catch"](function (err) {
       return console.error(err);
@@ -42,8 +54,4 @@ MongoClient.connect(baseUrl, {
   });
 })["catch"](function (error) {
   return console.error(error);
-}); // app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Content-Type", "text/plain");
-//   next();
-// });
+});
