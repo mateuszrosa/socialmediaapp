@@ -6,14 +6,12 @@ const RegisterPage = () => {
     <div className={styles.container}>
       <div className={styles.login}>
         <h1>Register</h1>
-        <form action="">
+        <form action="http://localhost:3500/register" method="post">
           <label htmlFor="login">Login</label>
           <input type="text" name="login" id="login" />
-          <label htmlFor="email">E-mail</label>
-          <input type="email" name="email" id="email" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <input type="button" value="Register" />
+          <input type="submit" value="Register" />
         </form>
       </div>
     </div>

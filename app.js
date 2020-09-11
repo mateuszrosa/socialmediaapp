@@ -32,14 +32,31 @@ MongoClient.connect(baseUrl, {
       res.send("Hello World!");
     });
     app.post("/login", (req, res) => {
-      usersCollection
-        .insertOne(req.body)
-        .then((res) => console.log(res))
+      db.collection("users")
+        .findOne(req.body)
+        .then((response) => {
+          if (response !== null) {
+            console.log("Logged in");
+            res.redirect("http://localhost:3000");
+          } else {
+            console.log("Wrong login or password");
+            res.end();
+          }
+        })
         .catch((err) => console.error(err));
-      res.redirect("http://localhost:3000");
+      // const cursor = db
+      //   .collection("users")
+      //   .findOne({ login: "mateusz.rosa", password: 123 })
+      //   .toArray()
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => console.error(err));
+      // res.redirect("http://localhost:3000");
     });
 
     app.post("/register", (req, res) => {
+      console.log("object");
       usersCollection
         .insertOne(req.body)
         .then((res) => console.log(res))
