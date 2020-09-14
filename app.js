@@ -32,7 +32,8 @@ MongoClient.connect(baseUrl, {
       res.send("Hello World!");
     });
     app.post("/login", (req, res) => {
-      db.collection("users")
+      const cursor = db
+        .collection("users")
         .findOne(req.body)
         .then((response) => {
           if (response !== null) {
@@ -40,7 +41,7 @@ MongoClient.connect(baseUrl, {
             res.redirect("http://localhost:3000");
           } else {
             console.log("Wrong login or password");
-            res.end();
+            res.redirect("http://localhost:3000/login");
           }
         })
         .catch((err) => console.error(err));

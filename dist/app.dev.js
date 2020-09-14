@@ -34,13 +34,13 @@ MongoClient.connect(baseUrl, {
     res.send("Hello World!");
   });
   app.post("/login", function (req, res) {
-    db.collection("users").findOne(req.body).then(function (response) {
+    var cursor = db.collection("users").findOne(req.body).then(function (response) {
       if (response !== null) {
         console.log("Logged in");
         res.redirect("http://localhost:3000");
       } else {
         console.log("Wrong login or password");
-        res.end();
+        res.redirect("http://localhost:3000/login");
       }
     })["catch"](function (err) {
       return console.error(err);
