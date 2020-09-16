@@ -16,11 +16,11 @@ MongoClient.connect(baseUrl, {
     const usersCollection = db.collection("users");
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    // app.use(function(req, res, next) {
-    //   res.header("Access-Control-Allow-Origin", "*");
-    //   res.header("Content-Type", "text/plain");
-    //   next();
-    // });
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Content-Type", "text/plain");
+      next();
+    });
 
     app.get("/", (req, res) => {
       const cursor = db
@@ -34,7 +34,7 @@ MongoClient.connect(baseUrl, {
     app.post("/login", (req, res) => {
       const cursor = db
         .collection("users")
-        .findOne(req.body)
+        .findOne(req.query)
         .then((response) => {
           if (response !== null) {
             console.log("Logged in");
@@ -57,12 +57,12 @@ MongoClient.connect(baseUrl, {
     });
 
     app.post("/register", (req, res) => {
-      console.log("object");
-      usersCollection
-        .insertOne(req.body)
-        .then((res) => console.log(res))
-        .catch((err) => console.error(err));
-      res.redirect("http://localhost:3000");
+      console.log(req.query);
+      // usersCollection
+      //   .insertOne(req.body)
+      //   .then((res) => console.log(res))
+      //   .catch((err) => console.error(err));
+      // res.redirect("http://localhost:3000");
     });
 
     app.listen(port, () => {
