@@ -33,7 +33,6 @@ export const login = (login, password) => (dispatch) => {
   return axios
     .post(`http://localhost:3500/login/?${params}`)
     .then((payload) => {
-      console.log(payload);
       dispatch({ type: LOGIN_SUCCES, payload });
     })
     .catch((err) => {
