@@ -2,10 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { register as registerAuth } from "actions";
 import { login as loginAuth } from "actions";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styles from "./UserPages.module.scss";
 
-const UserPage = ({ isLogged, loginAuth }) => {
+const UserPage = ({ isLogged, loginAuth, userId }) => {
+  if (userId) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.login}>
@@ -38,4 +41,8 @@ const mapDispatchToState = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToState)(UserPage);
+const mapToStateProps = ({ userId }) => ({
+  userId,
+});
+
+export default connect(mapToStateProps, mapDispatchToState)(UserPage);

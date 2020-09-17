@@ -37,7 +37,6 @@ MongoClient.connect(baseUrl, {
         .then((response) => {
           if (response !== null) {
             console.log("Logged in");
-            console.log(response._id);
             res.json({ userId: response._id });
           } else {
             res.sendStatus(500);

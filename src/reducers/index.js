@@ -18,7 +18,7 @@ const rootReducer = (state = initialState, action) => {
       return;
     }
     case LOGIN_SUCCES: {
-      return console.log(action.payload.data.userId);
+      return { ...state, userId: action.payload.data.userId };
     }
     case LOGIN_FAILURE: {
       return console.log("fail");
