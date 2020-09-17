@@ -1,9 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import styles from "./Sidebar.module.scss";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "actions";
 
-const Sidebar = ({ userId }) => {
+const Sidebar = ({ userId, logout }) => {
   return (
     <div className={styles.menu}>
       <ul>
@@ -18,7 +19,15 @@ const Sidebar = ({ userId }) => {
         </li>
         <li>
           {userId ? (
-            <Link to="/logout">log Out</Link>
+            <Link
+              onClick={() => {
+                logout(userId);
+                console.log(userId);
+              }}
+              to="/"
+            >
+              log Out
+            </Link>
           ) : (
             <Link to="/login">log In</Link>
           )}
@@ -28,8 +37,14 @@ const Sidebar = ({ userId }) => {
   );
 };
 
-const mapToStateProps = ({ userId }) => ({
-  userId,
+const mapDispatchToProps = (dispatch) => ({
+  logout: (userId) => {
+    dispatch(logout(userId));
+  },
 });
 
-export default connect(mapToStateProps)(Sidebar);
+const mapToStateProps = ({ userId = null }) => {
+  return { userId };
+};
+
+export default connect(mapToStateProps, mapDispatchToProps)(Sidebar);

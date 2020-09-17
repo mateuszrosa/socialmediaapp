@@ -5,9 +5,12 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCES,
   LOGIN_FAILURE,
+  LOGOUT,
 } from "actions";
 
-const initialState = {};
+const initialState = {
+  notes: ["1", "2", "3"],
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,13 +18,17 @@ const rootReducer = (state = initialState, action) => {
       return;
     }
     case LOGIN_REQUEST: {
-      return;
+      return state;
     }
     case LOGIN_SUCCES: {
       return { ...state, userId: action.payload.data.userId };
     }
     case LOGIN_FAILURE: {
       return console.log("fail");
+    }
+    case LOGOUT: {
+      delete state.userId;
+      return { ...state };
     }
     default:
       return state;

@@ -5,6 +5,7 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGOUT = "LOGOUT";
 
 export const register = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
@@ -39,4 +40,8 @@ export const login = (login, password) => (dispatch) => {
       console.log(err);
       dispatch({ type: LOGIN_FAILURE });
     });
+};
+
+export const logout = (userId) => (dispatch) => {
+  return dispatch({ type: LOGOUT, payload: { userId } });
 };

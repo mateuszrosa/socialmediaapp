@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const { response } = require("express");
 const port = process.env.PORT || 3500;
 const MongoClient = require("mongodb").MongoClient;
 
@@ -46,12 +47,11 @@ MongoClient.connect(baseUrl, {
     });
 
     app.post("/register", (req, res) => {
-      console.log(req.query);
       usersCollection
         .insertOne(req.query)
-        .then((res) => {
-          console.log("register");
-          console.log(res);
+        .then((response) => {
+          console.log("You registered account");
+          res.json(response.ops);
         })
         .catch((err) => console.error(err));
     });
