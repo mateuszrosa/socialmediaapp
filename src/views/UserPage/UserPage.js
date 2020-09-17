@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { register as registerAuth } from "actions";
+import { useFormik } from "formik";
 import { login as loginAuth } from "actions";
 import { Link, Redirect } from "react-router-dom";
 import styles from "./UserPages.module.scss";
@@ -9,20 +10,36 @@ const UserPage = ({ isLogged, loginAuth, userId }) => {
   if (userId) {
     return <Redirect to="/" />;
   }
+  const formik = useFormik({
+    initialValues: {
+      login: "",
+      password: "",
+    },
+    onSubmit: ({ login, password }) => {
+      loginAuth(login, password);
+    },
+  });
   return (
     <div className={styles.container}>
       <div className={styles.login}>
         <h1>Just Log In</h1>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            loginAuth("mateusz.rosa", "123");
-          }}
-        >
+        <form onSubmit={formik.handleSubmit}>
           <label htmlFor="login">Login</label>
-          <input type="text" name="login" id="login" />
+          <input
+            onChange={formik.handleChange}
+            value={formik.values.login}
+            type="text"
+            name="login"
+            id="login"
+          />
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" />
+          <input
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            type="password"
+            name="password"
+            id="password"
+          />
           {isLogged ? (
             <input type="submit" value="Log In" />
           ) : (

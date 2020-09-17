@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import styles from "./Sidebar.module.scss";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ userId }) => {
   return (
     <div className={styles.menu}>
       <ul>
@@ -16,11 +17,19 @@ const Sidebar = () => {
           <Link to="/friends">friends</Link>
         </li>
         <li>
-          <Link to="/login">log In</Link>
+          {userId ? (
+            <Link to="/logout">log Out</Link>
+          ) : (
+            <Link to="/login">log In</Link>
+          )}
         </li>
       </ul>
     </div>
   );
 };
 
-export default Sidebar;
+const mapToStateProps = ({ userId }) => ({
+  userId,
+});
+
+export default connect(mapToStateProps)(Sidebar);
