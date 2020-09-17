@@ -6,7 +6,7 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const register = ({ login, password }) => (dispatch) => {
+export const register = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
     login,
     password,

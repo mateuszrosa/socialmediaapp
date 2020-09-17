@@ -6,7 +6,7 @@ import { login as loginAuth } from "actions";
 import { Link, Redirect } from "react-router-dom";
 import styles from "./UserPages.module.scss";
 
-const UserPage = ({ isLogged, loginAuth, userId }) => {
+const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
   if (userId) {
     return <Redirect to="/" />;
   }
@@ -16,7 +16,7 @@ const UserPage = ({ isLogged, loginAuth, userId }) => {
       password: "",
     },
     onSubmit: ({ login, password }) => {
-      loginAuth(login, password);
+      isLogged ? loginAuth(login, password) : registerAuth(login, password);
     },
   });
   return (
@@ -55,6 +55,9 @@ const UserPage = ({ isLogged, loginAuth, userId }) => {
 const mapDispatchToState = (dispatch) => ({
   loginAuth: (login, password) => {
     dispatch(loginAuth(login, password));
+  },
+  registerAuth: (login, password) => {
+    dispatch(registerAuth(login, password));
   },
 });
 

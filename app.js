@@ -47,11 +47,13 @@ MongoClient.connect(baseUrl, {
 
     app.post("/register", (req, res) => {
       console.log(req.query);
-      // usersCollection
-      //   .insertOne(req.body)
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.error(err));
-      // res.redirect("http://localhost:3000");
+      usersCollection
+        .insertOne(req.query)
+        .then((res) => {
+          console.log("register");
+          console.log(res);
+        })
+        .catch((err) => console.error(err));
     });
 
     app.listen(port, () => {
