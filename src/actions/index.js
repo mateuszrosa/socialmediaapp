@@ -32,7 +32,7 @@ export const login = (login, password) => (dispatch) => {
   });
   dispatch({ type: LOGIN_REQUEST });
   return axios
-    .post(`http://localhost:3500/login/?${params}`)
+    .post(`http://localhost:4000/api/users/?${params}`)
     .then((payload) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })

@@ -19,13 +19,7 @@ const Sidebar = ({ userId, logout }) => {
         </li>
         <li>
           {userId ? (
-            <Link
-              onClick={() => {
-                logout(userId);
-                console.log(userId);
-              }}
-              to="/"
-            >
+            <Link onClick={() => logout(userId)} to="/">
               log Out
             </Link>
           ) : (

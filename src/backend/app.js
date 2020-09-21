@@ -1,11 +1,12 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const { response } = require("express");
-const port = process.env.PORT || 3500;
-const MongoClient = require("mongodb").MongoClient;
+// const express = require("express");
+import express from 'express';
+import cors from "cors";
+import bodyParser from "body-parser";
+import MongoClient from "mongodb"
 
+const port = process.env.PORT || 3500;
+
+const app = express();
 const baseUrl =
   "mongodb+srv://parik:piechy8@favnote-bruxz.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -17,13 +18,6 @@ MongoClient.connect(baseUrl, {
     const db = client.db("social-media-app");
     const usersCollection = db.collection("users");
     app.use(bodyParser.urlencoded({ extended: true }));
-
-    // app.use(function(req, res, next) {
-    //   console.log("Time:", Date.now());
-    //   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    //   res.header("Content-Type", "text/plain");
-    //   next();
-    // });
 
     app.use(cors());
 
@@ -46,17 +40,15 @@ MongoClient.connect(baseUrl, {
         .catch((err) => console.error(err));
     });
 
-    app.post("/register", (req, res) => {
-      usersCollection
-        .findOne(req.query)
-        .then((response) => {
-          if (response !== null) return;
-          console.log("object");
-        })
-        .catch((err) => console.error(err));
-      usersCollection
-        .insertOne(req.query)
-        .then((response) => console.log(response));
+    app.post("/register", async (req, res) => {
+      let user = await usersCollection.findOne({ login: req.query.login });
+      if (user) {
+        return res.status(400).send({ message: "That user already exists" });
+      } else {
+        usersCollection
+          .insertOne(req.query)
+          .then((response) => console.log(response));
+      }
     });
 
     app.listen(port, () => {
