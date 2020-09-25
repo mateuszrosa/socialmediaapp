@@ -6,10 +6,13 @@ import {
   LOGIN_SUCCES,
   LOGIN_FAILURE,
   LOGOUT,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE
 } from "actions";
 
 const initialState = {
-  notes: ["1", "2", "3"],
+  userId: "5f634e3c79e20f40e8e7530f"
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,11 +27,25 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, userId: action.payload.data.userId };
     }
     case LOGIN_FAILURE: {
-      return console.log("fail");
+      return state
     }
     case LOGOUT: {
       delete state.userId;
       return { ...state };
+    }
+    case ADD_POST_REQUEST:{
+      return state;
+    }
+    case ADD_POST_SUCCESS:{
+      return {
+        ...state,
+        posts:  [state, action.payload.data]
+      }
+    }
+    case ADD_POST_FAILURE: {
+      return {
+        state
+      }
     }
     default:
       return state;

@@ -1,4 +1,3 @@
-// const express = require("express");
 import express from 'express';
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -17,7 +16,9 @@ MongoClient.connect(baseUrl, {
     console.log("Connected to database");
     const db = client.db("social-media-app");
     const usersCollection = db.collection("users");
+
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json())
 
     app.use(cors());
 
@@ -50,6 +51,17 @@ MongoClient.connect(baseUrl, {
           .then((response) => console.log(response));
       }
     });
+
+    app.post("/post", (req, res) => {
+      const{userId, text} = req.body;
+      const cursor = db
+        .collection("posts")
+        .insertOne({userId,text})
+        .then((response) => {
+          console.log(req.body)
+          res.json(req.body)
+        })
+    })
 
     app.listen(port, () => {
       console.log("Express listening " + port);

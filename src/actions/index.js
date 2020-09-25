@@ -6,6 +6,10 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
+export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
+export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
+export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
+
 
 export const register = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
@@ -46,3 +50,20 @@ export const login = (login, password) => (dispatch) => {
 export const logout = (userId) => (dispatch) => {
   return dispatch({ type: LOGOUT, payload: { userId } });
 };
+
+export const addPost = (userId, text) => dispatch => {
+  dispatch({type: ADD_POST_REQUEST})
+  return axios
+    .post(`http://localhost:3500/post/?`, {
+      userId,
+      text
+    })
+    .then((payload) => {
+      console.log(payload)
+      return dispatch({type: ADD_POST_SUCCESS, payload})
+    })
+    .catch((err) => {
+      console.log(err);
+      return dispatch({type: ADD_POST_FAILURE})
+    });
+}

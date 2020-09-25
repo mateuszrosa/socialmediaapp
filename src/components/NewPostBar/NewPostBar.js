@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from "react-redux";
 import styles from 'components/NewPostBar/NewPostBar.module.scss';
 import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
+import {addPost as addPostAuth} from 'actions'
 
-const NewPostBar = ({click}) => {
+const NewPostBar = ({hideBar, addPost, userId}) => {
 
     const formik = useFormik({
         initialValues: {
@@ -11,13 +13,13 @@ const NewPostBar = ({click}) => {
         },
 
     onSubmit: ({text}) => {
-        console.log(text);
-        click()
+        addPost(userId, text)
+        hideBar()
     }
     });
     return ( 
         <div className={styles.bar}>
-            <img onClick={click} src={close} alt=""/>
+            <img onClick={hideBar} src={close} alt=""/>
             <h1>Create Post</h1>    
             <form onSubmit={formik.handleSubmit}>
                 <textarea 
@@ -32,5 +34,13 @@ const NewPostBar = ({click}) => {
         </div>
      );
 }
- 
-export default NewPostBar;
+
+const mapDispatchToState = (dispatch) => ({
+    addPost: (userId, text) => dispatch(addPostAuth(userId,text))
+  });
+  
+  const mapToStateProps = ({ userId }) => ({
+    userId,
+  });
+
+export default connect(mapToStateProps, mapDispatchToState)(NewPostBar);
