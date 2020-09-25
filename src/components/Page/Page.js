@@ -1,25 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./Page.module.scss";
+import NewPostBar from 'components/NewPostBar/NewPostBar';
 
 const Page = () => {
+
+  const [isVisible, setVisible] = useState(false);
+
+  const handlePostBar = (e) => {
+    e.preventDefault();
+    setVisible(!isVisible)
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.window}>
-        <div className={styles.text}>
-          <h1> Welcome to SocialMediaApp </h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.Consequatur
-            voluptatibus omnis alias sunt.Blanditiis enim esse dignissimos iure
-            officia veritatis nulla alias nostrum reiciendis.Nemo ducimus error
-            consequatur ab consectetur ?
-          </p>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.Quisquam
-            numquam minima ea consectetur earum quas ex incidunt aperiam ratione
-            sequi minus, non doloremque deleniti ullam quo.Tenetur consequatur
-            molestias rerum ?
-          </p>
-        </div>
+        <form className={styles.form}>
+          <input type="text" name="" id="" value="What you think about?" />
+          <input onClick={handlePostBar} type="submit" value="Post it"/>
+        </form>
+        {isVisible && <NewPostBar click={handlePostBar}/>}
       </div>
     </div>
   );

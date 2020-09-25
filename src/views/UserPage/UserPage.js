@@ -22,7 +22,7 @@ const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
   return (
     <div className={styles.container}>
       <div className={styles.login}>
-        <h1>Just Log In</h1>
+        {isLogged ? <h1>Just Log In</h1> : <h1>Register</h1>}
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="login">Login</label>
           <input
