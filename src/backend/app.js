@@ -43,7 +43,7 @@ MongoClient.connect(baseUrl, {
     app.post("/register", async (req, res) => {
       let user = await usersCollection.findOne({ login: req.query.login });
       if (user) {
-        return res.status(400).send({ message: "That user already exists" });
+        return res.status(400).send("That user already exists" );
       } else {
         usersCollection
           .insertOne(req.query)
