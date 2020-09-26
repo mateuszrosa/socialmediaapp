@@ -80,7 +80,7 @@ var rootReducer = function rootReducer() {
       {
         console.log(action.payload);
         return _objectSpread({}, state, {
-          posts: [state, action.payload.posts]
+          posts: action.payload.data
         });
       }
 

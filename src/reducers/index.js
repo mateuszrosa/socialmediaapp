@@ -59,7 +59,7 @@ const rootReducer = (state = initialState, action) => {
       console.log(action.payload)
       return {
         ...state,
-        posts: [state, action.payload.posts]
+        posts: action.payload.data
       }
     }
     default:

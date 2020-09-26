@@ -4,7 +4,7 @@ import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
 import {fetchPosts as fetchPostsAuth} from 'actions'
 
-const Page = ({userId, fetchPosts}) => {
+const Page = ({userId, posts, fetchPosts}) => {
 
   useEffect(() => {
     fetchPosts();
@@ -53,8 +53,9 @@ const Page = ({userId, fetchPosts}) => {
   );
 };
 
-const mapToStateProps = ({userId}) => ({
+const mapToStateProps = ({userId, posts}) => ({
   userId,
+  posts
 })
 
 const mapDispatchToState = (dispatch) => ({
