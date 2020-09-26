@@ -87,6 +87,13 @@ _mongodb["default"].connect(baseUrl, {
       res.json(req.body);
     });
   });
+  app.get('/posts', function (req, res) {
+    db.collection("posts").find().toArray().then(function (response) {
+      res.json(response);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  });
   app.listen(port, function () {
     console.log("Express listening " + port);
   });

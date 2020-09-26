@@ -9,8 +9,14 @@
         background-color: #fff;
         flex-grow: 1;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         position: relative;
+
+        .posts {
+            border: 1px solid black;
+            flex-grow: 1;
+        }
 
         .text {
             width: 55%;

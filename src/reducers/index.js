@@ -8,7 +8,10 @@ import {
   LOGOUT,
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
-  ADD_POST_FAILURE
+  ADD_POST_FAILURE,
+  FETCH_POSTS_REQUEST,
+  FETCH_POSTS_SUCCESS,
+  FETCH_POSTS_FAILURE
 } from "actions";
 
 const initialState = {
@@ -45,6 +48,18 @@ const rootReducer = (state = initialState, action) => {
     case ADD_POST_FAILURE: {
       return {
         state
+      }
+    }
+    case FETCH_POSTS_REQUEST: {
+      return {
+        state
+      }
+    }
+    case FETCH_POSTS_SUCCESS: {
+      console.log(action.payload)
+      return {
+        ...state,
+        posts: [state, action.payload.posts]
       }
     }
     default:

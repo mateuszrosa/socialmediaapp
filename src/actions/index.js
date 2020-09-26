@@ -9,6 +9,9 @@ export const LOGOUT = "LOGOUT";
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
+export const FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST";
+export const FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS";
+export const FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
 
 
 export const register = (login, password) => (dispatch) => {
@@ -66,4 +69,15 @@ export const addPost = (userId, text) => dispatch => {
       console.log(err);
       return dispatch({type: ADD_POST_FAILURE})
     });
+}
+
+export const fetchPosts = () => (dispatch) => {
+  dispatch({type: FETCH_POSTS_REQUEST})
+  return axios
+    .get(`http://localhost:3500/posts`)
+    .then((payload) => {
+      return dispatch({type: FETCH_POSTS_SUCCESS, payload})
+    })
+    .catch(err=> {
+       console.log(err)})
 }

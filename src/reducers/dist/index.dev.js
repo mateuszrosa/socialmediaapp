@@ -69,6 +69,21 @@ var rootReducer = function rootReducer() {
         };
       }
 
+    case _actions.FETCH_POSTS_REQUEST:
+      {
+        return {
+          state: state
+        };
+      }
+
+    case _actions.FETCH_POSTS_SUCCESS:
+      {
+        console.log(action.payload);
+        return _objectSpread({}, state, {
+          posts: [state, action.payload.posts]
+        });
+      }
+
     default:
       return state;
   }

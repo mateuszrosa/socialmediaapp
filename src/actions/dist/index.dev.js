@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.addPost = exports.logout = exports.login = exports.register = exports.ADD_POST_FAILURE = exports.ADD_POST_SUCCESS = exports.ADD_POST_REQUEST = exports.LOGOUT = exports.LOGIN_FAILURE = exports.LOGIN_SUCCES = exports.LOGIN_REQUEST = exports.REGISTER_FAILURE = exports.REGISTER_SUCCES = exports.REGISTER_REQUEST = void 0;
+exports.fetchPosts = exports.addPost = exports.logout = exports.login = exports.register = exports.FETCH_POSTS_FAILURE = exports.FETCH_POSTS_SUCCESS = exports.FETCH_POSTS_REQUEST = exports.ADD_POST_FAILURE = exports.ADD_POST_SUCCESS = exports.ADD_POST_REQUEST = exports.LOGOUT = exports.LOGIN_FAILURE = exports.LOGIN_SUCCES = exports.LOGIN_REQUEST = exports.REGISTER_FAILURE = exports.REGISTER_SUCCES = exports.REGISTER_REQUEST = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -29,6 +29,12 @@ var ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 exports.ADD_POST_SUCCESS = ADD_POST_SUCCESS;
 var ADD_POST_FAILURE = "ADD_POST_FAILURE";
 exports.ADD_POST_FAILURE = ADD_POST_FAILURE;
+var FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST";
+exports.FETCH_POSTS_REQUEST = FETCH_POSTS_REQUEST;
+var FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS";
+exports.FETCH_POSTS_SUCCESS = FETCH_POSTS_SUCCESS;
+var FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
+exports.FETCH_POSTS_FAILURE = FETCH_POSTS_FAILURE;
 
 var register = function register(login, password) {
   return function (dispatch) {
@@ -118,3 +124,21 @@ var addPost = function addPost(userId, text) {
 };
 
 exports.addPost = addPost;
+
+var fetchPosts = function fetchPosts() {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_POSTS_REQUEST
+    });
+    return _axios["default"].get("http://localhost:3500/posts").then(function (payload) {
+      return dispatch({
+        type: FETCH_POSTS_SUCCESS,
+        payload: payload
+      });
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+};
+
+exports.fetchPosts = fetchPosts;

@@ -63,6 +63,16 @@ MongoClient.connect(baseUrl, {
         })
     })
 
+    app.get('/posts', (req,res) => {
+      db.collection("posts")
+      .find()
+      .toArray()
+      .then((response) => {
+        res.json(response)
+      })
+      .catch(err => console.log(err))
+    })
+
     app.listen(port, () => {
       console.log("Express listening " + port);
     });

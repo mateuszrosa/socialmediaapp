@@ -1,9 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {connect} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
+import {fetchPosts as fetchPostsAuth} from 'actions'
 
-const Page = ({userId}) => {
+const Page = ({userId, fetchPosts}) => {
+
+  useEffect(() => {
+    fetchPosts();
+  }, [])
 
   const [isVisible, setVisible] = useState(false);
 
@@ -23,7 +28,7 @@ const Page = ({userId}) => {
           <input readOnly type="text" name="" id="" value="What you think about?" />
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
-        <div className={styles.posts}>posty</div>
+        <div onClick={() =>fetchPosts()} className={styles.posts}>posty</div>
         </>
         ) 
         : 
@@ -52,4 +57,8 @@ const mapToStateProps = ({userId}) => ({
   userId,
 })
 
-export default connect(mapToStateProps)(Page);
+const mapDispatchToState = (dispatch) => ({
+  fetchPosts: () => dispatch(fetchPostsAuth())
+});
+
+export default connect(mapToStateProps, mapDispatchToState)(Page);
