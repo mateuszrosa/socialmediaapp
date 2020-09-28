@@ -46,20 +46,15 @@ const rootReducer = (state = initialState, action) => {
       }
     }
     case ADD_POST_FAILURE: {
-      return {
-        state
-      }
+      return state;
     }
     case FETCH_POSTS_REQUEST: {
-      return {
-        state
-      }
+      return state;
     }
     case FETCH_POSTS_SUCCESS: {
-      console.log(action.payload)
       return {
         ...state,
-        posts: action.payload.data
+        posts: [...action.payload.data]
       }
     }
     default:
