@@ -31,7 +31,7 @@ const Page = ({userId, fetchPosts, posts}) => {
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
         <div className={styles.posts}>
-          {posts.map(post => <Post>post</Post>)}
+          {posts.map(({text, login}) => <Post text={text} login={login} />)}
         </div>
         </>
         ) 
@@ -59,7 +59,6 @@ const Page = ({userId, fetchPosts, posts}) => {
 
 Page.propTypes = {
   userId: PropTypes.string.isRequired,
-  
 }
 
 Page.defaultProps = {

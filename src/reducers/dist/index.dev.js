@@ -23,7 +23,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   userId: "5f634e3c79e20f40e8e7530f",
-  isLoading: false
+  login: "Parik"
 };
 
 var rootReducer = function rootReducer() {
@@ -44,7 +44,8 @@ var rootReducer = function rootReducer() {
     case _actions.LOGIN_SUCCES:
       {
         return _objectSpread({}, state, {
-          userId: action.payload.data.userId
+          userId: action.payload.data.userId,
+          login: action.payload.data.login
         });
       }
 
@@ -66,8 +67,9 @@ var rootReducer = function rootReducer() {
 
     case _actions.ADD_POST_SUCCESS:
       {
+        console.log(state);
         return _objectSpread({}, state, {
-          posts: [state, action.payload.data]
+          posts: [].concat(_toConsumableArray(state.posts), [action.payload.data])
         });
       }
 
@@ -78,15 +80,12 @@ var rootReducer = function rootReducer() {
 
     case _actions.FETCH_POSTS_REQUEST:
       {
-        return _objectSpread({}, state, {
-          isLoading: true
-        });
+        return state;
       }
 
     case _actions.FETCH_POSTS_SUCCESS:
       {
         return _objectSpread({}, state, {
-          isLoading: false,
           posts: _toConsumableArray(action.payload.data)
         });
       }

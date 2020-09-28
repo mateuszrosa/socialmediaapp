@@ -100,16 +100,16 @@ var logout = function logout(userId) {
 
 exports.logout = logout;
 
-var addPost = function addPost(userId, text) {
+var addPost = function addPost(userId, text, login) {
   return function (dispatch) {
     dispatch({
       type: ADD_POST_REQUEST
     });
     return _axios["default"].post("http://localhost:3500/post/?", {
       userId: userId,
-      text: text
+      text: text,
+      login: login
     }).then(function (payload) {
-      console.log(payload);
       return dispatch({
         type: ADD_POST_SUCCESS,
         payload: payload

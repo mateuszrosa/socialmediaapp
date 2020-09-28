@@ -53,12 +53,11 @@ MongoClient.connect(baseUrl, {
     });
 
     app.post("/post", (req, res) => {
-      const{userId, text} = req.body;
+      const{userId, text, login} = req.body;
       const cursor = db
         .collection("posts")
-        .insertOne({userId,text})
+        .insertOne({userId,text, login})
         .then((response) => {
-          console.log(req.body)
           res.json(req.body)
         })
     })
@@ -68,7 +67,7 @@ MongoClient.connect(baseUrl, {
       .find()
       .toArray()
       .then((response) => {
-        res.send(response)
+        res.json(response)
       })
       .catch(err => console.log(err))
     })

@@ -78,18 +78,19 @@ _mongodb["default"].connect(baseUrl, {
   app.post("/post", function (req, res) {
     var _req$body = req.body,
         userId = _req$body.userId,
-        text = _req$body.text;
+        text = _req$body.text,
+        login = _req$body.login;
     var cursor = db.collection("posts").insertOne({
       userId: userId,
-      text: text
+      text: text,
+      login: login
     }).then(function (response) {
-      console.log(req.body);
       res.json(req.body);
     });
   });
   app.get('/posts', function (req, res) {
     db.collection("posts").find().toArray().then(function (response) {
-      res.send(response);
+      res.json(response);
     })["catch"](function (err) {
       return console.log(err);
     });

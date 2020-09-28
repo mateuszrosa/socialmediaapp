@@ -16,6 +16,12 @@
         .posts {
             border: 1px solid black;
             flex-grow: 1;
+            width: 75%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ddd;
         }
 
         .text {

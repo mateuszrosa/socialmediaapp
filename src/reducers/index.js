@@ -16,7 +16,7 @@ import {
 
 const initialState = {
   userId: "5f634e3c79e20f40e8e7530f",
-  isLoading: false,
+  login: "Parik"
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -28,7 +28,10 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case LOGIN_SUCCES: {
-      return { ...state, userId: action.payload.data.userId };
+      return {
+         ...state, 
+         userId: action.payload.data.userId, login: action.payload.data.login 
+        };
     }
     case LOGIN_FAILURE: {
       return state
@@ -41,23 +44,21 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case ADD_POST_SUCCESS:{
+       console.log(state)
       return {
         ...state,
-        posts:  [state, action.payload.data]
-      }
+        posts: [...state.posts, action.payload.data],
+      };
     }
     case ADD_POST_FAILURE: {
       return state;
     }
     case FETCH_POSTS_REQUEST: {
-      return {...state,
-      isLoading: true
-    };
+      return state
     }
     case FETCH_POSTS_SUCCESS: {
       return {
         ...state,
-        isLoading: false,
         posts: [...action.payload.data]
       }
     }
