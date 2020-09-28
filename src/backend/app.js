@@ -68,7 +68,7 @@ MongoClient.connect(baseUrl, {
       .find()
       .toArray()
       .then((response) => {
-        res.json(response)
+        res.send(response)
       })
       .catch(err => console.log(err))
     })

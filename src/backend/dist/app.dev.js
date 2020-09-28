@@ -89,7 +89,7 @@ _mongodb["default"].connect(baseUrl, {
   });
   app.get('/posts', function (req, res) {
     db.collection("posts").find().toArray().then(function (response) {
-      res.json(response);
+      res.send(response);
     })["catch"](function (err) {
       return console.log(err);
     });

@@ -15,7 +15,8 @@ import {
 } from "actions";
 
 const initialState = {
-  userId: "5f634e3c79e20f40e8e7530f"
+  userId: "5f634e3c79e20f40e8e7530f",
+  isLoading: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -49,11 +50,14 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case FETCH_POSTS_REQUEST: {
-      return state;
+      return {...state,
+      isLoading: true
+    };
     }
     case FETCH_POSTS_SUCCESS: {
       return {
         ...state,
+        isLoading: false,
         posts: [...action.payload.data]
       }
     }

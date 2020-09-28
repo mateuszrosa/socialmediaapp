@@ -22,7 +22,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var initialState = {
-  userId: "5f634e3c79e20f40e8e7530f"
+  userId: "5f634e3c79e20f40e8e7530f",
+  isLoading: false
 };
 
 var rootReducer = function rootReducer() {
@@ -77,12 +78,15 @@ var rootReducer = function rootReducer() {
 
     case _actions.FETCH_POSTS_REQUEST:
       {
-        return state;
+        return _objectSpread({}, state, {
+          isLoading: true
+        });
       }
 
     case _actions.FETCH_POSTS_SUCCESS:
       {
         return _objectSpread({}, state, {
+          isLoading: false,
           posts: _toConsumableArray(action.payload.data)
         });
       }

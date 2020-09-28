@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
+import Post from 'components/Page/Post/Post'
 import {fetchPosts as fetchPostsAuth} from 'actions'
 
-const Page = ({userId, posts, fetchPosts}) => {
+const Page = ({userId, fetchPosts, posts}) => {
 
   useEffect(() => {
     fetchPosts();
@@ -28,7 +30,9 @@ const Page = ({userId, posts, fetchPosts}) => {
           <input readOnly type="text" name="" id="" value="What you think about?" />
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
-        <div onClick={() =>fetchPosts()} className={styles.posts}>posty</div>
+        <div className={styles.posts}>
+          {posts.map(post => <Post>post</Post>)}
+        </div>
         </>
         ) 
         : 
@@ -52,6 +56,15 @@ const Page = ({userId, posts, fetchPosts}) => {
     </div>
   );
 };
+
+Page.propTypes = {
+  userId: PropTypes.string.isRequired,
+  
+}
+
+Page.defaultProps = {
+  posts: []
+}
 
 const mapToStateProps = ({userId, posts}) => ({
   userId,
