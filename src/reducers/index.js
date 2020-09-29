@@ -30,7 +30,8 @@ const rootReducer = (state = initialState, action) => {
     case LOGIN_SUCCES: {
       return {
          ...state, 
-         userId: action.payload.data.userId, login: action.payload.data.login 
+         userId: action.payload.data.userId,
+         login: action.payload.data.login 
         };
     }
     case LOGIN_FAILURE: {
@@ -44,7 +45,6 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case ADD_POST_SUCCESS:{
-       console.log(state)
       return {
         ...state,
         posts: [...state.posts, action.payload.data],
