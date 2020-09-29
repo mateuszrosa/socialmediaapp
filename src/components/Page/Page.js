@@ -10,7 +10,7 @@ const Page = ({userId, fetchPosts, posts}) => {
 
   useEffect(() => {
     fetchPosts();
-  }, [])
+  })
 
   const [isVisible, setVisible] = useState(false);
 
@@ -31,7 +31,7 @@ const Page = ({userId, fetchPosts, posts}) => {
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
         <div className={styles.posts}>
-          {posts.map(({text, login}) => <Post text={text} login={login} />)}
+          {posts.map(({text, login, _id: id, likes}) => <Post text={text} login={login} key={id} id={id} likes={likes} />)}
         </div>
         </>
         ) 
@@ -65,7 +65,7 @@ Page.defaultProps = {
   posts: []
 }
 
-const mapToStateProps = ({userId, posts}) => ({
+const mapStateToProps = ({userId, posts}) => ({
   userId,
   posts
 })
@@ -74,4 +74,4 @@ const mapDispatchToState = (dispatch) => ({
   fetchPosts: () => dispatch(fetchPostsAuth())
 });
 
-export default connect(mapToStateProps, mapDispatchToState)(Page);
+export default connect(mapStateToProps, mapDispatchToState)(Page);

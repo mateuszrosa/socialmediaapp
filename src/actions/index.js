@@ -12,6 +12,9 @@ export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 export const FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST";
 export const FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS";
 export const FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
+export const ADD_LIKE_REQUEST = "ADD_LIKE_REQUEST";
+export const ADD_LIKE_SUCCESS = "ADD_LIKE_SUCCESS";
+export const ADD_LIKE_FAILURE = "ADD_LIKE_FAILURE";
 
 
 export const register = (login, password) => (dispatch) => {
@@ -60,7 +63,8 @@ export const addPost = (text) => (dispatch, getState) => {
     .post(`http://localhost:3500/post/?`, {
       userId: getState().userId,
       login: getState().login,
-      text
+      text,
+      likes: 0
     })
     .then((payload) => {
       return dispatch({type: ADD_POST_SUCCESS, payload})
@@ -80,4 +84,17 @@ export const fetchPosts = () => (dispatch) => {
     })
     .catch(err=> {
        console.log(err)})
+}
+
+export const addLikes = (id) => dispatch => {
+  const params = new URLSearchParams({
+    id
+  });
+  dispatch({type: ADD_LIKE_REQUEST});
+  return axios
+    .post(`http://localhost:3500/like/?${params}`)
+    .then((payload) => {
+      return dispatch({type: ADD_LIKE_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
 }

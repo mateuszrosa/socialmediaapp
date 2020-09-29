@@ -11,7 +11,10 @@ import {
   ADD_POST_FAILURE,
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_FAILURE
+  FETCH_POSTS_FAILURE,
+  ADD_LIKE_REQUEST,
+  ADD_LIKE_SUCCESS,
+  ADD_LIKE_FAILURE
 } from "actions";
 
 const initialState = {
@@ -60,6 +63,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...action.payload.data]
+      }
+    }
+    case ADD_LIKE_REQUEST: {
+      return state;
+    }
+    case ADD_LIKE_SUCCESS: {
+      let index = state.posts.findIndex(
+        (post) => post._id === action.payload.data._id
+      );
+      state.posts[index] = action.payload.data;
+      return {
+        ...state
       }
     }
     default:

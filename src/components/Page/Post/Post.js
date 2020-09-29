@@ -1,7 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {addLikes} from 'actions'
+import heart from 'assets/heart-thin.svg';
+import blackheart from 'assets/heart-black.svg';
+import comment from 'assets/comment-blog.svg';
 import styles from './Post.module.scss'
 
-const Post = ({text, login}) => {
+const Post = ({text, login, id, likes, addLikes}) => {
     return ( 
         <div className={styles.post}>
             <div className={styles.img}></div>
@@ -12,12 +17,22 @@ const Post = ({text, login}) => {
                     <p>{text}</p>
                 </div>
                 <div className={styles.interactions}>
-                    <button>Like</button>
-                    <button>Comments</button>
+                    <img onClick={() => addLikes(id)} src={heart} alt=""/>
+                    <span>{likes} Likes</span>
+                    <img src={comment} alt=""/>
+                    <span>Comments</span>
                 </div>
             </div>
         </div>
      );
 }
- 
-export default Post;
+
+const mapStatetoProps = ({posts}) => ({
+    posts
+});
+
+const mapDispatchToState = dispatch  => ({
+    addLikes: (id) => dispatch(addLikes(id))
+})
+
+export default connect(mapStatetoProps,mapDispatchToState)(Post);
