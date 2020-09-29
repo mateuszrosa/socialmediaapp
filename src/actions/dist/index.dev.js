@@ -102,7 +102,6 @@ exports.logout = logout;
 
 var addPost = function addPost(text) {
   return function (dispatch, getState) {
-    console.log(getState());
     dispatch({
       type: ADD_POST_REQUEST
     });

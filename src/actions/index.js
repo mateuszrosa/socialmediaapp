@@ -55,7 +55,6 @@ export const logout = (userId) => (dispatch) => {
 };
 
 export const addPost = (text) => (dispatch, getState) => {
-  console.log(getState())
   dispatch({type: ADD_POST_REQUEST})
   return axios
     .post(`http://localhost:3500/post/?`, {

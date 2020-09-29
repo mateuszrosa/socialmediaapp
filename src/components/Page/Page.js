@@ -58,7 +58,7 @@ const Page = ({userId, fetchPosts, posts}) => {
 };
 
 Page.propTypes = {
-  userId: PropTypes.string.isRequired,
+  posts: PropTypes.array.isRequired,
 }
 
 Page.defaultProps = {
