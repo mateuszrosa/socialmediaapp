@@ -6,10 +6,12 @@ import MongoClient from "mongodb"
 const port = process.env.PORT || 3500;
 
 const app = express();
-const baseUrl =
-  "mongodb+srv://parik:piechy8@favnote-bruxz.mongodb.net/test?retryWrites=true&w=majority";
+// const baseUrl =
+//   "mongodb+srv://parik:piechy8@favnote-bruxz.mongodb.net/test?retryWrites=true&w=majority";
 
-MongoClient.connect(baseUrl, {
+console.log(process.env.NODE_DATABASE)
+
+MongoClient.connect(process.env.NODE_DATABASE, {
   useUnifiedTopology: true,
 })
   .then((client) => {
