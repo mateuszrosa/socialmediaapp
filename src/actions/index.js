@@ -54,13 +54,14 @@ export const logout = (userId) => (dispatch) => {
   return dispatch({ type: LOGOUT, payload: { userId } });
 };
 
-export const addPost = (userId, text, login) => dispatch => {
+export const addPost = (text) => (dispatch, getState) => {
+  console.log(getState())
   dispatch({type: ADD_POST_REQUEST})
   return axios
     .post(`http://localhost:3500/post/?`, {
-      userId,
-      text,
-      login
+      userId: getState().userId,
+      login: getState().login,
+      text
     })
     .then((payload) => {
       return dispatch({type: ADD_POST_SUCCESS, payload})

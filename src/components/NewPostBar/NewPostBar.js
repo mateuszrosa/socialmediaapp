@@ -5,7 +5,7 @@ import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
 import {addPost as addPostAuth} from 'actions'
 
-const NewPostBar = ({hideBar, addPost, userId, login}) => {
+const NewPostBar = ({hideBar, addPost}) => {
 
     const formik = useFormik({
         initialValues: {
@@ -13,7 +13,7 @@ const NewPostBar = ({hideBar, addPost, userId, login}) => {
         },
 
     onSubmit: ({text}) => {
-        addPost(userId, text, login)
+        addPost(text)
         hideBar()
     }
     });
@@ -36,12 +36,11 @@ const NewPostBar = ({hideBar, addPost, userId, login}) => {
 }
 
 const mapDispatchToState = (dispatch) => ({
-    addPost: (userId, text, login) => dispatch(addPostAuth(userId,text, login))
+    addPost: ( text) => dispatch(addPostAuth(text))
   });
   
-  const mapToStateProps = ({ userId, login }) => ({
+  const mapToStateProps = ({ userId }) => ({
     userId,
-    login
   });
 
 export default connect(mapToStateProps, mapDispatchToState)(NewPostBar);
