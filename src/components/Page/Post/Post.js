@@ -17,9 +17,9 @@ const Post = ({text, login, id, likes, addLikes}) => {
                     <p>{text}</p>
                 </div>
                 <div className={styles.interactions}>
-                    <img onClick={() => addLikes(id)} src={heart} alt=""/>
+                    <a href="#"><img onClick={(e) => addLikes(id)} src={heart} alt=""/></a>
                     <span>{likes} Likes</span>
-                    <img src={comment} alt=""/>
+                    <a href="#"><img src={comment} alt=""/></a>
                     <span>Comments</span>
                 </div>
             </div>

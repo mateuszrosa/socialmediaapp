@@ -98,3 +98,12 @@ export const addLikes = (id) => dispatch => {
     })
     .catch(err => console.log(err))
 }
+
+export const fetch = () => dispatch => {
+  return axios
+    .get(`http://localhost:3500/posts`)
+    .then((payload) => {
+      return dispatch({type: FETCH_POSTS_SUCCESS})
+    })
+    .catch(err => console.log(err))
+}
