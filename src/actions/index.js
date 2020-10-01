@@ -53,8 +53,8 @@ export const login = (login, password) => (dispatch) => {
     });
 };
 
-export const logout = (userId) => (dispatch) => {
-  return dispatch({ type: LOGOUT, payload: { userId } });
+export const logout = (userId,login) => (dispatch) => {
+  return dispatch({ type: LOGOUT, payload: { userId,login } });
 };
 
 export const addPost = (text) => (dispatch, getState) => {

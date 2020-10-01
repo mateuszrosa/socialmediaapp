@@ -42,6 +42,7 @@ const rootReducer = (state = initialState, action) => {
     }
     case LOGOUT: {
       delete state.userId;
+      delete state.login;
       return { ...state };
     }
     case ADD_POST_REQUEST:{

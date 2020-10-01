@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "actions";
 
-const Sidebar = ({ userId, logout }) => {
+const Sidebar = ({ userId,login, logout }) => {
   return (
     <div className={styles.menu}>
       <ul>
@@ -19,7 +19,7 @@ const Sidebar = ({ userId, logout }) => {
         </li>
         <li>
           {userId ? (
-            <Link onClick={() => logout(userId)} to="/">
+            <Link onClick={() => logout(userId,login)} to="/">
               log Out
             </Link>
           ) : (
@@ -32,13 +32,13 @@ const Sidebar = ({ userId, logout }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: (userId) => {
-    dispatch(logout(userId));
+  logout: (userId, login) => {
+    dispatch(logout(userId,login));
   },
 });
 
-const mapToStateProps = ({ userId = null }) => {
-  return { userId };
+const mapToStateProps = ({ userId = null, login }) => {
+  return { userId,login };
 };
 
 export default connect(mapToStateProps, mapDispatchToProps)(Sidebar);
