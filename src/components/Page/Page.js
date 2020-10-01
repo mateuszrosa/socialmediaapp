@@ -1,20 +1,25 @@
 import React, {useState, useEffect} from "react";
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+import {useDispatch, useSelector} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
 import Post from 'components/Page/Post/Post'
-import {fetchPosts as fetchPostsAuth} from 'actions'
+import {fetchPosts} from 'actions'
 
-const Page = ({userId, fetchPosts, posts}) => {
+const Page = () => {
 
-  console.log(posts)
+  const {userId, posts = []} =
+    useSelector(state => ({
+      userId: state.userId,
+      posts: state.posts,
+    }));
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchPosts();
-  },[])
+    dispatch(fetchPosts())
+  },[]);
 
-  console.log(posts)
   const [isVisible, setVisible] = useState(false);
 
   const handlePostBar = () => {
@@ -34,10 +39,7 @@ const Page = ({userId, fetchPosts, posts}) => {
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
         <div className={styles.posts}>
-        {posts.map(({text, login, _id: id, likes}) =><><Post text={text} login={login} key={id} id={id} likes={likes} />
-        {likes}
-        </>
-          )}
+          {posts.map(({text, login, _id: id, likes, likedBy}) => <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} />)}
         </div>
         </>
         ) 
@@ -63,21 +65,22 @@ const Page = ({userId, fetchPosts, posts}) => {
   );
 };
 
-Page.propTypes = {
+// const mapStateToProps = ({userId, posts}) => ({
+//   userId,
+//   posts
+// })
+
+// const mapDispatchToState = (dispatch) => ({
+//   fetchPosts: () => dispatch(fetchPostsAuth())
+// });
+
+const withPropsValidation = props => {
+  PropTypes.checkPropTypes(propTypes, props, 'prop', '')
+  return props
+}
+
+const propTypes = {
   posts: PropTypes.array.isRequired,
 }
 
-Page.defaultProps = {
-  posts: []
-}
-
-const mapStateToProps = ({userId, posts}) => ({
-  userId,
-  posts
-})
-
-const mapDispatchToState = (dispatch) => ({
-  fetchPosts: () => dispatch(fetchPostsAuth())
-});
-
-export default connect(mapStateToProps, mapDispatchToState)(Page);
+export default Page;

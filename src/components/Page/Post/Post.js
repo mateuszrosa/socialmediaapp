@@ -6,7 +6,7 @@ import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
 import styles from './Post.module.scss'
 
-const Post = ({text, login, id, likes, addLikes}) => {
+const Post = ({text, login, id, likes, addLikes, userId, likedBy}) => {
     return ( 
         <div className={styles.post}>
             <div className={styles.img}></div>
@@ -17,9 +17,16 @@ const Post = ({text, login, id, likes, addLikes}) => {
                     <p>{text}</p>
                 </div>
                 <div className={styles.interactions}>
-                    <a href="#"><img onClick={(e) => addLikes(id)} src={heart} alt=""/></a>
+                    <button>
+                        {likedBy.includes(userId) ? 
+                        <img src={blackheart} alt=""/> 
+                        : 
+                        <img onClick={(e) => addLikes(id, userId)} src={heart} alt=""/>}
+                    </button>
                     <span>{likes} Likes</span>
-                    <a href="#"><img src={comment} alt=""/></a>
+                    <button>
+                        <img src={comment} alt=""/>
+                    </button>
                     <span>Comments</span>
                 </div>
             </div>
@@ -27,12 +34,13 @@ const Post = ({text, login, id, likes, addLikes}) => {
      );
 }
 
-const mapStatetoProps = ({posts}) => ({
-    posts
+const mapStatetoProps = ({posts, userId}) => ({
+    posts,
+    userId
 });
 
 const mapDispatchToState = dispatch  => ({
-    addLikes: (id) => dispatch(addLikes(id))
+    addLikes: (id, userId) => dispatch(addLikes(id, userId))
 })
 
 export default connect(mapStatetoProps,mapDispatchToState)(Post);

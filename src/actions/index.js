@@ -64,7 +64,8 @@ export const addPost = (text) => (dispatch, getState) => {
       userId: getState().userId,
       login: getState().login,
       text,
-      likes: 0
+      likes: 0,
+      likedBy: []
     })
     .then((payload) => {
       return dispatch({type: ADD_POST_SUCCESS, payload})
@@ -86,24 +87,16 @@ export const fetchPosts = () => (dispatch) => {
        console.log(err)})
 }
 
-export const addLikes = (id) => dispatch => {
+export const addLikes = (id,userId) => dispatch => {
   const params = new URLSearchParams({
-    id
+    id,
+    userId
   });
   dispatch({type: ADD_LIKE_REQUEST});
   return axios
     .post(`http://localhost:3500/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
-    })
-    .catch(err => console.log(err))
-}
-
-export const fetch = () => dispatch => {
-  return axios
-    .get(`http://localhost:3500/posts`)
-    .then((payload) => {
-      return dispatch({type: FETCH_POSTS_SUCCESS})
     })
     .catch(err => console.log(err))
 }
