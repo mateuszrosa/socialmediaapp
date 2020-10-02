@@ -14,7 +14,10 @@ import {
   FETCH_POSTS_FAILURE,
   ADD_LIKE_REQUEST,
   ADD_LIKE_SUCCESS,
-  ADD_LIKE_FAILURE
+  ADD_LIKE_FAILURE,
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS,
+  REMOVE_POST_FAILURE
 } from "actions";
 
 const initialState = {
@@ -24,6 +27,15 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_POSTS_REQUEST: {
+      return state
+    }
+    case FETCH_POSTS_SUCCESS: {
+      return {
+        ...state,
+        posts: [...action.payload.data]
+      }
+    }
     case REGISTER_REQUEST: {
       return;
     }
@@ -57,13 +69,13 @@ const rootReducer = (state = initialState, action) => {
     case ADD_POST_FAILURE: {
       return state;
     }
-    case FETCH_POSTS_REQUEST: {
-      return state
+    case REMOVE_POST_REQUEST: {
+      return state;
     }
-    case FETCH_POSTS_SUCCESS: {
+    case REMOVE_POST_SUCCESS: {
       return {
         ...state,
-        posts: [...action.payload.data]
+        posts: [...state.posts.filter(post => post._id !== action.payload.data._id)]
       }
     }
     case ADD_LIKE_REQUEST: {

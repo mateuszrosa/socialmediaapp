@@ -15,6 +15,9 @@ export const FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
 export const ADD_LIKE_REQUEST = "ADD_LIKE_REQUEST";
 export const ADD_LIKE_SUCCESS = "ADD_LIKE_SUCCESS";
 export const ADD_LIKE_FAILURE = "ADD_LIKE_FAILURE";
+export const REMOVE_POST_REQUEST = "REMOVE_POST_REQUEST";
+export const REMOVE_POST_SUCCESS = "REMOVE_POST_SUCCESS";
+export const REMOVE_POST_FAILURE = "REMOVE_POST_FAILURE";
 
 
 export const register = (login, password) => (dispatch) => {
@@ -99,6 +102,19 @@ export const addLikes = (id,userId) => dispatch => {
     .post(`http://localhost:3500/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+export const removePost = (id) => dispatch => {
+  const params = new URLSearchParams({
+    id,
+  });
+  dispatch({type: REMOVE_POST_REQUEST});
+  return axios
+    .post(`http://localhost:3500/post/remove/?${params}`)
+    .then((payload) => {
+      return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addLikes} from 'actions'
+import {addLikes, removePost} from 'actions'
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
 import bin from 'assets/bin.svg';
 import styles from './Post.module.scss'
 
-const Post = ({text, login, id, likes, addLikes, userId, likedBy, date}) => {
+const Post = ({text, login, id, likes, addLikes, userId, likedBy, date, user, removePost}) => {
     
     return ( 
         <div className={styles.post}>
@@ -30,22 +30,22 @@ const Post = ({text, login, id, likes, addLikes, userId, likedBy, date}) => {
                         <img src={comment} alt=""/>
                     </button>
                     <span>Comments</span>
-                    <button>
-                        <img src={bin} alt=""/>
-                    </button>
+                    {user === login && <button><img onClick={() => removePost(id)} src={bin} alt=""/></button>}
                 </div>
             </div>
         </div>
      );
 }
 
-const mapStatetoProps = ({posts, userId}) => ({
+const mapStatetoProps = ({posts, userId,login}) => ({
     posts,
-    userId
+    userId,
+    user: login
 });
 
 const mapDispatchToState = dispatch  => ({
-    addLikes: (id, userId) => dispatch(addLikes(id, userId))
+    addLikes: (id, userId) => dispatch(addLikes(id, userId)),
+    removePost: (id) => dispatch(removePost(id))
 })
 
 export default connect(mapStatetoProps,mapDispatchToState)(Post);
