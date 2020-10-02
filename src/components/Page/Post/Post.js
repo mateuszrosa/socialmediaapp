@@ -5,15 +5,17 @@ import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
 import bin from 'assets/bin.svg';
+import arrows from 'assets/expand.svg'
 import styles from './Post.module.scss'
 
 const Post = ({text, login, id, likes, addLikes, userId, likedBy, date, user, removePost}) => {
-    
+
     return ( 
         <div className={styles.post}>
             <div className={styles.img}></div>
             <div className={styles.body}>
                 <div className={styles.text}>
+                    <img src={arrows} alt=""/>
                     <h3>{login}</h3>
                     <span>{date}</span>
                     <p>{text}</p>
