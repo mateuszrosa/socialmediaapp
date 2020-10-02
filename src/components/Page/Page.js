@@ -39,7 +39,7 @@ const Page = () => {
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
         <div className={styles.posts}>
-          {posts.map(({text, login, _id: id, likes, likedBy}) => <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} />)}
+          {posts.map(({text, login, _id: id, likes, likedBy, date}) => <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} date={date} />)}
         </div>
         </>
         ) 

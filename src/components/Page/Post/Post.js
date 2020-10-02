@@ -4,16 +4,18 @@ import {addLikes} from 'actions'
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
+import bin from 'assets/bin.svg';
 import styles from './Post.module.scss'
 
-const Post = ({text, login, id, likes, addLikes, userId, likedBy}) => {
+const Post = ({text, login, id, likes, addLikes, userId, likedBy, date}) => {
+    
     return ( 
         <div className={styles.post}>
             <div className={styles.img}></div>
             <div className={styles.body}>
                 <div className={styles.text}>
                     <h3>{login}</h3>
-                    <span>date</span>
+                    <span>{date}</span>
                     <p>{text}</p>
                 </div>
                 <div className={styles.interactions}>
@@ -28,6 +30,9 @@ const Post = ({text, login, id, likes, addLikes, userId, likedBy}) => {
                         <img src={comment} alt=""/>
                     </button>
                     <span>Comments</span>
+                    <button>
+                        <img src={bin} alt=""/>
+                    </button>
                 </div>
             </div>
         </div>

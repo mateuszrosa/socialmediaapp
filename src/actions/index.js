@@ -58,6 +58,7 @@ export const logout = (userId,login) => (dispatch) => {
 };
 
 export const addPost = (text) => (dispatch, getState) => {
+  const date = new Date();
   dispatch({type: ADD_POST_REQUEST})
   return axios
     .post(`http://localhost:3500/post/?`, {
@@ -65,7 +66,8 @@ export const addPost = (text) => (dispatch, getState) => {
       login: getState().login,
       text,
       likes: 0,
-      likedBy: []
+      likedBy: [],
+      date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
     })
     .then((payload) => {
       return dispatch({type: ADD_POST_SUCCESS, payload})
