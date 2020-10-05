@@ -85,6 +85,7 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case FETCH_POST_SUCCESS: {
+      console.log(action.payload.data)
       return {
         ...state,
         post: action.payload.data

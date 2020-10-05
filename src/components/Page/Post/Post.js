@@ -10,7 +10,6 @@ import arrows from 'assets/expand.svg';
 import styles from './Post.module.scss';
 
 const Post = ({text, login, id, likes, addLikes, userId, likedBy, date, user, removePost}) => {
-
     const [isOpened, setOpened] = useState(false);
 
     const openPost = () => {

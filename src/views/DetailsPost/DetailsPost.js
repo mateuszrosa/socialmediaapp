@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import {fetchPost, addLikes, removePost} from 'actions';
 import {useSelector, useDispatch} from 'react-redux'
 import face from 'assets/male.svg';
@@ -11,9 +11,12 @@ import styles from './DetailsPost.module.scss';
 
 const DetailsPost = (props) => {
 
-    // const [post, setPost] = useState({
-    //     likedBy: [],
-    // })
+    const [removed, setRemoved] = useState(false);
+
+    const redirectToHome = () => {
+        dispatch(removePost(id))
+        setRemoved(true);
+    }
 
     const {post = [], userId, user} =
     useSelector(state => ({
@@ -28,9 +31,11 @@ const DetailsPost = (props) => {
         dispatch(fetchPost(id))
     },[]);
     
-    const {login, date, text, likedBy = [], id} = post;
+    const {login, date, text, likedBy = [], _id: id} = post;
 
-    console.log(userId, login);
+    if(removed) {
+        return <Redirect to="/" />
+    }
 
     return ( 
         <div className={styles.container}>
@@ -57,7 +62,7 @@ const DetailsPost = (props) => {
                                 <img src={comment} alt=""/>
                             </button>
                             <span>Comments</span>
-                            {user === login && <button><img onClick={() => removePost(id)} src={bin} alt=""/></button>}
+                            {user === login && <button><img onClick={redirectToHome} src={bin} alt=""/></button>}
                         </div>
                     </div>
                 </div>
