@@ -40,7 +40,7 @@ const Page = () => {
         </div>
         <div className={styles.posts}>
           {posts.map(({text, login, _id: id, likes, likedBy, date}) => 
-          <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} date={date} />)}
+          <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} date={date} posts={posts} />)}
         </div>
         </>
         ) 

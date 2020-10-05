@@ -12,6 +12,9 @@ import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
+  FETCH_POST_REQUEST,
+  FETCH_POST_SUCCESS,
+  FETCH_POST_FAILURE,
   ADD_LIKE_REQUEST,
   ADD_LIKE_SUCCESS,
   ADD_LIKE_FAILURE,
@@ -76,6 +79,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts.filter(post => post._id !== action.payload.data._id)]
+      }
+    }
+    case FETCH_POST_REQUEST: {
+      return state;
+    }
+    case FETCH_POST_SUCCESS: {
+      return {
+        ...state,
+        post: action.payload.data
       }
     }
     case ADD_LIKE_REQUEST: {

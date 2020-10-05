@@ -8,6 +8,7 @@ import Page from "components/Page/Page";
 import UserPage from "views/UserPage/UserPage";
 import Profile from "components/Profile/Profile";
 import Friends from "components/Friends/Friends";
+import DetailsPost from 'views/DetailsPost/DetailsPost'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Root = () => {
@@ -33,6 +34,9 @@ const Root = () => {
           </Route>
           <Route path="/register">
             <UserPage isLogged={isLogged} />
+          </Route>
+          <Route path="/post/details:id">
+            <DetailsPost />
           </Route>
         </Switch>
       </Router>

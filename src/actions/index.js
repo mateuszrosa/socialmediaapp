@@ -12,6 +12,9 @@ export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 export const FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST";
 export const FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS";
 export const FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
+export const FETCH_POST_REQUEST = "FETCH_POST_REQUEST";
+export const FETCH_POST_SUCCESS = "FETCH_POST_SUCCESS";
+export const FETCH_POST_FAILURE = "FETCH_POST_FAILURE";
 export const ADD_LIKE_REQUEST = "ADD_LIKE_REQUEST";
 export const ADD_LIKE_SUCCESS = "ADD_LIKE_SUCCESS";
 export const ADD_LIKE_FAILURE = "ADD_LIKE_FAILURE";
@@ -27,7 +30,7 @@ export const register = (login, password) => (dispatch) => {
   });
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`http://localhost:3500/register/?${params}`)
+    .post(`http://localhost:3500/user/register/?${params}`)
     .then((payload) => {
       console.log(payload);
       dispatch({ type: REGISTER_SUCCES, payload });
@@ -46,7 +49,7 @@ export const login = (login, password) => (dispatch) => {
   });
   dispatch({ type: LOGIN_REQUEST });
   return axios
-    .post(`http://localhost:3500/login/?${params}`)
+    .post(`http://localhost:3500/user/login/?${params}`)
     .then((payload) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })
@@ -59,6 +62,30 @@ export const login = (login, password) => (dispatch) => {
 export const logout = (userId,login) => (dispatch) => {
   return dispatch({ type: LOGOUT, payload: { userId,login } });
 };
+
+export const fetchPosts = () => (dispatch) => {
+  dispatch({type: FETCH_POSTS_REQUEST})
+  return axios
+    .get(`http://localhost:3500/posts`)
+    .then((payload) => {
+      return dispatch({type: FETCH_POSTS_SUCCESS, payload})
+    })
+    .catch(err=> {
+       console.log(err)})
+}
+
+export const fetchPost = id => dispatch => {
+  const params = new URLSearchParams({
+    id,
+  });
+  dispatch({type: FETCH_POST_REQUEST})
+  return axios
+    .get(`http://localhost:3500/post/?${params}`)
+    .then((payload) => {
+      return ({type: FETCH_POSTS_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
 
 export const addPost = (text) => (dispatch, getState) => {
   const date = new Date();
@@ -81,17 +108,6 @@ export const addPost = (text) => (dispatch, getState) => {
     });
 }
 
-export const fetchPosts = () => (dispatch) => {
-  dispatch({type: FETCH_POSTS_REQUEST})
-  return axios
-    .get(`http://localhost:3500/posts`)
-    .then((payload) => {
-      return dispatch({type: FETCH_POSTS_SUCCESS, payload})
-    })
-    .catch(err=> {
-       console.log(err)})
-}
-
 export const addLikes = (id,userId) => dispatch => {
   const params = new URLSearchParams({
     id,
@@ -99,7 +115,7 @@ export const addLikes = (id,userId) => dispatch => {
   });
   dispatch({type: ADD_LIKE_REQUEST});
   return axios
-    .post(`http://localhost:3500/like/?${params}`)
+    .put(`http://localhost:3500/post/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
     })
@@ -112,7 +128,7 @@ export const removePost = (id) => dispatch => {
   });
   dispatch({type: REMOVE_POST_REQUEST});
   return axios
-    .post(`http://localhost:3500/post/remove/?${params}`)
+    .delete(`http://localhost:3500/post/?${params}`)
     .then((payload) => {
       return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })

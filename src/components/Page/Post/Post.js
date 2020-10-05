@@ -1,21 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {addLikes, removePost} from 'actions'
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
 import bin from 'assets/bin.svg';
-import arrows from 'assets/expand.svg'
-import styles from './Post.module.scss'
+import arrows from 'assets/expand.svg';
+import styles from './Post.module.scss';
 
 const Post = ({text, login, id, likes, addLikes, userId, likedBy, date, user, removePost}) => {
 
+    const [isOpened, setOpened] = useState(false);
+
+    const openPost = () => {
+        setOpened(true);
+    }
+
+    if(isOpened) {
+        return <Redirect to={`post/details${id}`} />;
+    }
+
     return ( 
+        <>
         <div className={styles.post}>
             <div className={styles.img}></div>
             <div className={styles.body}>
                 <div className={styles.text}>
-                    <img src={arrows} alt=""/>
+                    <img onClick={openPost} src={arrows} alt=""/>
                     <h3>{login}</h3>
                     <span>{date}</span>
                     <p>{text}</p>
@@ -36,6 +48,7 @@ const Post = ({text, login, id, likes, addLikes, userId, likedBy, date, user, re
                 </div>
             </div>
         </div>
+        </>
      );
 }
 
