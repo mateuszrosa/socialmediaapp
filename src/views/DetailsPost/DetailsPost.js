@@ -1,7 +1,10 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom'
 import styles from './DetailsPost.module.scss'
 
-const DetailsPost = () => {
+const DetailsPost = (props) => {
+console.log(props.match.params.id);
+
     return ( 
         <div className={styles.container}>
             <div className={styles.window}>
@@ -12,4 +15,4 @@ const DetailsPost = () => {
      );
 }
  
-export default DetailsPost;
+export default withRouter(DetailsPost);
