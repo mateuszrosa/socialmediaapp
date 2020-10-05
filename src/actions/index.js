@@ -82,7 +82,7 @@ export const fetchPost = id => dispatch => {
   return axios
     .get(`http://localhost:3500/post/?${params}`)
     .then((payload) => {
-      return ({type: FETCH_POSTS_SUCCESS, payload})
+      return dispatch({type: FETCH_POST_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 }
@@ -115,7 +115,7 @@ export const addLikes = (id,userId) => dispatch => {
   });
   dispatch({type: ADD_LIKE_REQUEST});
   return axios
-    .put(`http://localhost:3500/post/like/?${params}`)
+    .put(`http://localhost:3500/post/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
     })
@@ -128,7 +128,7 @@ export const removePost = (id) => dispatch => {
   });
   dispatch({type: REMOVE_POST_REQUEST});
   return axios
-    .delete(`http://localhost:3500/post/?${params}`)
+    .delete(`http://localhost:3500/post/?${id}`)
     .then((payload) => {
       return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })
