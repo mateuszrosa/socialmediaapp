@@ -1,15 +1,31 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom'
-import styles from './DetailsPost.module.scss'
+import React, {useState, useEffect} from 'react';
+import {withRouter} from 'react-router-dom';
+import styles from './DetailsPost.module.scss';
+import axios from 'axios'
 
 const DetailsPost = (props) => {
-console.log(props.match.params.id);
+    const id = props.match.params.id;
+
+    const [post, setPost] = useState({})
+
+    useEffect(() => {
+    const params = new URLSearchParams({
+    id
+  });
+    axios.get(`http://localhost:3500/post/?${params}`)
+    .then((payload) => {
+        setPost(payload.data)
+        console.log(payload.data);
+    })
+    .catch(err => console.log(err))
+},[])
+
 
     return ( 
         <div className={styles.container}>
             <div className={styles.window}>
-                <h1>Author</h1>
-                <p>Text</p>
+                <h1>{post.login}</h1>
+                <p>{post.text}</p>
             </div>
         </div>
      );
