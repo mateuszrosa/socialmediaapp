@@ -6,7 +6,8 @@ import face from 'assets/male.svg';
 import comment from 'assets/comment-blog.svg';
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
-import bin from 'assets/bin.svg'
+import bin from 'assets/bin.svg';
+import close from 'assets/close-fat.svg'
 import styles from './DetailsPost.module.scss';
 
 const DetailsPost = (props) => {
@@ -14,8 +15,12 @@ const DetailsPost = (props) => {
     const [removed, setRemoved] = useState(false);
     const dispatch = useDispatch();
 
-    const redirectToHome = () => {
+    const toRemovePost = () => {
         dispatch(removePost(id))
+        setRemoved(true);
+    }
+
+    const toClosePost = () => {
         setRemoved(true);
     }
 
@@ -50,6 +55,7 @@ const DetailsPost = (props) => {
                     </div>
                     <div className={styles.userinfo}>
                         <div className={styles.text}>
+                            <img onClick={toClosePost} src={close} alt=""/>
                             <h1>{login}</h1>
                             <span>{date}</span>
                             <p>{text}</p>
@@ -66,7 +72,7 @@ const DetailsPost = (props) => {
                                 <img src={comment} alt=""/>
                             </button>
                             <span>Comments</span>
-                            {user === login && <button><img onClick={redirectToHome} src={bin} alt=""/></button>}
+                            {user === login && <button><img onClick={toRemovePost} src={bin} alt=""/></button>}
                         </div>
                     </div>
                 </div>
