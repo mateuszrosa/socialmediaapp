@@ -76,6 +76,13 @@ const DetailsPost = (props) => {
                         </div>
                     </div>
                 </div>
+            <div className={styles.comments}>
+                <form action="#">
+                    <label htmlFor="comment">Write your comment</label>
+                    <input type="text" name="" id="comment"/>
+                    <input type="submit" value="Send"/>
+                </form>
+            </div>
             </div>
         </div>
      );
