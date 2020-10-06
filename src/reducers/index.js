@@ -85,7 +85,6 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case FETCH_POST_SUCCESS: {
-      console.log(action.payload.data)
       return {
         ...state,
         post: action.payload.data
@@ -98,6 +97,7 @@ const rootReducer = (state = initialState, action) => {
       let index = state.posts.findIndex(
         (post) => post._id === action.payload.data._id
       );
+      state.post = action.payload.data;
       state.posts[index] = action.payload.data;
       return {
         ...state

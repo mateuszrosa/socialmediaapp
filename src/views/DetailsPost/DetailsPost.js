@@ -12,10 +12,15 @@ import styles from './DetailsPost.module.scss';
 const DetailsPost = (props) => {
 
     const [removed, setRemoved] = useState(false);
+    const dispatch = useDispatch();
 
     const redirectToHome = () => {
         dispatch(removePost(id))
         setRemoved(true);
+    }
+
+    const isLiked = () => {
+        dispatch(addLikes(id, userId))
     }
 
     const {post = [], userId, user} =
@@ -25,7 +30,6 @@ const DetailsPost = (props) => {
       user: state.login
     }));
     
-    const dispatch = useDispatch();
     useEffect(() => {
         const id = props.match.params.id;
         dispatch(fetchPost(id))
@@ -55,7 +59,7 @@ const DetailsPost = (props) => {
                                 {likedBy.includes(userId) ? 
                                 <img src={blackheart} alt=""/> 
                                 : 
-                                <img src={heart} alt=""/>}
+                                <img onClick={() => isLiked()} src={heart} alt=""/>}
                             </button>
                             <span>{post.likes} Likes</span>
                             <button>
