@@ -30,7 +30,7 @@ export const register = (login, password) => (dispatch) => {
   });
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`http://localhost:3500/user/register/?${params}`)
+    .post(`https://socialmediaapp-backend.herokuapp.com/user/register/?${params}`)
     .then((payload) => {
       console.log(payload);
       dispatch({ type: REGISTER_SUCCES, payload });
@@ -49,7 +49,7 @@ export const login = (login, password) => (dispatch) => {
   });
   dispatch({ type: LOGIN_REQUEST });
   return axios
-    .post(`http://localhost:3500/user/login/?${params}`)
+    .post(`https://socialmediaapp-backend.herokuapp.com/user/login/?${params}`)
     .then((payload) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })
@@ -66,7 +66,7 @@ export const logout = (userId,login) => (dispatch) => {
 export const fetchPosts = () => (dispatch) => {
   dispatch({type: FETCH_POSTS_REQUEST})
   return axios
-    .get(`http://localhost:3500/posts`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/posts`)
     .then((payload) => {
       return dispatch({type: FETCH_POSTS_SUCCESS, payload})
     })
@@ -80,7 +80,7 @@ export const fetchPost = id => dispatch => {
   });
   dispatch({type: FETCH_POST_REQUEST})
   return axios
-    .get(`http://localhost:3500/post/?${params}`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
     .then((payload) => {
       return dispatch({type: FETCH_POST_SUCCESS, payload})
     })
@@ -91,7 +91,7 @@ export const addPost = (text) => (dispatch, getState) => {
   const date = new Date();
   dispatch({type: ADD_POST_REQUEST})
   return axios
-    .post(`http://localhost:3500/post/?`, {
+    .post(`https://socialmediaapp-backend.herokuapp.com/post/?`, {
       userId: getState().userId,
       login: getState().login,
       text,
@@ -115,7 +115,7 @@ export const addLikes = (id,userId) => dispatch => {
   });
   dispatch({type: ADD_LIKE_REQUEST});
   return axios
-    .put(`http://localhost:3500/post/like/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/post/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
     })
@@ -128,7 +128,7 @@ export const removePost = (id) => dispatch => {
   });
   dispatch({type: REMOVE_POST_REQUEST});
   return axios
-    .delete(`http://localhost:3500/post/?${params}`)
+    .delete(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
     .then((payload) => {
       return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })
