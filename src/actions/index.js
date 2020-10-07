@@ -34,7 +34,6 @@ export const register = (login, password) => (dispatch) => {
   return axios
     .post(`http://localhost:3500/user/register/?${params}`)
     .then((payload) => {
-      console.log(payload);
       dispatch({ type: REGISTER_SUCCES, payload });
     })
     .catch((err) => {
@@ -139,17 +138,19 @@ export const removePost = (id) => dispatch => {
 }
 
 export const addComment = (text,id, userId, login) => dispatch => {
+  const date = new Date();
   const params = new URLSearchParams({
    text,
    id,
    userId, 
-   login
+   login,
+   date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
   });
   dispatch({type: ADD_COMMENT_REQUEST});
   return axios
     .put(`http://localhost:3500/post/comment/?${params}`)
     .then(payload => {
-      console.log(payload)
+      return dispatch({type: ADD_COMMENT_SUCCESS, payload});
     })
-    .then(err => console.log(err))
+    .catch(err => console.log(err))
 }

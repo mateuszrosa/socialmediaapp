@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
-import { fetchPost, addLikes, removePost, addComment } from 'actions';
+import { fetchPosts, fetchPost, addLikes, removePost, addComment } from 'actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from "formik";
 import face from 'assets/male.svg';
@@ -13,8 +13,20 @@ import styles from './DetailsPost.module.scss';
 
 const DetailsPost = (props) => {
 
+    const dispatch = useDispatch()
+    const { post = [], userId, user } =
+        useSelector(state => ({
+            post: state.post,
+            userId: state.userId,
+            user: state.login
+        }));
+    useEffect(() => {
+        const id = props.match.params.id;
+        dispatch(fetchPost(id));
+        dispatch(fetchPosts());
+    }, []);
+    const { login, date, text, likedBy = [], _id: id } = post;
     const [removed, setRemoved] = useState(false);
-    const dispatch = useDispatch();
 
     const toRemovePost = () => {
         dispatch(removePost(id))
@@ -29,24 +41,6 @@ const DetailsPost = (props) => {
         dispatch(addLikes(id, userId))
     }
 
-    const { post = [], userId, user } =
-        useSelector(state => ({
-            post: state.post,
-            userId: state.userId,
-            user: state.login
-        }));
-
-    useEffect(() => {
-        const id = props.match.params.id;
-        dispatch(fetchPost(id))
-    }, []);
-
-    const { login, date, text, likedBy = [], _id: id } = post;
-
-    if (removed) {
-        return <Redirect to="/" />
-    }
-
     const formik = useFormik({
         initialValues: {
             comment: "",
@@ -58,6 +52,10 @@ const DetailsPost = (props) => {
             }
         }
     });
+
+    if (removed) {
+        return <Redirect to="/" />
+    }
 
     return (
         <div className={styles.container}>

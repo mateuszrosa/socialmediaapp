@@ -20,7 +20,10 @@ import {
   ADD_LIKE_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
-  REMOVE_POST_FAILURE
+  REMOVE_POST_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILURE
 } from "actions";
 
 const initialState = {
@@ -102,6 +105,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state
       }
+    }
+    case ADD_COMMENT_REQUEST: {
+      return state;
+    }
+    case ADD_COMMENT_SUCCESS: {
+      let index = state.posts.findIndex(post => post._id === action.payload.data._id);
+      state.post = action.payload.data;
+      state.posts[index] = action.payload.data;
+      return state;
     }
     default:
       return state;
