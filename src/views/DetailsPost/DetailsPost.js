@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import {Redirect, withRouter} from 'react-router-dom';
-import {fetchPost, addLikes, removePost} from 'actions';
-import {useSelector, useDispatch} from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
+import { fetchPost, addLikes, removePost, addComment } from 'actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { useFormik } from "formik";
 import face from 'assets/male.svg';
 import comment from 'assets/comment-blog.svg';
 import heart from 'assets/heart-thin.svg';
@@ -28,64 +29,82 @@ const DetailsPost = (props) => {
         dispatch(addLikes(id, userId))
     }
 
-    const {post = [], userId, user} =
-    useSelector(state => ({
-      post: state.post,
-      userId: state.userId,
-      user: state.login
-    }));
-    
+    const { post = [], userId, user } =
+        useSelector(state => ({
+            post: state.post,
+            userId: state.userId,
+            user: state.login
+        }));
+
     useEffect(() => {
         const id = props.match.params.id;
         dispatch(fetchPost(id))
-    },[]);
-    
-    const {login, date, text, likedBy = [], _id: id} = post;
+    }, []);
 
-    if(removed) {
+    const { login, date, text, likedBy = [], _id: id } = post;
+
+    if (removed) {
         return <Redirect to="/" />
     }
 
-    return ( 
+    const formik = useFormik({
+        initialValues: {
+            comment: "",
+        },
+
+        onSubmit: ({ comment }) => {
+            if (comment) {
+                dispatch(addComment(comment, id, userId, login))
+            }
+        }
+    });
+
+    return (
         <div className={styles.container}>
             <div className={styles.window}>
                 <div className={styles.user}>
                     <div className={styles.image}>
-                        <img src={face} alt=""/>
+                        <img src={face} alt="" />
                     </div>
                     <div className={styles.userinfo}>
                         <div className={styles.text}>
-                            <img onClick={toClosePost} src={close} alt=""/>
+                            <img onClick={toClosePost} src={close} alt="" />
                             <h1>{login}</h1>
                             <span>{date}</span>
                             <p>{text}</p>
                         </div>
                         <div className={styles.interactions}>
                             <button>
-                                {likedBy.includes(userId) ? 
-                                <img src={blackheart} alt=""/> 
-                                : 
-                                <img onClick={() => isLiked()} src={heart} alt=""/>}
+                                {likedBy.includes(userId) ?
+                                    <img src={blackheart} alt="" />
+                                    :
+                                    <img onClick={() => isLiked()} src={heart} alt="" />}
                             </button>
                             <span>{post.likes} Likes</span>
                             <button>
-                                <img src={comment} alt=""/>
+                                <img src={comment} alt="" />
                             </button>
                             <span>Comments</span>
-                            {user === login && <button><img onClick={toRemovePost} src={bin} alt=""/></button>}
+                            {user === login && <button><img onClick={toRemovePost} src={bin} alt="" /></button>}
                         </div>
                     </div>
                 </div>
-            <div className={styles.comments}>
-                <form action="#">
-                    <label htmlFor="comment">Write your comment</label>
-                    <input type="text" name="" id="comment"/>
-                    <input type="submit" value="Send"/>
-                </form>
-            </div>
+                <div className={styles.comments}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <label htmlFor="comment">Write your comment</label>
+                        <input
+                            onChange={formik.handleChange}
+                            value={formik.values.comment}
+                            type="text"
+                            name="comment"
+                            id="comment"
+                        />
+                        <input type="submit" value="Send" />
+                    </form>
+                </div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default withRouter(DetailsPost);

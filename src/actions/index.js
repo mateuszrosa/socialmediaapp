@@ -21,7 +21,9 @@ export const ADD_LIKE_FAILURE = "ADD_LIKE_FAILURE";
 export const REMOVE_POST_REQUEST = "REMOVE_POST_REQUEST";
 export const REMOVE_POST_SUCCESS = "REMOVE_POST_SUCCESS";
 export const REMOVE_POST_FAILURE = "REMOVE_POST_FAILURE";
-
+export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
 
 export const register = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
@@ -30,7 +32,7 @@ export const register = (login, password) => (dispatch) => {
   });
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`https://socialmediaapp-backend.herokuapp.com/user/register/?${params}`)
+    .post(`http://localhost:3500/user/register/?${params}`)
     .then((payload) => {
       console.log(payload);
       dispatch({ type: REGISTER_SUCCES, payload });
@@ -49,7 +51,7 @@ export const login = (login, password) => (dispatch) => {
   });
   dispatch({ type: LOGIN_REQUEST });
   return axios
-    .post(`https://socialmediaapp-backend.herokuapp.com/user/login/?${params}`)
+    .post(`http://localhost:3500/user/login/?${params}`)
     .then((payload) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })
@@ -66,7 +68,7 @@ export const logout = (userId,login) => (dispatch) => {
 export const fetchPosts = () => (dispatch) => {
   dispatch({type: FETCH_POSTS_REQUEST})
   return axios
-    .get(`https://socialmediaapp-backend.herokuapp.com/posts`)
+    .get(`http://localhost:3500/posts`)
     .then((payload) => {
       return dispatch({type: FETCH_POSTS_SUCCESS, payload})
     })
@@ -80,7 +82,7 @@ export const fetchPost = id => dispatch => {
   });
   dispatch({type: FETCH_POST_REQUEST})
   return axios
-    .get(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
+    .get(`http://localhost:3500/post/?${params}`)
     .then((payload) => {
       return dispatch({type: FETCH_POST_SUCCESS, payload})
     })
@@ -91,12 +93,13 @@ export const addPost = (text) => (dispatch, getState) => {
   const date = new Date();
   dispatch({type: ADD_POST_REQUEST})
   return axios
-    .post(`https://socialmediaapp-backend.herokuapp.com/post/?`, {
+    .post(`http://localhost:3500/post/?`, {
       userId: getState().userId,
       login: getState().login,
       text,
       likes: 0,
       likedBy: [],
+      comments: [],
       date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
     })
     .then((payload) => {
@@ -115,7 +118,7 @@ export const addLikes = (id,userId) => dispatch => {
   });
   dispatch({type: ADD_LIKE_REQUEST});
   return axios
-    .put(`https://socialmediaapp-backend.herokuapp.com/post/like/?${params}`)
+    .put(`http://localhost:3500/post/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
     })
@@ -128,9 +131,25 @@ export const removePost = (id) => dispatch => {
   });
   dispatch({type: REMOVE_POST_REQUEST});
   return axios
-    .delete(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
+    .delete(`http://localhost:3500/post/?${params}`)
     .then((payload) => {
       return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })
     .catch(err => console.log(err))
+}
+
+export const addComment = (text,id, userId, login) => dispatch => {
+  const params = new URLSearchParams({
+   text,
+   id,
+   userId, 
+   login
+  });
+  dispatch({type: ADD_COMMENT_REQUEST});
+  return axios
+    .put(`http://localhost:3500/post/comment/?${params}`)
+    .then(payload => {
+      console.log(payload)
+    })
+    .then(err => console.log(err))
 }

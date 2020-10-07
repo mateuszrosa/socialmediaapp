@@ -21,9 +21,9 @@ const NewPostBar = ({hideBar, addPost}) => {
         } else {
             setValid(true)
         }
-
     }
     });
+    
     return ( 
         <div className={styles.bar}>
             <img onClick={hideBar} src={close} alt=""/>

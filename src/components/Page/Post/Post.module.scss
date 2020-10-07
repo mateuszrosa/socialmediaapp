@@ -2,7 +2,7 @@
     width: 70%;
     height: 140px;
     background-color: #fff;
-    border:1px solid black;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -34,6 +34,7 @@
 
         .text {
             position: relative;
+
             img {
                 position: absolute;
                 top: -5px;
@@ -42,6 +43,7 @@
                 height: 30px;
                 cursor: pointer;
             }
+
             span {
                 font-size: 12.5px;
                 color: gray
@@ -58,17 +60,22 @@
                 border: none;
                 cursor: pointer;
 
-                &:nth-last-child(1) {
+                &.actions {
                     position: absolute;
-                    right: 5px;
+                    right: 50px;
+
+                    &:last-of-type {
+                        right: 7.5px;
+                    }
                 }
 
                 img {
-                width: 27.5px;
-                height: 27.5px;
-                margin: 0 5px 0 5px;
+                    width: 27.5px;
+                    height: 27.5px;
+                    margin: 0 5px 0 5px;
                 }
             }
+
             span {
                 color: #000;
                 font-size: 20px;

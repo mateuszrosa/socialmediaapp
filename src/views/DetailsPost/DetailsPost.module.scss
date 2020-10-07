@@ -5,9 +5,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     .window {
         width: 60%;
+        max-width: 700px;
         min-height: 50%;
         border: 1px solid black;
         display: flex;
@@ -66,6 +67,7 @@
                         font-size: 17px;
                     }
                 }
+
                 .interactions {
                     display: flex;
                     align-items: center;
@@ -73,22 +75,23 @@
                     height: 40px;
                     position: relative;
                     margin-bottom: 10px;
-        
+
                     button {
                         border: none;
                         cursor: pointer;
-        
+
                         &:nth-last-child(1) {
                             position: absolute;
                             right: 5px;
                         }
-        
+
                         img {
-                        width: 27.5px;
-                        height: 27.5px;
-                        margin: 0 5px 0 5px;
+                            width: 27.5px;
+                            height: 27.5px;
+                            margin: 0 5px 0 5px;
                         }
                     }
+
                     span {
                         color: #000;
                         font-size: 20px;
