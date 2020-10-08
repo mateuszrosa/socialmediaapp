@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux'; import { fetchPosts, fetchPost, addLikes, removePost, addComment } from 'actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPosts, fetchPost, addLikes as addLikesAction, removePost as removePostAction, addComment } from 'actions';
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
@@ -35,6 +36,15 @@ const Post = (props) => {
         setClosed(true);
     }
 
+    const addLikes = () => {
+        dispatch(addLikesAction(id, userId))
+    }
+
+    const removePost = () => {
+        dispatch(removePostAction(id));
+        setClosed(true);
+    }
+
     if (isOpened) {
         return <Redirect to={`post/details${id}`} />;
     } else if (isClosed) {
@@ -61,7 +71,7 @@ const Post = (props) => {
                             {likedBy.includes(userId) ?
                                 <img src={blackheart} alt="" />
                                 :
-                                <img onClick={(e) => addLikes(id, userId)} src={heart} alt="" />}
+                                <img onClick={addLikes} src={heart} alt="" />}
                         </button>
                         <span>{likes} Likes</span>
                         <button>
@@ -69,7 +79,7 @@ const Post = (props) => {
                         </button>
                         <span>Comments</span>
                         {user === login && <button className={styles.actions}><img src={edit} alt="" /></button>}
-                        {user === login && <button className={styles.actions}><img onClick={() => removePost(id)} src={bin} alt="" /></button>}
+                        {user === login && <button className={styles.actions}><img onClick={removePost} src={bin} alt="" /></button>}
                     </div> 
                 </div>
             </div>
