@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {useDispatch, useSelector} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
-import Post from 'components/Page/Post/Post'
+import Post from 'components/Post/Post';
 import {fetchPosts} from 'actions'
 
 const Page = () => {
@@ -65,23 +65,5 @@ const Page = () => {
     </div>
   );
 };
-
-// const mapStateToProps = ({userId, posts}) => ({
-//   userId,
-//   posts
-// })
-
-// const mapDispatchToState = (dispatch) => ({
-//   fetchPosts: () => dispatch(fetchPostsAuth())
-// });
-
-const withPropsValidation = props => {
-  PropTypes.checkPropTypes(propTypes, props, 'prop', '')
-  return props
-}
-
-const propTypes = {
-  posts: PropTypes.array.isRequired,
-}
 
 export default Page;
