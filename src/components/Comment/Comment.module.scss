@@ -1,5 +1,23 @@
 .comment {
-    background-color: #f9f9;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
     width: 100%;
     height: 100px;
+
+    .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ddd;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            width: 80px;
+            height: 80px;
+        }
+    }
 }

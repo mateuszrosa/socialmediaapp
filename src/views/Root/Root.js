@@ -36,7 +36,7 @@ const Root = () => {
             <UserPage isLogged={isLogged} />
           </Route>
           <Route exact path="/post/details:id">
-            <DetailsPost siema />
+            <DetailsPost />
           </Route>
         </Switch>
       </Router>

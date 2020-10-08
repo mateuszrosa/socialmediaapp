@@ -12,7 +12,7 @@ import close from 'assets/close-fat.svg'
 import styles from './Post.module.scss';
 
 const Post = (props) => {
-    const {date, id, likedBy, likes, login, posts, text, detailPost } = props;
+    const { date, id, likedBy = [], likes, login, posts, text, detailPost, commentPost } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Post = (props) => {
             user: state.login
         }));
     useEffect(() => {
-        if(detailPost) {
+        if (detailPost) {
             dispatch(fetchPost(props.match.params.id));
         }
     }, []);
@@ -52,13 +52,21 @@ const Post = (props) => {
     }
 
     return (
-        <>
-            <div className={styles.post}>
-                <div className={styles.img}></div>
+        <div className={styles.post}>
+            <div className={styles.img}></div>
+            {commentPost ?
+                <div className={styles.body}>
+                    <div className={styles.commentText}>
+                        <h3>{login}</h3>
+                        <span>{date}</span>
+                        <p>{text}</p>
+                    </div>
+                </div>
+                :
                 <div className={styles.body}>
                     <div className={styles.text}>
-                        {detailPost ? 
-                            <img src={close} onClick={closePost}alt="" />
+                        {detailPost ?
+                            <img src={close} onClick={closePost} alt="" />
                             :
                             <img src={arrows} onClick={openPost} alt="" />
                         }
@@ -80,10 +88,9 @@ const Post = (props) => {
                         <span>Comments</span>
                         {user === login && <button className={styles.actions}><img src={edit} alt="" /></button>}
                         {user === login && <button className={styles.actions}><img onClick={removePost} src={bin} alt="" /></button>}
-                    </div> 
-                </div>
-            </div>
-        </>
+                    </div>
+                </div>}
+        </div>
     );
 }
 

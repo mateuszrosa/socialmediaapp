@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {addComment } from 'actions';
+import {fetchPosts, addComment } from 'actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from "formik";
 import Post from 'components/Post/Post';
+import Comment from 'components/Comment/Comment'
 import face from 'assets/male.svg';
 import comment from 'assets/comment-blog.svg';
 import heart from 'assets/heart-thin.svg';
@@ -13,14 +14,11 @@ import styles from './DetailsPost.module.scss';
 
 const DetailsPost = (props) => {
 
-    console.log(props.siema)
-
     const dispatch = useDispatch()
-    const { post = [], userId, user } =
+    const { post = [], userId} =
         useSelector(state => ({
             post: state.post,
             userId: state.userId,
-            user: state.login
         }));
 
     const formik = useFormik({
@@ -31,11 +29,12 @@ const DetailsPost = (props) => {
         onSubmit: ({ comment }) => {
             if (comment) {
                 dispatch(addComment(comment, id, userId, login))
+                dispatch(fetchPosts())
             }
         }
     });
 
-    const { login, date, text, likedBy = [], _id: id } = post;
+    const { login, date, text, likedBy = [], _id: id, comments =[] } = post;
 
     return (
         <div className={styles.container}>
@@ -54,6 +53,13 @@ const DetailsPost = (props) => {
                         <input type="submit" value="Send" />
                     </form>
                     <div className={styles.commentsList}>
+                        {comments.map(({date,id,login,text,userId}) => <Post
+                            text={text}
+                            date={date} 
+                            login={login} 
+                            key={id}
+                            commentPost
+                        />)}
                     </div>
                 </div>
             </div> 
