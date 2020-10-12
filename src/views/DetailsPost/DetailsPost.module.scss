@@ -13,97 +13,11 @@
         border: 1px solid black;
         display: flex;
         flex-direction: column;
-
-        .user {
-            display: flex;
-            align-items: center;
-            height: 250px;
-            border-bottom: 1px solid black;
-
-            .image {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 180px;
-                height: 180px;
-                border-radius: 50%;
-                background-color: #ddd;
-                overflow: hidden;
-                margin-left: 10px;
-
-                img {
-                    width: 180px;
-                    height: 180px;
-                }
-            }
-
-            .userinfo {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                height: 100%;
-                flex-grow: 1;
-                border-left: 1px solid black;
-
-                .text {
-                    padding: 20px 0 0 30px;
-                    position: relative;
-
-                    img {
-                        width: 30px;
-                        height: 30px;
-                        position: absolute;
-                        top: 15px;
-                        right: 15px;
-                        cursor: pointer;
-                    }
-
-                    span {
-                        font-size: 12px;
-                        color: gray;
-                    }
-
-                    p {
-                        font-size: 17px;
-                    }
-                }
-
-                .interactions {
-                    display: flex;
-                    align-items: center;
-                    padding-left: 30px;
-                    height: 40px;
-                    position: relative;
-                    margin-bottom: 10px;
-
-                    button {
-                        border: none;
-                        cursor: pointer;
-
-                        &:nth-last-child(1) {
-                            position: absolute;
-                            right: 5px;
-                        }
-
-                        img {
-                            width: 27.5px;
-                            height: 27.5px;
-                            margin: 0 5px 0 5px;
-                        }
-                    }
-
-                    span {
-                        color: #000;
-                        font-size: 20px;
-                        font-weight: 800;
-                        margin-right: 10px;
-                    }
-                }
-            }
-        }
+        align-items: center;
 
         .comments {
             background-color: #ddd;
+            width: 100%;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
