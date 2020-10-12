@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from 'components/NewPostBar/NewPostBar.module.scss';
 import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
-import {fetchPost as fetchPostAction,addPost as addPostAction, editPost as editPostAction} from 'actions'
+import {addPost as addPostAction, editPost as editPostAction} from 'actions'
 
 const NewPostBar = ({hideBar, edit, id}) => {
     const dispatch = useDispatch();

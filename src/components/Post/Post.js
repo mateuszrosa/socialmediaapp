@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPost, addLikes as addLikesAction, removePost as removePostAction, editPost as editPostAction } from 'actions';
+import { fetchPost, addLikes as addLikesAction, removePost as removePostAction } from 'actions';
 import NewPostBar from 'components/NewPostBar/NewPostBar'
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
@@ -13,7 +13,7 @@ import close from 'assets/close-fat.svg'
 import styles from './Post.module.scss';
 
 const Post = (props) => {
-    const { date, id, likedBy = [], likes, login, posts, text, detailPost, commentPost } = props;
+    const { date, id, likedBy = [], likes, login, text, detailPost, commentPost } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
@@ -26,7 +26,7 @@ const Post = (props) => {
             user: state.login
         }));
     useEffect(() => {
-        if (detailPost) {
+        if (detailPost && post.length === 0) {
             dispatch(fetchPost(props.match.params.id));
         }
     }, []);

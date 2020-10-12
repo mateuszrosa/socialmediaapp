@@ -24,15 +24,17 @@
             align-items: center;
 
             form {
+                width: 100%;
                 display: flex;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: center;
                 width: 70%;
             }
 
             .commentsList {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 flex-grow: 1;
                 width: 100%;
                 background-color: #fff;
