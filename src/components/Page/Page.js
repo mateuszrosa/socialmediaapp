@@ -17,7 +17,7 @@ const Page = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPosts())
+    dispatch(fetchPosts());
   },[]);
 
   const [isVisible, setVisible] = useState(false);

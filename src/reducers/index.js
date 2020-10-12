@@ -45,6 +45,15 @@ const rootReducer = (state = initialState, action) => {
         posts: [...action.payload.data]
       }
     }
+    case FETCH_POST_REQUEST: {
+      return state;
+    }
+    case FETCH_POST_SUCCESS: {
+      return {
+        ...state,
+        post: action.payload.data
+      }
+    }
     case REGISTER_REQUEST: {
       return;
     }
@@ -85,15 +94,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts.filter(post => post._id !== action.payload.data._id)]
-      }
-    }
-    case FETCH_POST_REQUEST: {
-      return state;
-    }
-    case FETCH_POST_SUCCESS: {
-      return {
-        ...state,
-        post: action.payload.data
       }
     }
     case ADD_LIKE_REQUEST: {

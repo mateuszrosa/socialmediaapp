@@ -26,7 +26,7 @@ const Post = (props) => {
             user: state.login
         }));
     useEffect(() => {
-        if (detailPost && post.length === 0) {
+        if (detailPost && (id !== props.match.params.id || post.length === 0)) {
             dispatch(fetchPost(props.match.params.id));
         }
     }, []);
@@ -40,6 +40,7 @@ const Post = (props) => {
     }
 
     const addLikes = () => {
+        console.log(id, userId)
         dispatch(addLikesAction(id, userId))
     }
 

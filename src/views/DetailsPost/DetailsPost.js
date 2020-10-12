@@ -34,12 +34,12 @@ const DetailsPost = (props) => {
         }
     });
 
-    const { login, date, text, likedBy = [], _id: id, comments =[] } = post;
+    const { login, date, text, likes, likedBy = [], _id: id, comments =[] } = post;
 
     return (
         <div className={styles.container}>
              <div className={styles.window}>
-             <Post text={text} login={login} key={id} id={id} likedBy={likedBy} date={date} detailPost/>
+             <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} date={date} detailPost/>
                 <div className={styles.comments}>
                     <form onSubmit={formik.handleSubmit}>
                         <label htmlFor="comment">Write your comment</label>
