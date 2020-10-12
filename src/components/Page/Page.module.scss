@@ -14,9 +14,10 @@
         position: relative;
 
         .posts {
-            // border: 1px solid black;
+            margin-top: 10px;
+            padding-top: 20px;
             flex-grow: 1;
-            width: 60%;
+            width: 75%;
             max-width: 1000px;
             display: flex;
             flex-direction: column;
