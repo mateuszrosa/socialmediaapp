@@ -39,8 +39,18 @@ const DetailsPost = (props) => {
     return (
         <div className={styles.container}>
              <div className={styles.window}>
-             <Post text={text} login={login} key={id} id={id} likes={likes} likedBy={likedBy} date={date} detailPost/>
-                <div className={styles.comments}>
+             <Post 
+                text={text} 
+                login={login} 
+                key={id} 
+                id={id} 
+                likes={likes} 
+                likedBy={likedBy} 
+                date={date}  
+                comments={comments} 
+                detailPost
+            />
+            <div className={styles.comments}>
                     <form onSubmit={formik.handleSubmit}>
                         <label htmlFor="comment">Write your comment</label>
                         <input

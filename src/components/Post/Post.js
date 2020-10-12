@@ -13,7 +13,7 @@ import close from 'assets/close-fat.svg'
 import styles from './Post.module.scss';
 
 const Post = (props) => {
-    const { date, id, likedBy = [], likes, login, text, detailPost, commentPost } = props;
+    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost , profile } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
@@ -95,7 +95,7 @@ const Post = (props) => {
                             <button>
                                 <img src={comment} alt="" />
                             </button>
-                            <span>Comments</span>
+                            <span>{comments.length} Comments</span>
                             {user === login && 
                                 <button className={styles.actions}>
                                     <img onClick={editPost} src={edit} alt="" />
