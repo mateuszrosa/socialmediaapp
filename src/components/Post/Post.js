@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts, fetchPost, addLikes as addLikesAction, removePost as removePostAction, addComment } from 'actions';
+import { fetchPost, addLikes as addLikesAction, removePost as removePostAction, editPost as editPostAction } from 'actions';
+import NewPostBar from 'components/NewPostBar/NewPostBar'
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
@@ -15,7 +16,9 @@ const Post = (props) => {
     const { date, id, likedBy = [], likes, login, posts, text, detailPost, commentPost } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
+    const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
+    
     const { post = [], userId, user } =
         useSelector(state => ({
             post: state.post,
@@ -40,6 +43,10 @@ const Post = (props) => {
         dispatch(addLikesAction(id, userId))
     }
 
+    const editPost = () => {
+        setEdited(!isEdited);
+    }
+
     const removePost = () => {
         dispatch(removePostAction(id));
         setClosed(true);
@@ -52,45 +59,54 @@ const Post = (props) => {
     }
 
     return (
-        <div className={styles.post}>
-            <div className={styles.img}></div>
-            {commentPost ?
-                <div className={styles.body}>
-                    <div className={styles.commentText}>
-                        <h3>{login}</h3>
-                        <span>{date}</span>
-                        <p>{text}</p>
+        <>
+           {isEdited && <NewPostBar id={id} hideBar={editPost} edit/>}
+            <div className={styles.post}>
+                <div className={styles.img}></div>
+                {commentPost ?
+                    <div className={styles.body}>
+                        <div className={styles.commentText}>
+                            <h3>{login}</h3>
+                            <span>{date}</span>
+                            <p>{text}</p>
+                        </div>
                     </div>
-                </div>
-                :
-                <div className={styles.body}>
-                    <div className={styles.text}>
-                        {detailPost ?
-                            <img src={close} onClick={closePost} alt="" />
-                            :
-                            <img src={arrows} onClick={openPost} alt="" />
-                        }
-                        <h3>{login}</h3>
-                        <span>{date}</span>
-                        <p>{text}</p>
-                    </div>
-                    <div className={styles.interactions}>
-                        <button>
-                            {likedBy.includes(userId) ?
-                                <img src={blackheart} alt="" />
+                    :
+                    <div className={styles.body}>
+                        <div className={styles.text}>
+                            {detailPost ?
+                                <img src={close} onClick={closePost} alt="" />
                                 :
-                                <img onClick={addLikes} src={heart} alt="" />}
-                        </button>
-                        <span>{likes} Likes</span>
-                        <button>
-                            <img src={comment} alt="" />
-                        </button>
-                        <span>Comments</span>
-                        {user === login && <button className={styles.actions}><img src={edit} alt="" /></button>}
-                        {user === login && <button className={styles.actions}><img onClick={removePost} src={bin} alt="" /></button>}
-                    </div>
-                </div>}
-        </div>
+                                <img src={arrows} onClick={openPost} alt="" />
+                            }
+                            <h3>{login}</h3>
+                            <span>{date}</span>
+                            <p>{text}</p>
+                        </div>
+                        <div className={styles.interactions}>
+                            <button>
+                                {likedBy.includes(userId) ?
+                                    <img src={blackheart} alt="" />
+                                    :
+                                    <img onClick={addLikes} src={heart} alt="" />}
+                            </button>
+                            <span>{likes} Likes</span>
+                            <button>
+                                <img src={comment} alt="" />
+                            </button>
+                            <span>Comments</span>
+                            {user === login && 
+                                <button className={styles.actions}>
+                                    <img onClick={editPost} src={edit} alt="" />
+                                </button>}
+                            {user === login && 
+                            <button className={styles.actions}>
+                                <img onClick={removePost} src={bin} alt="" />
+                            </button>}
+                        </div>
+                    </div>}
+            </div>
+        </>
     );
 }
 

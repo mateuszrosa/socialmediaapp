@@ -23,7 +23,10 @@ import {
   REMOVE_POST_FAILURE,
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
-  ADD_COMMENT_FAILURE
+  ADD_COMMENT_FAILURE,
+  EDIT_POST_REQUEST,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_FAILURE
 } from "actions";
 
 const initialState = {
@@ -105,6 +108,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state
       }
+    }
+    case EDIT_POST_REQUEST: {
+      return state;
+    }
+    case EDIT_POST_SUCCESS: {
+      let index = state.posts.findIndex(post => post._id === action.payload.data._id);
+      state.post = action.payload.data;
+      state.posts[index] = action.payload.data;
+      return state;
     }
     case ADD_COMMENT_REQUEST: {
       return state;

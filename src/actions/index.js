@@ -24,6 +24,9 @@ export const REMOVE_POST_FAILURE = "REMOVE_POST_FAILURE";
 export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
 export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
 export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
+export const EDIT_POST_REQUEST = "EDIT_POST_REQUEST";
+export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
+export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";
 
 export const register = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
@@ -120,6 +123,20 @@ export const addLikes = (id,userId) => dispatch => {
     .put(`http://localhost:3500/post/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+export const editPost = (id, text) => dispatch => {
+  const params = new URLSearchParams({
+    id,
+    text
+  });
+  dispatch({type: EDIT_POST_REQUEST});
+  return axios
+    .put(`http://localhost:3500/post/edit/?${params}`)
+    .then(payload => {
+      return dispatch({type: EDIT_POST_SUCCESS, payload});
     })
     .catch(err => console.log(err))
 }

@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import { connect } from "react-redux";
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from 'components/NewPostBar/NewPostBar.module.scss';
 import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
-import {addPost as addPostAuth} from 'actions'
+import {fetchPost as fetchPostAction,addPost as addPostAction, editPost as editPostAction} from 'actions'
 
-const NewPostBar = ({hideBar, addPost}) => {
+const NewPostBar = ({hideBar, edit, id}) => {
+    const dispatch = useDispatch();
 
     const [valid, setValid] = useState(false) 
 
@@ -16,7 +17,7 @@ const NewPostBar = ({hideBar, addPost}) => {
 
     onSubmit: ({text}) => {
         if(text) {
-        addPost(text)
+            edit ? dispatch(editPostAction(id, text)) :dispatch(addPostAction(text))
         hideBar()
         } else {
             setValid(true)
@@ -27,7 +28,7 @@ const NewPostBar = ({hideBar, addPost}) => {
     return ( 
         <div className={styles.bar}>
             <img onClick={hideBar} src={close} alt=""/>
-            <h1>Create Post</h1>
+            {edit ? <h1>Edit Post</h1> : <h1>Create Post</h1>}
             {valid && <p>You can't send empty post!</p>}
             <form onSubmit={formik.handleSubmit}>
                 <textarea 
@@ -44,12 +45,4 @@ const NewPostBar = ({hideBar, addPost}) => {
      );
 }
 
-const mapDispatchToState = (dispatch) => ({
-    addPost: ( text) => dispatch(addPostAuth(text))
-  });
-  
-  const mapToStateProps = ({ userId }) => ({
-    userId,
-  });
-
-export default connect(mapToStateProps, mapDispatchToState)(NewPostBar);
+export default NewPostBar;
