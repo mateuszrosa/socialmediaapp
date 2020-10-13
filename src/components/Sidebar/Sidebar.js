@@ -12,7 +12,7 @@ const Sidebar = ({ userId,login, logout }) => {
           <Link to="/">home</Link>
         </li>
         <li>
-          <Link to="/profile">profile</Link>
+          <Link to={`/profile/${userId}`}>profile</Link>
         </li>
         <li>
           <Link to="/friends">friends</Link>

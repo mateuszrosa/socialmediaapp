@@ -10,11 +10,12 @@
     .window {
         margin-top: 50px;
         width: 60%;
+        max-width: 700px;
         min-height: 500px;
         border: 1px solid black;
 
         .profile {
-            min-height: 180px;
+            height: 180px;
             display: flex;
             align-items: center;
             width: 100%;
@@ -28,6 +29,22 @@
                 background-image: url();
                 background-image: url("assets/male.svg");
                 border: 6px solid #fff;
+            }
+
+            .info {
+                padding-left: 20px;
+                flex-grow: 1;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            img {
+                width: 60px;
+                height: 60px;
+                margin-right: 25px;
             }
         }
     }

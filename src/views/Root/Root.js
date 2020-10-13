@@ -23,7 +23,7 @@ const Root = () => {
           <Route exact path="/">
             <Page />
           </Route>
-          <Route path="/profile">
+          <Route path="/profile/:id">
             <Profile />
           </Route>
           <Route path="/friends">
