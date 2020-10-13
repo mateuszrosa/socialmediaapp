@@ -10,7 +10,7 @@ const Page = () => {
 
   const {userId, posts = []} =
     useSelector(state => ({
-      userId: state.userId,
+      userId: state.user.userId,
       posts: state.posts,
     }));
 

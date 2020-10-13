@@ -33,8 +33,10 @@ import {
 } from "actions";
 
 const initialState = {
-  userId: "5f634e3c79e20f40e8e7530f",
-  login: "Parik"
+  user: {
+    userId: "5f634e3c79e20f40e8e7530f",
+    login: "Parik"
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -59,6 +61,12 @@ const rootReducer = (state = initialState, action) => {
     }
     case REGISTER_REQUEST: {
       return;
+    }
+    case REGISTER_SUCCES: {
+      return {
+        ...state,
+        user: action.payload.data
+      }
     }
     case LOGIN_REQUEST: {
       return state;

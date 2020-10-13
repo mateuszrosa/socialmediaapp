@@ -22,8 +22,8 @@ const Post = (props) => {
     const { post = [], userId, user } =
         useSelector(state => ({
             post: state.post,
-            userId: state.userId,
-            user: state.login
+            userId: state.user.userId,
+            user: state.user.login
         }));
     useEffect(() => {
         if (detailPost && (id !== props.match.params.id || post.length === 0)) {

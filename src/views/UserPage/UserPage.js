@@ -14,9 +14,10 @@ const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
     initialValues: {
       login: "",
       password: "",
+      email: ""
     },
-    onSubmit: ({ login, password }) => {
-      isLogged ? loginAuth(login, password) : registerAuth(login, password);
+    onSubmit: ({ login, password, email }) => {
+      isLogged ? loginAuth(login, password) : registerAuth(login, password, email);
     },
   });
   return (
@@ -32,6 +33,17 @@ const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
             name="login"
             id="login"
           />
+          {!isLogged &&
+            <>
+              <label htmlFor="email">E-mail</label>
+              <input
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                type="email"
+                name="email"
+                id="email"
+              />
+            </>}
           <label htmlFor="password">Password</label>
           <input
             onChange={formik.handleChange}
@@ -43,8 +55,8 @@ const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
           {isLogged ? (
             <input type="submit" value="Log In" />
           ) : (
-            <input type="submit" value="Register" />
-          )}
+              <input type="submit" value="Register" />
+            )}
           {isLogged ? <Link to="/register">I want my account!</Link> : null}
         </form>
       </div>
