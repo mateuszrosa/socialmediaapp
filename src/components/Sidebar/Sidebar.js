@@ -1,10 +1,17 @@
 import React from "react";
 import styles from "./Sidebar.module.scss";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "actions";
 
-const Sidebar = ({ userId,login, logout }) => {
+const Sidebar = () => {
+
+  const dispatch = useDispatch();
+  const {userId, login} = useSelector(state => ({
+    userId: state.user.userId,
+    login: state.user.login
+  }))
+
   return (
     <div className={styles.menu}>
       <ul>
@@ -19,7 +26,7 @@ const Sidebar = ({ userId,login, logout }) => {
         </li>
         <li>
           {userId ? (
-            <Link onClick={() => logout(userId,login)} to="/">
+            <Link onClick={() => dispatch(logout(userId,login))} to="/">
               log Out
             </Link>
           ) : (
@@ -31,14 +38,14 @@ const Sidebar = ({ userId,login, logout }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: (userId, login) => {
-    dispatch(logout(userId,login));
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   logout: (userId, login) => {
+//     dispatch(logout(userId,login));
+//   },
+// });
 
-const mapToStateProps = ({ userId = null, login }) => {
-  return { userId,login };
-};
+// const mapToStateProps = ({ userId = null, login }) => {
+//   return { userId,login };
+// };
 
-export default connect(mapToStateProps, mapDispatchToProps)(Sidebar);
+export default Sidebar;

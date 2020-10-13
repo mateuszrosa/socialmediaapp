@@ -33,10 +33,12 @@ export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
 
 export const register = (login, password, email) => (dispatch) => {
+  const date = new Date();
   const params = new URLSearchParams({
     login,
     password,
-    email
+    email,
+    date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
   });
   dispatch({ type: REGISTER_REQUEST });
   return axios
@@ -101,8 +103,8 @@ export const addPost = (text) => (dispatch, getState) => {
   dispatch({type: ADD_POST_REQUEST})
   return axios
     .post(`http://localhost:3500/post/?`, {
-      userId: getState().userId,
-      login: getState().login,
+      userId: getState().user.userId,
+      login: getState().user.login,
       text,
       likes: 0,
       likedBy: [],

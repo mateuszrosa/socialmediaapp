@@ -1,15 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
-import { register as registerAuth } from "actions";
+import { useSelector, useDispatch } from "react-redux";
+import { register as registerAuth, login as loginAuth } from "actions";
 import { useFormik } from "formik";
-import { login as loginAuth } from "actions";
 import { Link, Redirect } from "react-router-dom";
 import styles from "./UserPages.module.scss";
 
-const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
-  if (userId) {
-    return <Redirect to="/" />;
-  }
+const UserPage = ({ isLogged }) => {
+
+  const dispatch = useDispatch();
+  const { userId } = useSelector(state => ({
+    userId: state.user.userId
+  }))
+
   const formik = useFormik({
     initialValues: {
       login: "",
@@ -17,9 +19,12 @@ const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
       email: ""
     },
     onSubmit: ({ login, password, email }) => {
-      isLogged ? loginAuth(login, password) : registerAuth(login, password, email);
+      isLogged ? dispatch(loginAuth(login, password)) : dispatch(registerAuth(login, password, email));
     },
   });
+  if (userId) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.login}>
@@ -64,17 +69,4 @@ const UserPage = ({ isLogged, loginAuth, registerAuth, userId }) => {
   );
 };
 
-const mapDispatchToState = (dispatch) => ({
-  loginAuth: (login, password) => {
-    dispatch(loginAuth(login, password));
-  },
-  registerAuth: (login, password) => {
-    dispatch(registerAuth(login, password));
-  },
-});
-
-const mapToStateProps = ({ userId }) => ({
-  userId,
-});
-
-export default connect(mapToStateProps, mapDispatchToState)(UserPage);
+export default UserPage;

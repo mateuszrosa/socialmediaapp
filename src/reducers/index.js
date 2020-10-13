@@ -65,7 +65,11 @@ const rootReducer = (state = initialState, action) => {
     case REGISTER_SUCCES: {
       return {
         ...state,
-        user: action.payload.data
+        user: {
+          userId: action.payload.data._id,
+          login: action.payload.data.login,
+          date: action.payload.data.date,
+        }
       }
     }
     case LOGIN_REQUEST: {
@@ -74,16 +78,18 @@ const rootReducer = (state = initialState, action) => {
     case LOGIN_SUCCES: {
       return {
          ...state, 
-         userId: action.payload.data.userId,
-         login: action.payload.data.login 
-        };
+         user: {
+          userId: action.payload.data.userId,
+          login: action.payload.data.login
+        }
+      };
     }
     case LOGIN_FAILURE: {
       return state
     }
     case LOGOUT: {
-      delete state.userId;
-      delete state.login;
+      delete state.user.userId;
+      delete state.user.login;
       return { ...state };
     }
     case FETCH_USER_REQUEST: {
