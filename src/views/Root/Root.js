@@ -35,7 +35,7 @@ const Root = () => {
           <Route path="/register">
             <UserPage isLogged={isLogged} />
           </Route>
-          <Route exact path="/post/details:id">
+          <Route exact path="/post/details/:id">
             <DetailsPost />
           </Route>
         </Switch>

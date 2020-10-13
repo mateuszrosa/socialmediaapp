@@ -26,7 +26,10 @@ import {
   ADD_COMMENT_FAILURE,
   EDIT_POST_REQUEST,
   EDIT_POST_SUCCESS,
-  EDIT_POST_FAILURE
+  EDIT_POST_FAILURE,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE
 } from "actions";
 
 const initialState = {
@@ -74,6 +77,15 @@ const rootReducer = (state = initialState, action) => {
       delete state.userId;
       delete state.login;
       return { ...state };
+    }
+    case FETCH_USER_REQUEST: {
+      return state;
+    }
+    case FETCH_USER_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload.data
+      }
     }
     case ADD_POST_REQUEST:{
       return state;

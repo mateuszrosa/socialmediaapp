@@ -1,4 +1,5 @@
 import axios from "axios";
+import { get } from "mongoose";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCES = "REGISTER_SUCCES";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
@@ -27,6 +28,9 @@ export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
 export const EDIT_POST_REQUEST = "EDIT_POST_REQUEST";
 export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
 export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";
+export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
 
 export const register = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
@@ -168,6 +172,19 @@ export const addComment = (text,id, userId, login) => dispatch => {
     .put(`http://localhost:3500/post/comment/?${params}`)
     .then(payload => {
       return dispatch({type: ADD_COMMENT_SUCCESS, payload});
+    })
+    .catch(err => console.log(err))
+}
+
+export const fetchUserProfile = userId => dispatch => {
+  const params = new URLSearchParams({
+    userId
+  });
+  dispatch({type: FETCH_USER_REQUEST});
+  return axios
+    .get(`http://localhost:3500/user/?${params}`)
+    .then(payload => {
+      return dispatch({type: FETCH_USER_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 }

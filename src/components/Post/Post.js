@@ -54,7 +54,7 @@ const Post = (props) => {
     }
 
     if (isOpened) {
-        return <Redirect to={`post/details${id}`} />;
+        return <Redirect to={`post/details/${id}`} />;
     } else if (isClosed) {
         return <Redirect to="/" />
     }

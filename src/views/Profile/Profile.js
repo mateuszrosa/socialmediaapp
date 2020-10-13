@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Post from 'components/Post/Post';
+import { fetchUserProfile } from 'actions';
+import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import addFriend from 'assets/add.svg';
-import Post from 'components/Post/Post';
 import styles from './Profile.module.scss';
 
-const Profile = () => {
+const Profile = (props) => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchUserProfile(props.match.params.id))
+    }, [])
+
+
     return (
         <div className={styles.container}>
             <div className={styles.window}>
@@ -25,4 +35,4 @@ const Profile = () => {
     );
 }
 
-export default Profile;
+export default withRouter(Profile);
