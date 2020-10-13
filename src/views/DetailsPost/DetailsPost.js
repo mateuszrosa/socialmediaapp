@@ -15,10 +15,11 @@ import styles from './DetailsPost.module.scss';
 const DetailsPost = (props) => {
 
     const dispatch = useDispatch()
-    const { post = [], userId} =
+    const { post = [], userId, user} =
         useSelector(state => ({
             post: state.post,
-            userId: state.userId,
+            userId: state.user.userId,
+            user: state.user.login
         }));
 
     const formik = useFormik({
@@ -28,7 +29,7 @@ const DetailsPost = (props) => {
 
         onSubmit: ({ comment }) => {
             if (comment) {
-                dispatch(addComment(comment, id, userId, login))
+                dispatch(addComment(comment, id, userId, user))
                 dispatch(fetchPosts())
             }
         }

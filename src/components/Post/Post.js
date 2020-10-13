@@ -13,7 +13,8 @@ import close from 'assets/close-fat.svg'
 import styles from './Post.module.scss';
 
 const Post = (props) => {
-    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost , profile } = props;
+
+    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
@@ -25,6 +26,7 @@ const Post = (props) => {
             userId: state.user.userId,
             user: state.user.login
         }));
+
     useEffect(() => {
         if (detailPost && (id !== props.match.params.id || post.length === 0)) {
             dispatch(fetchPost(props.match.params.id));
@@ -40,7 +42,6 @@ const Post = (props) => {
     }
 
     const addLikes = () => {
-        console.log(id, userId)
         dispatch(addLikesAction(id, userId))
     }
 

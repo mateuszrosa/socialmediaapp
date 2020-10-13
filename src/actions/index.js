@@ -31,6 +31,9 @@ export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";
 export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
 export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
+export const FETCH_USER_POSTS_REQUEST = "FETCH_USER_POSTS_REQUEST";
+export const FETCH_USER_POSTS_SUCCESS = "FETCH_USER_POSTS_SUCCESS";
+export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
 
 export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
@@ -188,6 +191,19 @@ export const fetchUserProfile = userId => dispatch => {
     .get(`http://localhost:3500/user/?${params}`)
     .then(payload => {
       return dispatch({type: FETCH_USER_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+export const fetchUsersPosts = userId => dispatch => {
+  const params = new URLSearchParams({
+    userId
+  });
+  dispatch({type: FETCH_USER_POSTS_REQUEST})
+  return axios
+    .get(`http://localhost:3500/posts/user/?${params}`)
+    .then(payload => {
+      return dispatch({type: FETCH_USER_POSTS_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 }

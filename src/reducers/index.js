@@ -29,13 +29,16 @@ import {
   EDIT_POST_FAILURE,
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE
+  FETCH_USER_FAILURE,
+  FETCH_USER_POSTS_REQUEST,
+  FETCH_USER_POSTS_SUCCESS,
+  FETCH_USER_POSTS_FAILURE
 } from "actions";
 
 const initialState = {
   user: {
-    userId: "5f634e3c79e20f40e8e7530f",
-    login: "Parik"
+    userId: "5f8588c7dab6c229dc034650",
+    login: "parik"
   }
 };
 
@@ -48,6 +51,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...action.payload.data]
+      }
+    }
+    case FETCH_USER_POSTS_REQUEST: {
+      return state;
+    }
+    case FETCH_USER_POSTS_SUCCESS: {
+      return {
+        ...state,
+        posts: action.payload.data
       }
     }
     case FETCH_POST_REQUEST: {
@@ -98,7 +110,12 @@ const rootReducer = (state = initialState, action) => {
     case FETCH_USER_SUCCESS: {
       return {
         ...state,
-        user: action.payload.data
+        user: {
+          userId: action.payload.data._id,
+          date: action.payload.data.date,
+          email: action.payload.data.email,
+          login: action.payload.data.login,
+        }
       }
     }
     case ADD_POST_REQUEST:{
