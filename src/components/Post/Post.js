@@ -81,7 +81,7 @@ const Post = (props) => {
                                 :
                                 <img src={arrows} onClick={openPost} alt="" />
                             }
-                            <h3>{login}</h3>
+                            <h3><a href={`profile/${userId}`}>{login}</a></h3>
                             <span>{date}</span>
                             <p>{text}</p>
                         </div>
