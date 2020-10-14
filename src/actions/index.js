@@ -189,7 +189,9 @@ export const fetchUsers = () => dispatch => {
   dispatch({type: FETCH_USER_REQUEST});
   return axios
     .get(`http://localhost:3500/users`)
-    .then(payload => console.log(payload))
+    .then(payload => {
+      return dispatch({type: FETCH_USERS_SUCCESS, payload})
+    })
     .catch(err => console.log(err))
 }
 

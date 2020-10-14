@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
 import Post from 'components/Post/Post';
-import {fetchPosts} from 'actions'
+import {fetchPosts, fetchUsers} from 'actions'
 
 const Page = () => {
 
@@ -18,6 +18,7 @@ const Page = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchUsers())
   },[]);
 
   const [isVisible, setVisible] = useState(false);

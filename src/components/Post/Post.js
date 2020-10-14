@@ -20,10 +20,9 @@ const Post = (props) => {
     const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
     
-    const { post = [], postuserId, user } =
+    const { post = [], user } =
         useSelector(state => ({
             post: state.post,
-            postuserId: state.user.userId,
             user: state.user.login
         }));
 

@@ -32,7 +32,10 @@ import {
   FETCH_USER_FAILURE,
   FETCH_USER_POSTS_REQUEST,
   FETCH_USER_POSTS_SUCCESS,
-  FETCH_USER_POSTS_FAILURE
+  FETCH_USER_POSTS_FAILURE,
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE
 } from "actions";
 
 const initialState = {
@@ -60,6 +63,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: action.payload.data
+      }
+    }
+    case FETCH_USERS_REQUEST: {
+      return state;
+    }
+    case FETCH_USERS_SUCCESS: {
+      return {
+        ...state,
+        users: action.payload.data
       }
     }
     case FETCH_POST_REQUEST: {
