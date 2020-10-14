@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, withRouter, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPost, addLikes as addLikesAction, removePost as removePostAction } from 'actions';
 import NewPostBar from 'components/NewPostBar/NewPostBar'
@@ -14,16 +14,16 @@ import styles from './Post.module.scss';
 
 const Post = (props) => {
 
-    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost } = props;
+    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost, userId } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
     
-    const { post = [], userId, user } =
+    const { post = [], postuserId, user } =
         useSelector(state => ({
             post: state.post,
-            userId: state.user.userId,
+            postuserId: state.user.userId,
             user: state.user.login
         }));
 
@@ -81,7 +81,7 @@ const Post = (props) => {
                                 :
                                 <img src={arrows} onClick={openPost} alt="" />
                             }
-                            <h3><a href={`profile/${userId}`}>{login}</a></h3>
+                            <h3><Link to={`profile/${userId}`}>{login}</Link></h3>
                             <span>{date}</span>
                             <p>{text}</p>
                         </div>

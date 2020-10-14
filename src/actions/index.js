@@ -34,6 +34,9 @@ export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
 export const FETCH_USER_POSTS_REQUEST = "FETCH_USER_POSTS_REQUEST";
 export const FETCH_USER_POSTS_SUCCESS = "FETCH_USER_POSTS_SUCCESS";
 export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
+export const FETCH_USERS_REQUEST = "FETCH_USER_REQUEST";
+export const FETCH_USERS_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USERS_FAILURE = "FETCH_USER_FAILURE";
 
 export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
@@ -179,6 +182,14 @@ export const addComment = (text,id, userId, login) => dispatch => {
     .then(payload => {
       return dispatch({type: ADD_COMMENT_SUCCESS, payload});
     })
+    .catch(err => console.log(err))
+}
+
+export const fetchUsers = () => dispatch => {
+  dispatch({type: FETCH_USER_REQUEST});
+  return axios
+    .get(`http://localhost:3500/users`)
+    .then(payload => console.log(payload))
     .catch(err => console.log(err))
 }
 

@@ -28,6 +28,12 @@ const Header = () => {
     setNicks(arr)
   }
 
+  const chooseNick = e => {
+    const input = document.querySelector('input');
+    input.value = "";
+    setNicks([])
+  }
+
   return (
     <header>
       <form>
@@ -40,7 +46,7 @@ const Header = () => {
         />
         <input type="submit" value="Search" />
       <ul>
-          {nicks.map(nick => <li key={nick}>{nick}</li>)}
+          {nicks.map(nick => <li onClick={chooseNick} key={nick}>{nick}</li>)}
       </ul>
       </form>
       <img src={logo} alt="" />
