@@ -7,8 +7,8 @@ import logo from "../../assets/logo.png";
 
 const Header = () => {
 
-  const {posts} = useSelector(state => ({
-    posts: state.posts
+  const {users} = useSelector(state => ({
+    users: state.users
   }))
 
   const dispatch = useDispatch();
@@ -19,9 +19,9 @@ const Header = () => {
     if(e.target.value === "") {
       arr = [];
     } else {
-      for (const post of posts) {
-        if(post.login.startsWith(e.target.value)) {
-          !arr.includes(post.login) && arr.push(post.login)
+      for (const user of users) {
+        if(user.login.startsWith(e.target.value)) {
+          !arr.includes(user.login) && arr.push(user.login)
         }
       }
     }
