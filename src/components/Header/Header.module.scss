@@ -1,12 +1,13 @@
 header {
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: calc(100vw - 150px);
     height: 120px;
     background-color: #dedede;
-    position: fixed;
     margin-left: 150px;
+    z-index: 2;
 
     img {
         width: 120px;
@@ -15,9 +16,34 @@ header {
 
     form {
         margin-left: 50px;
+        width: 550px;
 
         input {
             font-size: 30px;
+            position: relative;
+            width: 400px;
+
+            &[type="submit"] {
+                width: 150px;
+            }
+        }
+
+        ul {
+            position: absolute;
+            width: 400px;
+            font-size: 30px;
+            list-style: none;
+
+            li {
+                background-color: #fff;
+                border: 1px solid gray;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: gray;
+                    color: #fff;
+                }
+            }
         }
     }
 }
