@@ -47,56 +47,12 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_POSTS_REQUEST: {
-      return state
-    }
-    case FETCH_POSTS_SUCCESS: {
-      return {
-        ...state,
-        posts: [...action.payload.data]
-      }
-    }
-    case FETCH_USER_POSTS_REQUEST: {
-      return state;
-    }
-    case FETCH_USER_POSTS_SUCCESS: {
-      return {
-        ...state,
-        posts: action.payload.data
-      }
-    }
-    case FETCH_USERS_REQUEST: {
-      return state;
-    }
-    case FETCH_USERS_SUCCESS: {
-      console.log('users')
-      return {
-        ...state,
-        users: action.payload.data
-      }
-    }
-    case FETCH_POST_REQUEST: {
-      return state;
-    }
-    case FETCH_POST_SUCCESS: {
-      return {
-        ...state,
-        post: action.payload.data
-      }
-    }
-    case REGISTER_REQUEST: {
-      return;
-    }
-    case REGISTER_SUCCES: {
-      return {
-        ...state,
-        user: {
-          userId: action.payload.data._id,
-          login: action.payload.data.login,
-          date: action.payload.data.date,
-        }
-      }
-    }
+
+    ////////////////
+    //USER ACTIONS//
+    ////////////////
+
+    //LOGGING
     case LOGIN_REQUEST: {
       return state;
     }
@@ -112,11 +68,42 @@ const rootReducer = (state = initialState, action) => {
     case LOGIN_FAILURE: {
       return state
     }
+
+    //REGISTER
+    case REGISTER_REQUEST: {
+      return;
+    }
+    case REGISTER_SUCCES: {
+      return {
+        ...state,
+        user: {
+          userId: action.payload.data._id,
+          login: action.payload.data.login,
+          date: action.payload.data.date,
+        }
+      }
+    }
+
+    //LOGOUT
     case LOGOUT: {
       delete state.user.userId;
       delete state.user.login;
       return { ...state };
     }
+
+    //FETCHING USERS
+    case FETCH_USERS_REQUEST: {
+      return state;
+    }
+    case FETCH_USERS_SUCCESS: {
+      console.log('users')
+      return {
+        ...state,
+        users: action.payload.data
+      }
+    }
+
+    //FETCHING USER
     case FETCH_USER_REQUEST: {
       return state;
     }
@@ -132,6 +119,45 @@ const rootReducer = (state = initialState, action) => {
         }
       }
     }
+
+    /////////////////
+    //POSTS ACTIONS//
+    /////////////////
+
+    //FETCH POSTS
+    case FETCH_POSTS_REQUEST: {
+      return state
+    }
+    case FETCH_POSTS_SUCCESS: {
+      return {
+        ...state,
+        posts: [...action.payload.data]
+      }
+    }
+
+    //FETCH POST
+    case FETCH_POST_REQUEST: {
+      return state;
+    }
+    case FETCH_POST_SUCCESS: {
+      return {
+        ...state,
+        post: action.payload.data
+      }
+    }
+
+    //FETCH USER'S POSTS
+    case FETCH_USER_POSTS_REQUEST: {
+      return state;
+    }
+    case FETCH_USER_POSTS_SUCCESS: {
+      return {
+        ...state,
+        posts: action.payload.data
+      }
+    }
+
+    //ADD POST
     case ADD_POST_REQUEST:{
       return state;
     }
@@ -144,6 +170,8 @@ const rootReducer = (state = initialState, action) => {
     case ADD_POST_FAILURE: {
       return state;
     }
+
+    //REMOVE POST
     case REMOVE_POST_REQUEST: {
       return state;
     }
@@ -153,6 +181,8 @@ const rootReducer = (state = initialState, action) => {
         posts: [...state.posts.filter(post => post._id !== action.payload.data._id)]
       }
     }
+
+    //ADD LIKE TO POST
     case ADD_LIKE_REQUEST: {
       return state;
     }
@@ -166,6 +196,8 @@ const rootReducer = (state = initialState, action) => {
         ...state
       }
     }
+
+    //EDIT POST
     case EDIT_POST_REQUEST: {
       return state;
     }
@@ -175,6 +207,8 @@ const rootReducer = (state = initialState, action) => {
       state.posts[index] = action.payload.data;
       return state;
     }
+
+    //ADD COMMENT TO POST
     case ADD_COMMENT_REQUEST: {
       return state;
     }
