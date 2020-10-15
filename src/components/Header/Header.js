@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
+import {Redirect} from 'react-router-dom'
 import {fetchUserProfile} from 'actions'
 import "./Header.module.scss";
 import { useFormik } from "formik";
@@ -13,6 +14,8 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const [nicks, setNicks] = useState([]);
+  const [redirect, setRedirect] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const change = (e) => {
     let arr = [];
@@ -21,7 +24,7 @@ const Header = () => {
     } else {
       for (const user of users) {
         if(user.login.startsWith(e.target.value)) {
-          !arr.includes(user.login) && arr.push(user.login)
+          !arr.includes(user.login) && arr.push({login :user.login, userId: user._id})
         }
       }
     }
@@ -30,8 +33,14 @@ const Header = () => {
 
   const chooseNick = e => {
     const input = document.querySelector('input');
-    input.value = "";
+    setUserId(e.target.dataset.id);
+    setRedirect(true);
     setNicks([])
+    input.value = "";
+  }
+
+  if(redirect) {
+    return <Redirect to={`/profile/${userId}`} />
   }
 
   return (
@@ -46,7 +55,7 @@ const Header = () => {
         />
         <input type="submit" value="Search" />
       <ul>
-          {nicks.map(nick => <li onClick={chooseNick} key={nick}>{nick}</li>)}
+          {nicks.map(({login, userId}) => <li onClick={chooseNick} key={userId} data-id={userId}>{login}</li>)}
       </ul>
       </form>
       <img src={logo} alt="" />
