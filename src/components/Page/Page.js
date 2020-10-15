@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import PropTypes from 'prop-types'
 import {useDispatch, useSelector} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
@@ -18,7 +17,6 @@ const Page = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
-    dispatch(fetchUsers())
   },[]);
 
   const [isVisible, setVisible] = useState(false);

@@ -18,7 +18,8 @@ const Profile = (props) => {
     const {user, posts=[]} = useSelector(state => ({
         user: state.user,
         posts: state.posts
-    }))
+    }));
+
 
 
     return (

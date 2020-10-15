@@ -34,10 +34,14 @@ export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
 export const FETCH_USER_POSTS_REQUEST = "FETCH_USER_POSTS_REQUEST";
 export const FETCH_USER_POSTS_SUCCESS = "FETCH_USER_POSTS_SUCCESS";
 export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
-export const FETCH_USERS_REQUEST = "FETCH_USER_REQUEST";
-export const FETCH_USERS_SUCCESS = "FETCH_USER_SUCCESS";
-export const FETCH_USERS_FAILURE = "FETCH_USER_FAILURE";
+export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
 
+
+//USER ACTION
+
+//REGISTER
 export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
   const params = new URLSearchParams({
@@ -59,6 +63,7 @@ export const register = (login, password, email) => (dispatch) => {
     });
 };
 
+//LOGGING
 export const login = (login, password) => (dispatch) => {
   const params = new URLSearchParams({
     login,
@@ -76,10 +81,41 @@ export const login = (login, password) => (dispatch) => {
     });
 };
 
+//LOGOUT
 export const logout = (userId,login) => (dispatch) => {
   return dispatch({ type: LOGOUT, payload: { userId,login } });
 };
 
+//FETCH ALL USERS
+export const fetchUsers = () => dispatch => {
+  dispatch({type: FETCH_USERS_REQUEST});
+  return axios
+    .get(`http://localhost:3500/users`)
+    .then(payload => {
+      return dispatch({type: FETCH_USERS_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+//FETCH SINGLE USER
+export const fetchUserProfile = userId => dispatch => {
+  const params = new URLSearchParams({
+    userId
+  });
+  dispatch({type: FETCH_USER_REQUEST});
+  return axios
+    .get(`http://localhost:3500/user/?${params}`)
+    .then(payload => {
+      return dispatch({type: FETCH_USER_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+/////////////////
+//POSTS ACTIONS//
+/////////////////
+
+//FETCH ALL POSTS
 export const fetchPosts = () => (dispatch) => {
   dispatch({type: FETCH_POSTS_REQUEST})
   return axios
@@ -91,6 +127,7 @@ export const fetchPosts = () => (dispatch) => {
        console.log(err)})
 }
 
+//FETCH SINGLE POST BY ID
 export const fetchPost = id => dispatch => {
   const params = new URLSearchParams({
     id,
@@ -104,6 +141,7 @@ export const fetchPost = id => dispatch => {
     .catch(err => console.log(err))
 }
 
+//ADD NEW POST
 export const addPost = (text) => (dispatch, getState) => {
   const date = new Date();
   dispatch({type: ADD_POST_REQUEST})
@@ -126,6 +164,7 @@ export const addPost = (text) => (dispatch, getState) => {
     });
 }
 
+//ADD LIKE TO POST
 export const addLikes = (id,userId) => dispatch => {
   const params = new URLSearchParams({
     id,
@@ -140,6 +179,7 @@ export const addLikes = (id,userId) => dispatch => {
     .catch(err => console.log(err))
 }
 
+//EDIT POST
 export const editPost = (id, text) => dispatch => {
   const params = new URLSearchParams({
     id,
@@ -154,6 +194,7 @@ export const editPost = (id, text) => dispatch => {
     .catch(err => console.log(err))
 }
 
+//REMOVE POST
 export const removePost = (id) => dispatch => {
   const params = new URLSearchParams({
     id,
@@ -167,6 +208,7 @@ export const removePost = (id) => dispatch => {
     .catch(err => console.log(err))
 }
 
+//ADD COMMENT TO POST
 export const addComment = (text,id, userId, login) => dispatch => {
   const date = new Date();
   const params = new URLSearchParams({
@@ -185,29 +227,7 @@ export const addComment = (text,id, userId, login) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const fetchUsers = () => dispatch => {
-  dispatch({type: FETCH_USER_REQUEST});
-  return axios
-    .get(`http://localhost:3500/users`)
-    .then(payload => {
-      return dispatch({type: FETCH_USERS_SUCCESS, payload})
-    })
-    .catch(err => console.log(err))
-}
-
-export const fetchUserProfile = userId => dispatch => {
-  const params = new URLSearchParams({
-    userId
-  });
-  dispatch({type: FETCH_USER_REQUEST});
-  return axios
-    .get(`http://localhost:3500/user/?${params}`)
-    .then(payload => {
-      return dispatch({type: FETCH_USER_SUCCESS, payload})
-    })
-    .catch(err => console.log(err))
-}
-
+//FETCH ALL POSTS ADDED BY SINGLE USER
 export const fetchUsersPosts = userId => dispatch => {
   const params = new URLSearchParams({
     userId
