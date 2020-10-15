@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPost, addLikes as addLikesAction, removePost as removePostAction } from 'actions';
+import { useLastLocation } from 'react-router-last-location';
 import NewPostBar from 'components/NewPostBar/NewPostBar'
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
@@ -14,12 +15,12 @@ import styles from './Post.module.scss';
 
 const Post = (props) => {
 
+    const lastLocation = useLastLocation();
     const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost, userId } = props;
     const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
-    
     const { post = [], user } =
         useSelector(state => ({
             post: state.post,
@@ -54,9 +55,9 @@ const Post = (props) => {
     }
 
     if (isOpened) {
-        return <Redirect to={`post/details/${id}`} />;
+       return <Redirect to={`/post/details/${id}`} />;
     } else if (isClosed) {
-        return <Redirect to="/" />
+      return <Redirect to={lastLocation.pathname} />
     }
 
     return (

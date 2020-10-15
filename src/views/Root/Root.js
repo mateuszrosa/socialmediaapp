@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import { Provider } from "react-redux";
+import { LastLocationProvider } from 'react-router-last-location';
 import store from "store";
 import Sidebar from "components/Sidebar/Sidebar";
 import Header from "components/Header/Header";
@@ -17,6 +18,7 @@ const Root = () => {
   return ( 
     <Provider store={store}>
       <Router>
+        <LastLocationProvider>
         <Sidebar />
         <Header />
         <Switch>
@@ -39,6 +41,7 @@ const Root = () => {
             <DetailsPost />
           </Route>
         </Switch>
+        </LastLocationProvider>
       </Router>
     </Provider>
   );

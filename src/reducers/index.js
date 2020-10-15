@@ -96,7 +96,6 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case FETCH_USERS_SUCCESS: {
-      console.log('users')
       return {
         ...state,
         users: action.payload.data
@@ -108,7 +107,6 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case FETCH_USER_SUCCESS: {
-      console.log('user')
       return {
         ...state,
         user: {

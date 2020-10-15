@@ -8,11 +8,13 @@ import styles from './Profile.module.scss';
 
 const Profile = (props) => {
 
+    const userId = props.match.params.id
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchUserProfile(props.match.params.id))
-        dispatch(fetchUsersPosts(props.match.params.id))
+        dispatch(fetchUserProfile(userId))
+        dispatch(fetchUsersPosts(userId))
     }, [])
 
     const {user, posts=[]} = useSelector(state => ({
@@ -46,6 +48,7 @@ const Profile = (props) => {
                         date={date} 
                         posts={posts}
                         comments={comments}
+                        userId={userId}
                     />)}
             </div>
             </div>
