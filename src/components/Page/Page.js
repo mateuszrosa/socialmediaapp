@@ -17,6 +17,7 @@ const Page = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchUsers())
   },[]);
 
   const [isVisible, setVisible] = useState(false);

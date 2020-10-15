@@ -40,8 +40,8 @@ import {
 
 const initialState = {
   user: {
-    userId: "5f8588c7dab6c229dc034650",
-    login: "parik"
+    userId: "5f88683f647e750f50094f55",
+    login: "parikenzi"
   }
 };
 

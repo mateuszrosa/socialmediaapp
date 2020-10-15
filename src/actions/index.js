@@ -44,15 +44,15 @@ export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
 //REGISTER
 export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
-  const params = new URLSearchParams({
-    login,
-    password,
-    email,
-    date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
-  });
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`http://localhost:3500/user/register/?${params}`)
+    .post(`http://localhost:3500/user/register/?`,{
+      login,
+      password,
+      email,
+      friends: [],
+      date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+    })
     .then((payload) => {
       dispatch({ type: REGISTER_SUCCES, payload });
     })
