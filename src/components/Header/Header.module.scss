@@ -39,9 +39,16 @@ header {
                 border: 1px solid gray;
                 border-radius: 5px;
 
-                &:hover {
-                    background-color: gray;
-                    color: #fff;
+                a {
+                    text-decoration: none;
+                    color: black;
+                    width: 100%;
+                    display: block;
+
+                    &:hover {
+                        background-color: gray;
+                        color: #fff;
+                    }
                 }
             }
         }

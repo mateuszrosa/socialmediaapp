@@ -1,12 +1,11 @@
 import React,{useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import {Redirect} from 'react-router-dom'
-import {fetchUserProfile} from 'actions'
-import "./Header.module.scss";
+import {Redirect, Link} from 'react-router-dom';
+import styles from "./Header.module.scss";
 import { useFormik } from "formik";
 import logo from "../../assets/logo.png";
 
-const Header = () => {
+const Header = (e) => {
 
   const {users} = useSelector(state => ({
     users: state.users
@@ -39,12 +38,12 @@ const Header = () => {
     input.value = "";
   }
 
-  if(redirect) {
-    return <Redirect to={`/profile/${userId}`} />
-  }
+  // if(redirect) {
+  //   return <Redirect to={`/profile/${userId}`} />
+  // }
 
   return (
-    <header>
+    <header className={styles.header}>
       <form>
         <input
           onKeyUp={change}
@@ -52,10 +51,11 @@ const Header = () => {
           name="text"
           id="text"
           placeholder="Write here"
+          autoComplete="off"
         />
         <input type="submit" value="Search" />
       <ul>
-          {nicks.map(({login, userId}) => <li onClick={chooseNick} key={userId} data-id={userId}>{login}</li>)}
+          {nicks.map(({login, userId}) => <li key={userId}><Link onClick={chooseNick} to={`profile/${userId}`} data-id={userId}>{login}</Link></li>)}
       </ul>
       </form>
       <img src={logo} alt="" />
