@@ -71,7 +71,7 @@ const Page = () => {
             molestias rerum ?
           </p>
         </div>)}
-        {isVisible && <NewPostBar hideBar={handlePostBar}/>}
+        {isVisible && <NewPostBar post hideBar={handlePostBar}/>}
       </div>
     </div>
   );

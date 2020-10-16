@@ -5,7 +5,7 @@ import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
 import {addPost as addPostAction, editPost as editPostAction} from 'actions'
 
-const NewPostBar = ({hideBar, edit, id}) => {
+const NewPostBar = ({hideBar, id, edit, post, message}) => {
     const dispatch = useDispatch();
 
     const [valid, setValid] = useState(false) 
@@ -28,7 +28,9 @@ const NewPostBar = ({hideBar, edit, id}) => {
     return ( 
         <div className={styles.bar}>
             <img onClick={hideBar} src={close} alt=""/>
-            {edit ? <h1>Edit Post</h1> : <h1>Create Post</h1>}
+            {post && <h1>Create post</h1>}
+            {edit && <h1>Edit post</h1>}
+            {message && <h1>Send message</h1>}
             {valid && <p>You can't send empty post!</p>}
             <form onSubmit={formik.handleSubmit}>
                 <textarea 

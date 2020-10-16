@@ -7,7 +7,7 @@ import { logout } from "actions";
 const Sidebar = () => {
 
   const dispatch = useDispatch();
-  const {userId, login} = useSelector(state => ({
+  const { userId, login } = useSelector(state => ({
     userId: state.user.userId,
     login: state.user.login
   }))
@@ -25,13 +25,16 @@ const Sidebar = () => {
           <Link to="/friends">friends</Link>
         </li>
         <li>
+          <Link to="/messages">messages</Link>
+        </li>
+        <li>
           {userId ? (
-            <Link onClick={() => dispatch(logout(userId,login))} to="/">
+            <Link onClick={() => dispatch(logout(userId, login))} to="/">
               log Out
             </Link>
           ) : (
-            <Link to="/login">log In</Link>
-          )}
+              <Link to="/login">log In</Link>
+            )}
         </li>
       </ul>
     </div>

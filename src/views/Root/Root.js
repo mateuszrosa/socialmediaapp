@@ -5,10 +5,11 @@ import { LastLocationProvider } from 'react-router-last-location';
 import store from "store";
 import Sidebar from "components/Sidebar/Sidebar";
 import Header from "components/Header/Header";
-import Page from "components/Page/Page";
+import Page from "views/Page/Page";
 import UserPage from "views/UserPage/UserPage";
 import Profile from "views/Profile/Profile";
-import Friends from "components/Friends/Friends";
+import Friends from "views/Friends/Friends";
+import Messages from 'views/Messages/Messages';
 import DetailsPost from 'views/DetailsPost/DetailsPost'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -30,6 +31,9 @@ const Root = () => {
           </Route>
           <Route path="/friends">
             <Friends />
+          </Route>
+          <Route path="/messages">
+            <Messages />
           </Route>
           <Route path="/login">
             <UserPage isLogged={!isLogged} />
