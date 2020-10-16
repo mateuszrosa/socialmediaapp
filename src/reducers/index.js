@@ -109,7 +109,7 @@ const rootReducer = (state = initialState, action) => {
     case FETCH_USER_SUCCESS: {
       return {
         ...state,
-        user: {
+        profileUser: {
           userId: action.payload.data._id,
           date: action.payload.data.date,
           email: action.payload.data.email,

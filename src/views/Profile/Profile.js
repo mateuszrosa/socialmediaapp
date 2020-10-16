@@ -17,10 +17,14 @@ const Profile = (props) => {
         dispatch(fetchUsersPosts(userId))
     }, [])
 
-    const {user, posts=[]} = useSelector(state => ({
-        user: state.user,
+    const {user=[], posts=[]} = useSelector(state => ({
+        user: state.profileUser,
         posts: state.posts
     }));
+
+    const addToFriends = () => {
+        console.log('object')
+    }
 
 
 
@@ -34,7 +38,7 @@ const Profile = (props) => {
                         <span>{user.date}</span>
                         <h3>{user.email}</h3>
                     </div>
-                    <img src={addFriend} alt="" />
+                    <img onClick={addToFriends} src={addFriend} alt="" />
                 </div>
                 <div className={styles.posts}>
                 {posts.map(({text, login, _id: id, likes, likedBy, date, comments}) => 
