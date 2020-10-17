@@ -36,6 +36,12 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
+
+                p {
+                    span {
+                        font-weight: 800;
+                    }
+                }
             }
 
             img {

@@ -17,17 +17,20 @@ const Profile = (props) => {
         dispatch(fetchUsersPosts(userId))
     }, [])
 
-    const {user=[], profileUser=[], posts=[]} = useSelector(state => ({
+    const { user = [], profileUser = [], posts = [] } = useSelector(state => ({
         user: state.user,
         profileUser: state.profileUser,
         posts: state.posts
     }));
 
     const addToFriends = () => {
-        if(!profileUser.friends.includes(user.userId)) {
+        if (!profileUser.friends.includes(user.userId)) {
             dispatch(addToFriendsAction(profileUser._id, user.userId))
         }
     }
+
+    const { login, date, email, friends = [] } = profileUser;
+    console.log(typeof friends);
 
     return (
         <div className={styles.container}>
@@ -35,27 +38,28 @@ const Profile = (props) => {
                 <div className={styles.profile}>
                     <div className={styles.img}></div>
                     <div className={styles.info}>
-                        <h1>{profileUser.login}</h1>
-                        <span>{profileUser.date}</span>
-                        <h3>{profileUser.email}</h3>
+                        <h1>{login}</h1>
+                        <span>{date}</span>
+                        <h3>{email}</h3>
+                        <p>Friends: <span>{friends.length}</span></p>
                     </div>
-                    {user.login !== profileUser.login && <img onClick={addToFriends} src={addFriend} alt="" />}
+                    {user.login !== login && <img onClick={addToFriends} src={addFriend} alt="" />}
                 </div>
                 <div className={styles.posts}>
-                {posts.map(({text, login, _id: id, likes, likedBy, date, comments}) => 
-                    <Post 
-                        text={text} 
-                        login={login} 
-                        key={id} 
-                        id={id} 
-                        likes={likes} 
-                        likedBy={likedBy} 
-                        date={date} 
-                        posts={posts}
-                        comments={comments}
-                        userId={userId}
-                    />)}
-            </div>
+                    {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>
+                        <Post
+                            text={text}
+                            login={login}
+                            key={id}
+                            id={id}
+                            likes={likes}
+                            likedBy={likedBy}
+                            date={date}
+                            posts={posts}
+                            comments={comments}
+                            userId={userId}
+                        />)}
+                </div>
             </div>
         </div>
     );
