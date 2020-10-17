@@ -49,6 +49,10 @@
                 height: 60px;
                 margin-right: 25px;
                 cursor: pointer;
+
+                &.friends {
+                    opacity: .3;
+                }
             }
         }
 

@@ -30,7 +30,6 @@ const Profile = (props) => {
     }
 
     const { login, date, email, friends = [] } = profileUser;
-    console.log(typeof friends);
 
     return (
         <div className={styles.container}>
@@ -43,7 +42,7 @@ const Profile = (props) => {
                         <h3>{email}</h3>
                         <p>Friends: <span>{friends.length}</span></p>
                     </div>
-                    {user.login !== login && <img onClick={addToFriends} src={addFriend} alt="" />}
+                    {user.login !== login && <img className={friends.includes(user.userId) ? styles.friends : null} onClick={addToFriends} src={addFriend} alt="" />}
                 </div>
                 <div className={styles.posts}>
                     {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>
