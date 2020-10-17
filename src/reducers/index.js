@@ -35,12 +35,15 @@ import {
   FETCH_USER_POSTS_FAILURE,
   FETCH_USERS_REQUEST,
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_FAILURE
+  FETCH_USERS_FAILURE,
+  ADD_FRIEND_REQUEST,
+  ADD_FRIEND_SUCCESS,
+  ADD_FRIEND_FAILURE
 } from "actions";
 
 const initialState = {
   user: {
-    userId: "5f88683f647e750f50094f55",
+    userId: "5f89b9f154ea4754fbd6a101",
     login: "parikenzi"
   }
 };
@@ -110,11 +113,23 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         profileUser: {
-          userId: action.payload.data._id,
-          date: action.payload.data.date,
-          email: action.payload.data.email,
-          login: action.payload.data.login,
+          ...action.payload.data
         }
+      }
+    }
+
+    //ADD TO FRIENDS
+    case ADD_FRIEND_REQUEST: {
+      return state;
+    }
+    case ADD_FRIEND_SUCCESS: {
+      let index = state.users.findIndex(user => user._id === action.payload.data._id);
+      state.users[index] = action.payload.data;
+      return {
+        ...state,
+        profileUser: {
+          ...action.payload.data
+        },
       }
     }
 

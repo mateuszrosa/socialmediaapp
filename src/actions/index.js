@@ -37,6 +37,9 @@ export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
 export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
+export const ADD_FRIEND_REQUEST = "ADD_FRIEND_REQUEST";
+export const ADD_FRIEND_SUCCESS = "ADD_FRIEND_SUCCESS";
+export const ADD_FRIEND_FAILURE = "ADD_FRIEND_FAILURE";
 
 
 //USER ACTION
@@ -107,6 +110,22 @@ export const fetchUserProfile = userId => dispatch => {
     .get(`http://localhost:3500/user/?${params}`)
     .then(payload => {
       return dispatch({type: FETCH_USER_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+//ADD TO FRIENDS
+export const addToFriends = (userId, friendId) => dispatch => {
+  console.log(userId, friendId)
+  const params = new URLSearchParams({
+    userId,
+    friendId
+  });
+  dispatch({type: ADD_FRIEND_REQUEST})
+  return axios
+    .put(`http://localhost:3500/user/friend/?${params}`)
+    .then(payload => {
+      return dispatch({type: ADD_FRIEND_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 }

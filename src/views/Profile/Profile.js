@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Post from 'components/Post/Post';
-import { fetchUserProfile, fetchUsersPosts } from 'actions';
+import { fetchUserProfile, fetchUsersPosts, addToFriends as addToFriendsAction } from 'actions';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import addFriend from 'assets/add.svg';
@@ -17,16 +17,17 @@ const Profile = (props) => {
         dispatch(fetchUsersPosts(userId))
     }, [])
 
-    const {user=[], posts=[]} = useSelector(state => ({
-        user: state.profileUser,
+    const {user=[], profileUser=[], posts=[]} = useSelector(state => ({
+        user: state.user,
+        profileUser: state.profileUser,
         posts: state.posts
     }));
 
     const addToFriends = () => {
-        console.log('object')
+        if(!profileUser.friends.includes(user.userId)) {
+            dispatch(addToFriendsAction(profileUser._id, user.userId))
+        }
     }
-
-
 
     return (
         <div className={styles.container}>
@@ -34,11 +35,11 @@ const Profile = (props) => {
                 <div className={styles.profile}>
                     <div className={styles.img}></div>
                     <div className={styles.info}>
-                        <h1>{user.login}</h1>
-                        <span>{user.date}</span>
-                        <h3>{user.email}</h3>
+                        <h1>{profileUser.login}</h1>
+                        <span>{profileUser.date}</span>
+                        <h3>{profileUser.email}</h3>
                     </div>
-                    <img onClick={addToFriends} src={addFriend} alt="" />
+                    {user.login !== profileUser.login && <img onClick={addToFriends} src={addFriend} alt="" />}
                 </div>
                 <div className={styles.posts}>
                 {posts.map(({text, login, _id: id, likes, likedBy, date, comments}) => 
