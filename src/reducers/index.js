@@ -38,13 +38,16 @@ import {
   FETCH_USERS_FAILURE,
   ADD_FRIEND_REQUEST,
   ADD_FRIEND_SUCCESS,
-  ADD_FRIEND_FAILURE
+  ADD_FRIEND_FAILURE,
+  SEND_MESSAGE_REQUEST,
+  SEND_MESSAGE_SUCCESS,
+  SEND_MESSAGE_FAILURE,
 } from "actions";
 
 const initialState = {
   user: {
-    userId: "5f89b9f154ea4754fbd6a101",
-    login: "parikenzi"
+    userId: "5f8d5dc1def6f818b9b29611",
+    login: "parik"
   }
 };
 
@@ -131,6 +134,16 @@ const rootReducer = (state = initialState, action) => {
           ...action.payload.data
         },
       }
+    }
+
+    //SEND MESSAGE
+    case SEND_MESSAGE_REQUEST: {
+      return state;
+    }
+    case SEND_MESSAGE_SUCCESS: {
+      let index = state.users.findIndex(user => user._id === action.payload.data._id);
+      state.users[index] = action.payload.data;
+      return state;
     }
 
     /////////////////

@@ -40,6 +40,9 @@ export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
 export const ADD_FRIEND_REQUEST = "ADD_FRIEND_REQUEST";
 export const ADD_FRIEND_SUCCESS = "ADD_FRIEND_SUCCESS";
 export const ADD_FRIEND_FAILURE = "ADD_FRIEND_FAILURE";
+export const SEND_MESSAGE_REQUEST = "SEND_MESSAGE_REQUEST";
+export const SEND_MESSAGE_SUCCESS = "SEND_MESSAGE_SUCCESS";
+export const SEND_MESSAGE_FAILURE = "SEND_MESSAGE_FAILURE";
 
 
 //USER ACTION
@@ -54,6 +57,7 @@ export const register = (login, password, email) => (dispatch) => {
       password,
       email,
       friends: [],
+      messages: [],
       date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
     })
     .then((payload) => {
@@ -116,7 +120,6 @@ export const fetchUserProfile = userId => dispatch => {
 
 //ADD TO FRIENDS
 export const addToFriends = (userId, friendId) => dispatch => {
-  console.log(userId, friendId)
   const params = new URLSearchParams({
     userId,
     friendId
@@ -127,6 +130,23 @@ export const addToFriends = (userId, friendId) => dispatch => {
     .then(payload => {
       return dispatch({type: ADD_FRIEND_SUCCESS, payload})
     })
+    .catch(err => console.log(err))
+}
+
+//SEND MESSAGE
+export const sendMessage = (senderId, senderName, text, userId) => dispatch => {
+  const date = new Date();
+  const params = new URLSearchParams({
+    senderId,
+    senderName,
+    text,
+    userId,
+    date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+  });
+  dispatch({type: SEND_MESSAGE_REQUEST})
+  return axios
+    .post(`http://localhost:3500/user/message/?${params}`)
+    .then(payload => console.log(payload))
     .catch(err => console.log(err))
 }
 
