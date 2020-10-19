@@ -146,7 +146,9 @@ export const sendMessage = (senderId, senderName, text, userId) => dispatch => {
   dispatch({type: SEND_MESSAGE_REQUEST})
   return axios
     .post(`http://localhost:3500/user/message/?${params}`)
-    .then(payload => console.log(payload))
+    .then(payload => {
+      return dispatch({type: SEND_MESSAGE_SUCCESS, payload})
+    })
     .catch(err => console.log(err))
 }
 

@@ -66,8 +66,11 @@ const rootReducer = (state = initialState, action) => {
       return {
          ...state, 
          user: {
-          userId: action.payload.data.userId,
-          login: action.payload.data.login
+          userId: action.payload.data._id,
+          login: action.payload.data.login,
+          email: action.payload.data.email,
+          friends: action.payload.data.friends,
+          messages: action.payload.data.messages
         }
       };
     }
@@ -126,12 +129,14 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case ADD_FRIEND_SUCCESS: {
-      let index = state.users.findIndex(user => user._id === action.payload.data._id);
-      state.users[index] = action.payload.data;
+      let index1 = state.users.findIndex(user => user._id === action.payload.data.user._id);
+      state.users[index1] = action.payload.data.user;
+      let index2 = state.users.findIndex(user => user._id === action.payload.data.friendUser._id);
+      state.users.[index2] = action.payload.data.friendUser
       return {
         ...state,
         profileUser: {
-          ...action.payload.data
+          ...action.payload.data.user
         },
       }
     }

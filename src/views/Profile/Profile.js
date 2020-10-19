@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Post from 'components/Post/Post';
+import NewPostBar from 'components/NewPostBar/NewPostBar';
 import { fetchUserProfile, fetchUsersPosts, addToFriends as addToFriendsAction } from 'actions';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import addFriend from 'assets/add.svg';
+import message from 'assets/message.svg'
 import styles from './Profile.module.scss';
 
 const Profile = (props) => {
 
     const userId = props.match.params.id
+    const [openMessage, setOpen] = useState(false);
+    const sendMessage = (e) => {
+        setOpen(!openMessage)
+    }
 
     const dispatch = useDispatch();
 
@@ -33,6 +39,7 @@ const Profile = (props) => {
 
     return (
         <div className={styles.container}>
+            {openMessage && <NewPostBar userId={userId} message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <div className={styles.profile}>
                     <div className={styles.img}></div>
@@ -43,6 +50,7 @@ const Profile = (props) => {
                         <p>Friends: <span>{friends.length}</span></p>
                     </div>
                     {user.login !== login && <img className={friends.includes(user.userId) ? styles.friends : null} onClick={addToFriends} src={addFriend} alt="" />}
+                    {friends.includes(user.userId) && <img onClick={sendMessage} src={message} alt="" />}
                 </div>
                 <div className={styles.posts}>
                     {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>
