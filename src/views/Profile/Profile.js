@@ -10,7 +10,7 @@ import styles from './Profile.module.scss';
 
 const Profile = (props) => {
 
-    const userId = props.match.params.id
+    let userId = props.match.params.id;
     const [openMessage, setOpen] = useState(false);
     const sendMessage = (e) => {
         setOpen(!openMessage)
@@ -21,7 +21,7 @@ const Profile = (props) => {
     useEffect(() => {
         dispatch(fetchUserProfile(userId))
         dispatch(fetchUsersPosts(userId))
-    }, [])
+    }, [userId])
 
     const { user = [], profileUser = [], posts = [] } = useSelector(state => ({
         user: state.user,
