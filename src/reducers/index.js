@@ -146,12 +146,10 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case SEND_MESSAGE_SUCCESS: {
-      let index = state.users.findIndex(user => user._id === action.payload.data._id);
-      state.users[index] = action.payload.data;
-      if(state.user.userId === action.payload.data._id) {
-        state.user = action.payload.data;
-      }
-      return state;
+     return {
+       ...state,
+       messages: [...state.messages, action.payload.data]
+     }
     }
 
     /////////////////

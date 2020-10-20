@@ -1,9 +1,15 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
+import {removeMessage} from 'actions';
 import styles from './Message.module.scss';
 import close from 'assets/close-fat.svg';
 import message from 'assets/message.svg';
 
-const Message = ({sendMessage, senderId, senderName, date, text}) => {
+const Message = ({id, sendMessage, senderName, date, text}) => {
+
+    const dispatch = useDispatch();
+
+
     return ( 
     <div className={styles.message}>
         <img src={close} alt="" />

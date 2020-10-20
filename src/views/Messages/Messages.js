@@ -6,11 +6,13 @@ import styles from './Messages.module.scss';
 
 const Messages = () => {
 
-    const {user = []} = useSelector(state => ({
-        user: state.user
+    const {user, messages = []} = useSelector(state => ({
+        user: state.user,
+        messages: state.messages
     }))
 
-    let messages = user.messages || [];
+    console.log(messages)
+    // let userMessages = messages || [];
 
     const [openMessage, setOpen] = useState(false);
     const sendMessage = (e) => {
