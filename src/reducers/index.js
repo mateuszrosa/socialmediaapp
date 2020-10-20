@@ -46,8 +46,8 @@ import {
 
 const initialState = {
   user: {
-    userId: "5f8d5dc1def6f818b9b29611",
-    login: "parik"
+    // userId: "5f8d5dc1def6f818b9b29611",
+    // login: "parik"
   }
 };
 
@@ -148,6 +148,9 @@ const rootReducer = (state = initialState, action) => {
     case SEND_MESSAGE_SUCCESS: {
       let index = state.users.findIndex(user => user._id === action.payload.data._id);
       state.users[index] = action.payload.data;
+      if(state.user.userId === action.payload.data._id) {
+        state.user = action.payload.data;
+      }
       return state;
     }
 

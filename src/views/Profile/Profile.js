@@ -10,24 +10,22 @@ import styles from './Profile.module.scss';
 
 const Profile = (props) => {
 
-    let userId = props.match.params.id;
-    const [openMessage, setOpen] = useState(false);
-    const sendMessage = (e) => {
-        setOpen(!openMessage)
-    }
-
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchUserProfile(userId))
-        dispatch(fetchUsersPosts(userId))
-    }, [userId])
-
+    let userId = props.match.params.id;
     const { user = [], profileUser = [], posts = [] } = useSelector(state => ({
         user: state.user,
         profileUser: state.profileUser,
         posts: state.posts
     }));
+    const [openMessage, setOpen] = useState(false);
+    const sendMessage = (e) => {
+        setOpen(!openMessage)
+    }
+
+    useEffect(() => {
+        dispatch(fetchUserProfile(userId))
+        dispatch(fetchUsersPosts(userId))
+    }, [userId])
 
     const addToFriends = () => {
         if (!profileUser.friends.includes(user.userId)) {
@@ -39,7 +37,7 @@ const Profile = (props) => {
 
     return (
         <div className={styles.container}>
-            {openMessage && <NewPostBar userId={userId} message hideBar={sendMessage} />}
+            {openMessage && <NewPostBar to={profileUser.login} message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <div className={styles.profile}>
                     <div className={styles.img}></div>

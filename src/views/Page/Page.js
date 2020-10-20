@@ -16,8 +16,10 @@ const Page = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPosts());
-    dispatch(fetchUsers())
+    if(userId) {
+      dispatch(fetchPosts());
+      dispatch(fetchUsers())
+    }
   },[]);
 
   const [isVisible, setVisible] = useState(false);

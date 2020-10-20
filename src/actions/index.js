@@ -134,13 +134,13 @@ export const addToFriends = (userId, friendId) => dispatch => {
 }
 
 //SEND MESSAGE
-export const sendMessage = (senderId, senderName, text, userId) => dispatch => {
+export const sendMessage = (senderId, senderName, text, to) => dispatch => {
   const date = new Date();
   const params = new URLSearchParams({
     senderId,
     senderName,
     text,
-    userId,
+    to,
     date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
   });
   dispatch({type: SEND_MESSAGE_REQUEST})
