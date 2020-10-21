@@ -35,9 +35,6 @@ const Messages = () => {
         setWhichBox(box)
     }
 
-    // const inbox = messages.filter(message => message.to === user.login);
-    // const sentBox = messages.filter(message => message.senderName === user.login);
-
     return (
         <div className={styles.container}>
             {openMessage && <NewPostBar message hideBar={sendMessage} />}
