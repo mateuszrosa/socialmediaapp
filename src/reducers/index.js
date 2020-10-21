@@ -43,6 +43,7 @@ import {
   SEND_MESSAGE_SUCCESS,
   SEND_MESSAGE_FAILURE,
 } from "actions";
+import { FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS } from "../actions";
 
 const initialState = {
   user: {
@@ -70,7 +71,6 @@ const rootReducer = (state = initialState, action) => {
           login: action.payload.data.login,
           email: action.payload.data.email,
           friends: action.payload.data.friends,
-          messages: action.payload.data.messages
         }
       };
     }
@@ -141,15 +141,29 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    ////////////
+    //MESSAGES//
+    ////////////
+
     //SEND MESSAGE
     case SEND_MESSAGE_REQUEST: {
       return state;
     }
     case SEND_MESSAGE_SUCCESS: {
-     return {
-       ...state,
-       messages: [...state.messages, action.payload.data]
-     }
+        return {
+          ...state,
+          messages: [...state.messages, action.payload.data]
+        }
+    }
+
+    case FETCH_MESSAGES_REQUEST: {
+      return state;
+    }
+    case FETCH_MESSAGES_SUCCESS: {
+      return {
+        ...state,
+        messages: action.payload.data
+      }
     }
 
     /////////////////

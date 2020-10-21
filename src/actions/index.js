@@ -39,7 +39,7 @@ export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
 export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
 export const EDIT_POST_REQUEST = "EDIT_POST_REQUEST";
 export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
-export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";\
+export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";
 export const FETCH_USER_POSTS_REQUEST = "FETCH_USER_POSTS_REQUEST";
 export const FETCH_USER_POSTS_SUCCESS = "FETCH_USER_POSTS_SUCCESS";
 export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
@@ -152,10 +152,12 @@ export const fetchMessages = (login) => dispatch => {
   const params = new URLSearchParams({
     login
   });
-  dispatch({type: FETCH_MESSAGES});
+  dispatch({type: FETCH_MESSAGES_REQUEST});
   return axios
     .get(`http://localhost:3500/messages/?${params}`)
-    .then(payload => console.log(payload))
+    .then(payload => {
+      return dispatch({type: FETCH_MESSAGES_SUCCESS, payload})
+    })
     .catch(err => console.log(err))
 }
 
@@ -171,7 +173,7 @@ export const sendMessage = (senderId, senderName, text, to) => dispatch => {
   });
   dispatch({type: SEND_MESSAGE_REQUEST})
   return axios
-    .post(`http://localhost:3500/message/?${params}`)
+    .post(`http://localhost:3500/messages/?${params}`)
     .then(payload => {
       return dispatch({type: SEND_MESSAGE_SUCCESS, payload})
     })
