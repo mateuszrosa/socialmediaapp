@@ -42,8 +42,13 @@ import {
   SEND_MESSAGE_REQUEST,
   SEND_MESSAGE_SUCCESS,
   SEND_MESSAGE_FAILURE,
+  FETCH_MESSAGES_REQUEST,
+  FETCH_MESSAGES_SUCCESS,
+  FETCH_MESSAGES_FAILURE,
+  REMOVE_MESSAGE_REQUEST,
+  REMOVE_MESSAGE_SUCCESS,
+  REMOVE_MESSAGE_FAILURE
 } from "actions";
-import { FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS } from "../actions";
 
 const initialState = {
   user: {
@@ -132,7 +137,7 @@ const rootReducer = (state = initialState, action) => {
       let index1 = state.users.findIndex(user => user._id === action.payload.data.user._id);
       state.users[index1] = action.payload.data.user;
       let index2 = state.users.findIndex(user => user._id === action.payload.data.friendUser._id);
-      state.users.[index2] = action.payload.data.friendUser
+      state.users[index2] = action.payload.data.friendUser;
       return {
         ...state,
         profileUser: {
@@ -152,7 +157,7 @@ const rootReducer = (state = initialState, action) => {
     case SEND_MESSAGE_SUCCESS: {
         return {
           ...state,
-          messages: [...state.messages, action.payload.data]
+          sent: [...state.sent, action.payload.data],
         }
     }
 
@@ -160,9 +165,22 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case FETCH_MESSAGES_SUCCESS: {
+     let inMessages =  action.payload.data.filter(message => message.senderId !== state.user.userId);
+     let outMessages =  action.payload.data.filter(message => message.senderId === state.user.userId);
       return {
         ...state,
-        messages: action.payload.data
+        inbox: inMessages,
+        sent: outMessages
+      }
+    }
+
+    case REMOVE_MESSAGE_REQUEST: {
+      return state;
+    }
+    case REMOVE_MESSAGE_SUCCESS: {
+      return {
+        ...state,
+        messages: state.messages.filter(message => message._id !== action.payload.data.id)
       }
     }
 

@@ -1,14 +1,14 @@
 .message {
     min-height: 140px;
-    border-bottom: 1px solid #000;
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
     display: flex;
     align-items: center;
     position: relative;
 
     &:first-of-type {
-        border-top: 1px solid #000;
+        border-top: 1px solid gray;
     }
 
     img {
@@ -48,6 +48,12 @@
         h3,
         span {
             padding-left: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: normal;
         }
 
         span {

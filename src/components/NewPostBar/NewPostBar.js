@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from 'components/NewPostBar/NewPostBar.module.scss';
 import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
-import { addPost as addPostAction, editPost as editPostAction, sendMessage } from 'actions'
-import { label } from 'joi';
+import { addPost as addPostAction, editPost as editPostAction, sendMessage, fetchMessages } from 'actions';
 
 const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
 
@@ -24,7 +23,8 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
         onSubmit: ({ text, to }) => {
             if (text) {
                 if (message) {
-                    dispatch(sendMessage(senderId, senderName, text, to))
+                    dispatch(sendMessage(senderId, senderName, text, to));
+                    dispatch(fetchMessages(senderId))
                 } else {
                     edit ? dispatch(editPostAction(id, text)) : dispatch(addPostAction(text))
                 }

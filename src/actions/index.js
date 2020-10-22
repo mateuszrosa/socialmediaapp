@@ -49,6 +49,8 @@ export const SEND_MESSAGE_REQUEST = "SEND_MESSAGE_REQUEST";
 export const SEND_MESSAGE_SUCCESS = "SEND_MESSAGE_SUCCESS";
 export const SEND_MESSAGE_FAILURE = "SEND_MESSAGE_FAILURE";
 export const REMOVE_MESSAGE_REQUEST = "REMOVE_MESSAGE_REQUEST";
+export const REMOVE_MESSAGE_SUCCESS = "REMOVE_MESSAGE_SUCCESS";
+export const REMOVE_MESSAGE_FAILURE = "REMOVE_MESSAGE_FAILURE";
 export const FETCH_MESSAGES_REQUEST = "FETCH_MESSAGES_REQUEST";
 export const FETCH_MESSAGES_SUCCESS = "FETCH_MESSAGES_SUCCESS";
 export const FETCH_MESSAGES_FAILURE = "FETCH_MESSAGES_FAILURE";
@@ -180,16 +182,16 @@ export const sendMessage = (senderId, senderName, text, to) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const deleteMessage = (userId,id) => dispatch => {
+export const deleteMessage = id => dispatch => {
+  console.log(id)
   const params = new URLSearchParams({
-    userId,
     id
   });
   dispatch({type: REMOVE_MESSAGE_REQUEST});
   return axios
-    .delete(`http://localhost:3500/user/message/?${params}`)
+    .delete(`http://localhost:3500/messages/?${params}`)
     .then(payload => {
-      console.log(payload)
+      return dispatch({type: REMOVE_MESSAGE_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 } 

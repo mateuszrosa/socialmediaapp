@@ -8,31 +8,33 @@ import styles from './Messages.module.scss';
 const Messages = () => {
 
     const dispatch = useDispatch();
-    const { user, messages = []
-    } = useSelector(state => ({
-        user: state.user,
-        messages: state.messages || []
-    }))
-
-    useEffect(() => {
-        dispatch(fetchMessages(user.login));
-        setWhichBox(messages.filter(message => message.to === user.login))
-    }, [])
 
     const [openMessage, setOpen] = useState(false);
     const [box, setWhichBox] = useState([]);
 
+    const { user, inbox = [], sent = []
+    } = useSelector(state => ({
+            user: state.user,
+            inbox: state.inbox,
+            sent: state.sent
+        })
+    );
+
+    useEffect(() => {
+        dispatch(fetchMessages(user.login));
+        setWhichBox(inbox);
+    }, [])
+
     const sendMessage = (e) => {
         setOpen(!openMessage)
     }
-    const setBox = (e) => {
-        let box;
-        if (e.target.textContent === "Inbox") {
-            box = messages.filter(message => message.to === user.login);
+
+    const changeBox = e => {
+        if(e.target.textContent === "Inbox") {
+            setWhichBox(inbox)
         } else {
-            box = messages.filter(message => message.senderName === user.login);
+            setWhichBox(sent)
         }
-        setWhichBox(box)
     }
 
     return (
@@ -40,8 +42,8 @@ const Messages = () => {
             {openMessage && <NewPostBar message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <h1>Messages</h1>
-                <button onClick={setBox} >Inbox</button>
-                <button onClick={setBox} >Sent</button>
+                <button onClick={changeBox}>Inbox</button>
+                <button onClick={changeBox}>Sent</button>
                 {box.map(({ senderId, senderName, text, date, _id }) => {
                     return <Message
                         id={_id}
@@ -50,6 +52,7 @@ const Messages = () => {
                         senderName={senderName}
                         text={text}
                         date={date}
+                        sendMessage={sendMessage}
                     />
                 })}
             </div>
