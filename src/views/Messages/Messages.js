@@ -15,13 +15,12 @@ const Messages = () => {
     const { user, inbox = [], sent = []
     } = useSelector(state => ({
             user: state.user,
-            inbox: state.inbox,
-            sent: state.sent
+            inbox: state.user.inbox,
+            sent: state.user.sent
         })
     );
 
     useEffect(() => {
-        dispatch(fetchMessages(user.login));
         setWhichBox(inbox);
     }, [])
 
@@ -44,15 +43,16 @@ const Messages = () => {
                 <h1>Messages</h1>
                 <button onClick={changeBox}>Inbox</button>
                 <button onClick={changeBox}>Sent</button>
-                {box.map(({ senderId, senderName, text, date, _id }) => {
+                {box.map(({ senderId, senderName, text, date, id }) => {
                     return <Message
-                        id={_id}
-                        key={_id}
+                        id={id}
+                        key={id}
                         senderId={senderId}
                         senderName={senderName}
                         text={text}
                         date={date}
                         sendMessage={sendMessage}
+                        inbox={inbox && true}
                     />
                 })}
             </div>

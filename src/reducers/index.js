@@ -76,6 +76,8 @@ const rootReducer = (state = initialState, action) => {
           login: action.payload.data.login,
           email: action.payload.data.email,
           friends: action.payload.data.friends,
+          inbox: action.payload.data.inbox,
+          sent: action.payload.data.sent
         }
       };
     }
@@ -157,21 +159,15 @@ const rootReducer = (state = initialState, action) => {
     case SEND_MESSAGE_SUCCESS: {
         return {
           ...state,
-          sent: [...state.sent, action.payload.data],
+          user: {
+            userId: action.payload.data._id,
+            login: action.payload.data.login,
+            email: action.payload.data.email,
+            friends: action.payload.data.friends,
+            inbox: action.payload.data.inbox,
+            sent: action.payload.data.sent
+          }
         }
-    }
-
-    case FETCH_MESSAGES_REQUEST: {
-      return state;
-    }
-    case FETCH_MESSAGES_SUCCESS: {
-     let inMessages =  action.payload.data.filter(message => message.senderId !== state.user.userId);
-     let outMessages =  action.payload.data.filter(message => message.senderId === state.user.userId);
-      return {
-        ...state,
-        inbox: inMessages,
-        sent: outMessages
-      }
     }
 
     case REMOVE_MESSAGE_REQUEST: {

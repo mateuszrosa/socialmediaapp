@@ -6,12 +6,13 @@ import styles from './Message.module.scss';
 import close from 'assets/close-fat.svg';
 import message from 'assets/message.svg';
 
-const Message = ({id, sendMessage, senderId, senderName, date, text}) => {
+const Message = ({id, sendMessage, senderId, senderName, date, text, inbox}) => {
 
     const dispatch = useDispatch();
 
     const remove = () => {
-        dispatch(deleteMessage(id))
+
+        // dispatch(deleteMessage(id))
     }
 
     return ( 

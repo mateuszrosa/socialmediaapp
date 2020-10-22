@@ -69,7 +69,8 @@ export const register = (login, password, email) => (dispatch) => {
       password,
       email,
       friends: [],
-      messages: [],
+      inbox: [],
+      sent:[],
       date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
     })
     .then((payload) => {
@@ -150,18 +151,18 @@ export const addToFriends = (userId, friendId) => dispatch => {
 ////////////
 
 //FETCH MESSAGES
-export const fetchMessages = (login) => dispatch => {
-  const params = new URLSearchParams({
-    login
-  });
-  dispatch({type: FETCH_MESSAGES_REQUEST});
-  return axios
-    .get(`http://localhost:3500/messages/?${params}`)
-    .then(payload => {
-      return dispatch({type: FETCH_MESSAGES_SUCCESS, payload})
-    })
-    .catch(err => console.log(err))
-}
+// export const fetchMessages = (userId) => dispatch => {
+//   const params = new URLSearchParams({
+//     userId
+//   });
+//   dispatch({type: FETCH_MESSAGES_REQUEST});
+//   return axios
+//     .get(`http://localhost:3500/messages/?${params}`)
+//     .then(payload => {
+//       return dispatch({type: FETCH_MESSAGES_SUCCESS, payload})
+//     })
+//     .catch(err => console.log(err))
+// }
 
 //SEND MESSAGE
 export const sendMessage = (senderId, senderName, text, to) => dispatch => {

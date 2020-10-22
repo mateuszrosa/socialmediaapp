@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles from "./Page.module.scss";
 import NewPostBar from 'components/NewPostBar/NewPostBar';
 import Post from 'components/Post/Post';
-import {fetchPosts, fetchUsers, fetchMessages} from 'actions'
+import {fetchPosts, fetchUsers} from 'actions'
 
 const Page = () => {
 
@@ -19,7 +19,6 @@ const Page = () => {
     if(userId) {
       dispatch(fetchPosts());
       dispatch(fetchUsers())
-      dispatch(fetchMessages(userId))
     }
   },[]);
 
