@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMessages } from 'actions'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Message from 'components/Message/Message';
 import NewPostBar from 'components/NewPostBar/NewPostBar';
 import styles from './Messages.module.scss';
 
 const Messages = () => {
 
-    const dispatch = useDispatch();
-
-    const [openMessage, setOpen] = useState(false);
-    const [box, setWhichBox] = useState([]);
-
-    const { user, inbox = [], sent = []
+    const { inbox = [], sent = []
     } = useSelector(state => ({
-            user: state.user,
             inbox: state.user.inbox,
             sent: state.user.sent
         })
     );
 
-    useEffect(() => {
-        setWhichBox(inbox);
-    }, [])
+
+    const [openMessage, setOpen] = useState(false);
+    const [box, setWhichBox] = useState(false);
 
     const sendMessage = (e) => {
         setOpen(!openMessage)
@@ -30,9 +23,9 @@ const Messages = () => {
 
     const changeBox = e => {
         if(e.target.textContent === "Inbox") {
-            setWhichBox(inbox)
+            setWhichBox(false)
         } else {
-            setWhichBox(sent)
+            setWhichBox(true)
         }
     }
 
@@ -43,7 +36,20 @@ const Messages = () => {
                 <h1>Messages</h1>
                 <button onClick={changeBox}>Inbox</button>
                 <button onClick={changeBox}>Sent</button>
-                {box.map(({ senderId, senderName, text, date, id }) => {
+                {box ? 
+                sent.map(({ senderId, senderName, text, date, id }) => {
+                    return <Message
+                        id={id}
+                        key={id}
+                        senderId={senderId}
+                        senderName={senderName}
+                        text={text}
+                        date={date}
+                        sendMessage={sendMessage}
+                        inbox={inbox && true}
+                    />
+                }):
+                inbox.map(({ senderId, senderName, text, date, id }) => {
                     return <Message
                         id={id}
                         key={id}
