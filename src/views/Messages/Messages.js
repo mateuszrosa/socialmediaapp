@@ -16,9 +16,11 @@ const Messages = () => {
 
     const [openMessage, setOpen] = useState(false);
     const [box, setWhichBox] = useState(false);
+    const [sender, setSender] = useState("");
 
-    const sendMessage = (e) => {
+    const sendMessage = (senderName) => {
         setOpen(!openMessage)
+        typeof senderName === "string" && setSender(senderName)
     }
 
     const changeBox = e => {
@@ -31,7 +33,7 @@ const Messages = () => {
 
     return (
         <div className={styles.container}>
-            {openMessage && <NewPostBar message hideBar={sendMessage} />}
+            {openMessage && <NewPostBar to={sender} message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <h1>Messages</h1>
                 <button onClick={changeBox}>Inbox</button>

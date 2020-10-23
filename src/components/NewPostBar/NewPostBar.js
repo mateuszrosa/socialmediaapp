@@ -7,6 +7,7 @@ import { addPost as addPostAction, editPost as editPostAction, sendMessage } fro
 
 const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
 
+
     const dispatch = useDispatch();
     const [valid, setValid] = useState(false);
     const { senderId, senderName } = useSelector(state => ({
@@ -17,7 +18,7 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
     const formik = useFormik({
         initialValues: {
             text: "",
-            to: to || ""
+            to: to,
         },
 
         onSubmit: ({ text, to }) => {

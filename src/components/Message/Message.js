@@ -9,7 +9,7 @@ const Message = ({id, sendMessage, senderId, senderName, date, text}) => {
     return ( 
     <div className={styles.message}>
         <img src={close} alt="" />
-        <img onClick={sendMessage} src={message} alt="" />
+        <img onClick={() => sendMessage(senderName)} src={message} alt="" />
         <div className={styles.image}></div>
         <div className={styles.text}>
             <h3>From: <Link to={`profile/${senderId}`}>{senderName}</Link></h3>
