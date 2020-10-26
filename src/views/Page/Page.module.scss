@@ -1,69 +1,61 @@
-.main {
+.window {
+    margin: 120px 0 0 150px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    margin: 120px 0 0 150px;
-    background-color: #d3d9;
-    flex-grow: 1;
+    align-items: center;
+    position: relative;
 
-    .window {
-        background-color: #fff;
+    .posts {
+        margin-top: 10px;
+        padding-top: 20px;
         flex-grow: 1;
+        width: 75%;
+        max-width: 1000px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: relative;
+        background-color: #ddd;
+    }
 
-        .posts {
-            margin-top: 10px;
-            padding-top: 20px;
-            flex-grow: 1;
-            width: 75%;
-            max-width: 1000px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ddd;
+    .text {
+        width: 55%;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+
+        h1 {
+            text-align: center;
+            font-size: 45px;
         }
 
-        .text {
-            width: 55%;
-            height: 70%;
-            display: flex;
-            flex-direction: column;
-            align-self: center;
+        p {
+            margin-top: 25px;
 
-            h1 {
-                text-align: center;
-                font-size: 45px;
-            }
-
-            p {
-                margin-top: 25px;
-
-                &:nth-last-of-type(1) {
-                    margin-top: 15px;
-                }
+            &:nth-last-of-type(1) {
+                margin-top: 15px;
             }
         }
+    }
 
-        .form {
-            width: 600px;
-            height: 100px;
-            border: 1px solid black;
-            border-radius: 10px;
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    .form {
+        width: 600px;
+        height: 100px;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-            input {
-                font-size: 25px;
+        input {
+            font-size: 25px;
 
-                &[type="text"] {
-                    width: 350px;
-                    margin-right: 15px;
-                    font-size: 30px;
-                }
+            &[type="text"] {
+                width: 350px;
+                margin-right: 15px;
+                font-size: 30px;
             }
         }
     }

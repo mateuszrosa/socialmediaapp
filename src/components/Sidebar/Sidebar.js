@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Sidebar.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logout } from "actions";
 
 const Sidebar = () => {
@@ -16,39 +16,29 @@ const Sidebar = () => {
     <div className={styles.menu}>
       <ul>
         <li>
-          <Link to="/">home</Link>
+          <NavLink exact activeClassName={styles.active} to="/">home</NavLink>
         </li>
         <li>
-          <Link to={`/profile/${userId}`}>profile</Link>
+          <NavLink exact activeClassName={styles.active} to={`/profile/${userId}`}>profile</NavLink>
         </li>
         <li>
-          <Link to="/friends">friends</Link>
+          <NavLink exact activeClassName={styles.active} to="/friends">friends</NavLink>
         </li>
         <li>
-          <Link to="/messages">messages</Link>
+          <NavLink exact activeClassName={styles.active} to="/messages">messages</NavLink>
         </li>
         <li>
           {userId ? (
-            <Link onClick={() => dispatch(logout(userId, login))} to="/">
+            <NavLink onClick={() => dispatch(logout(userId, login))} to="/">
               log Out
-            </Link>
+            </NavLink>
           ) : (
-              <Link to="/login">log In</Link>
+              <NavLink to="/login">log In</NavLink>
             )}
         </li>
       </ul>
     </div>
   );
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   logout: (userId, login) => {
-//     dispatch(logout(userId,login));
-//   },
-// });
-
-// const mapToStateProps = ({ userId = null, login }) => {
-//   return { userId,login };
-// };
 
 export default Sidebar;

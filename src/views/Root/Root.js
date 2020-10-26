@@ -1,4 +1,5 @@
 import React from "react";
+import {useSelector} from 'react-redux';
 import "./index.css";
 import { Provider } from "react-redux";
 import { LastLocationProvider } from 'react-router-last-location';
@@ -26,7 +27,7 @@ const Root = () => {
           <Route exact path="/">
             <Page />
           </Route>
-          <Route path="/profile/:id">
+          <Route exact path="/profile/:id">
             <Profile />
           </Route>
           <Route path="/friends">
