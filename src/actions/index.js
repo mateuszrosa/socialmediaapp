@@ -67,7 +67,7 @@ export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`http://localhost:3500/user/register/?`,{
+    .post(`https://socialmediaapp-backend.herokuapp.com/user/register/?`,{
       login,
       password,
       email,
@@ -94,7 +94,7 @@ export const login = (login, password) => (dispatch) => {
   });
   dispatch({ type: LOGIN_REQUEST });
   return axios
-    .post(`http://localhost:3500/user/login/?${params}`)
+    .post(`https://socialmediaapp-backend.herokuapp.com/user/login/?${params}`)
     .then((payload) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })
@@ -113,7 +113,7 @@ export const logout = (userId,login) => (dispatch) => {
 export const fetchUsers = () => dispatch => {
   dispatch({type: FETCH_USERS_REQUEST});
   return axios
-    .get(`http://localhost:3500/users`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/users`)
     .then(payload => {
       return dispatch({type: FETCH_USERS_SUCCESS, payload})
     })
@@ -127,7 +127,7 @@ export const fetchUserProfile = userId => dispatch => {
   });
   dispatch({type: FETCH_USER_REQUEST});
   return axios
-    .get(`http://localhost:3500/user/?${params}`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/user/?${params}`)
     .then(payload => {
       return dispatch({type: FETCH_USER_SUCCESS, payload})
     })
@@ -142,7 +142,7 @@ export const addToFriends = (userId, friendId) => dispatch => {
   });
   dispatch({type: ADD_FRIEND_REQUEST})
   return axios
-    .put(`http://localhost:3500/user/friend/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/user/friend/?${params}`)
     .then(payload => {
       return dispatch({type: ADD_FRIEND_SUCCESS, payload})
     })
@@ -158,7 +158,7 @@ export const removeFromFriends = (userId, friendId) => dispatch => {
   });
   dispatch({type: REMOVE_FRIEND_REQUEST})
   return axios
-    .put(`http://localhost:3500/user/friend/remove/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/user/friend/remove/?${params}`)
     .then(payload => {
       return dispatch({type: REMOVE_FRIEND_SUCCESS, payload})
     })
@@ -181,7 +181,7 @@ export const sendMessage = (senderId, senderName, text, to) => dispatch => {
   });
   dispatch({type: SEND_MESSAGE_REQUEST})
   return axios
-    .post(`http://localhost:3500/messages/?${params}`)
+    .post(`https://socialmediaapp-backend.herokuapp.com/messages/?${params}`)
     .then(payload => {
       return dispatch({type: SEND_MESSAGE_SUCCESS, payload})
     })
@@ -196,7 +196,7 @@ export const deleteMessage = (id, user, box) => dispatch => {
   });
   dispatch({type: REMOVE_MESSAGE_REQUEST});
   return axios
-    .delete(`http://localhost:3500/messages/?${params}`)
+    .delete(`https://socialmediaapp-backend.herokuapp.com/messages/?${params}`)
     .then(payload => {
       return dispatch({type: REMOVE_MESSAGE_SUCCESS, payload})
     })
@@ -211,7 +211,7 @@ export const deleteMessage = (id, user, box) => dispatch => {
 export const fetchPosts = () => (dispatch) => {
   dispatch({type: FETCH_POSTS_REQUEST})
   return axios
-    .get(`http://localhost:3500/posts`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/posts`)
     .then((payload) => {
       return dispatch({type: FETCH_POSTS_SUCCESS, payload})
     })
@@ -226,7 +226,7 @@ export const fetchPost = id => dispatch => {
   });
   dispatch({type: FETCH_POST_REQUEST})
   return axios
-    .get(`http://localhost:3500/post/?${params}`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
     .then((payload) => {
       return dispatch({type: FETCH_POST_SUCCESS, payload})
     })
@@ -238,7 +238,7 @@ export const addPost = (text) => (dispatch, getState) => {
   const date = new Date();
   dispatch({type: ADD_POST_REQUEST})
   return axios
-    .post(`http://localhost:3500/post/?`, {
+    .post(`https://socialmediaapp-backend.herokuapp.com/post/?`, {
       userId: getState().user.userId,
       login: getState().user.login,
       text,
@@ -264,7 +264,7 @@ export const addLikes = (id,userId) => dispatch => {
   });
   dispatch({type: ADD_LIKE_REQUEST});
   return axios
-    .put(`http://localhost:3500/post/like/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/post/like/?${params}`)
     .then((payload) => {
       return dispatch({type: ADD_LIKE_SUCCESS, payload})
     })
@@ -279,7 +279,7 @@ export const editPost = (id, text) => dispatch => {
   });
   dispatch({type: EDIT_POST_REQUEST});
   return axios
-    .put(`http://localhost:3500/post/edit/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/post/edit/?${params}`)
     .then(payload => {
       return dispatch({type: EDIT_POST_SUCCESS, payload});
     })
@@ -293,7 +293,7 @@ export const removePost = (id) => dispatch => {
   });
   dispatch({type: REMOVE_POST_REQUEST});
   return axios
-    .delete(`http://localhost:3500/post/?${params}`)
+    .delete(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
     .then((payload) => {
       return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })
@@ -312,7 +312,7 @@ export const addComment = (text,id, userId, login) => dispatch => {
   });
   dispatch({type: ADD_COMMENT_REQUEST});
   return axios
-    .put(`http://localhost:3500/post/comment/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/post/comment/?${params}`)
     .then(payload => {
       return dispatch({type: ADD_COMMENT_SUCCESS, payload});
     })
@@ -326,7 +326,7 @@ export const fetchUsersPosts = userId => dispatch => {
   });
   dispatch({type: FETCH_USER_POSTS_REQUEST})
   return axios
-    .get(`http://localhost:3500/posts/user/?${params}`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/posts/user/?${params}`)
     .then(payload => {
       return dispatch({type: FETCH_USER_POSTS_SUCCESS, payload})
     })
