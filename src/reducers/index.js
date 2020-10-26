@@ -176,7 +176,14 @@ const rootReducer = (state = initialState, action) => {
     case REMOVE_MESSAGE_SUCCESS: {
       return {
         ...state,
-        messages: state.messages.filter(message => message._id !== action.payload.data.id)
+        user: {
+          userId: action.payload.data._id,
+          login: action.payload.data.login,
+          email: action.payload.data.email,
+          friends: action.payload.data.friends,
+          inbox: action.payload.data.inbox,
+          sent: action.payload.data.sent
+        }
       }
     }
 

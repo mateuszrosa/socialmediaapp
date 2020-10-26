@@ -39,7 +39,7 @@ const Messages = () => {
                 <button onClick={changeBox}>Inbox</button>
                 <button onClick={changeBox}>Sent</button>
                 {box ? 
-                sent.map(({ senderId, senderName, text, date, id }) => {
+                sent.map(({ senderId, senderName, text, date, id, to }) => {
                     return <Message
                         id={id}
                         key={id}
@@ -48,10 +48,11 @@ const Messages = () => {
                         text={text}
                         date={date}
                         sendMessage={sendMessage}
-                        inbox={inbox && true}
+                        to={to}
+                        sent
                     />
                 }):
-                inbox.map(({ senderId, senderName, text, date, id }) => {
+                inbox.map(({ senderId, senderName, text, date, id, to }) => {
                     return <Message
                         id={id}
                         key={id}
@@ -60,7 +61,7 @@ const Messages = () => {
                         text={text}
                         date={date}
                         sendMessage={sendMessage}
-                        inbox={inbox && true}
+                        to={to}
                     />
                 })}
             </div>

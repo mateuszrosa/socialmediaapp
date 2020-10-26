@@ -150,20 +150,6 @@ export const addToFriends = (userId, friendId) => dispatch => {
 //MESSAGES//
 ////////////
 
-//FETCH MESSAGES
-// export const fetchMessages = (userId) => dispatch => {
-//   const params = new URLSearchParams({
-//     userId
-//   });
-//   dispatch({type: FETCH_MESSAGES_REQUEST});
-//   return axios
-//     .get(`http://localhost:3500/messages/?${params}`)
-//     .then(payload => {
-//       return dispatch({type: FETCH_MESSAGES_SUCCESS, payload})
-//     })
-//     .catch(err => console.log(err))
-// }
-
 //SEND MESSAGE
 export const sendMessage = (senderId, senderName, text, to) => dispatch => {
   const date = new Date();
@@ -183,10 +169,11 @@ export const sendMessage = (senderId, senderName, text, to) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const deleteMessage = id => dispatch => {
-  console.log(id)
+export const deleteMessage = (id, user, box) => dispatch => {
   const params = new URLSearchParams({
-    id
+    id,
+    login: user,
+    box
   });
   dispatch({type: REMOVE_MESSAGE_REQUEST});
   return axios
