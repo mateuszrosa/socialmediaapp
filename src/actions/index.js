@@ -17,6 +17,9 @@ export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
 export const ADD_FRIEND_REQUEST = "ADD_FRIEND_REQUEST";
 export const ADD_FRIEND_SUCCESS = "ADD_FRIEND_SUCCESS";
 export const ADD_FRIEND_FAILURE = "ADD_FRIEND_FAILURE";
+export const REMOVE_FRIEND_REQUEST = "REMOVE_FRIEND_REQUEST";
+export const REMOVE_FRIEND_SUCCESS = "REMOVE_FRIEND_SUCCESS";
+export const REMOVE_FRIEND_FAILURE = "REMOVE_FRIEND_FAILURE";
 
 //POST ACTIONS
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
@@ -142,6 +145,22 @@ export const addToFriends = (userId, friendId) => dispatch => {
     .put(`http://localhost:3500/user/friend/?${params}`)
     .then(payload => {
       return dispatch({type: ADD_FRIEND_SUCCESS, payload})
+    })
+    .catch(err => console.log(err))
+}
+
+//REMOVE FROM FRIENDS
+
+export const removeFromFriends = (userId, friendId) => dispatch => {
+  const params = new URLSearchParams({
+    userId,
+    friendId
+  });
+  dispatch({type: REMOVE_FRIEND_REQUEST})
+  return axios
+    .put(`http://localhost:3500/user/friend/remove/?${params}`)
+    .then(payload => {
+      return dispatch({type: REMOVE_FRIEND_SUCCESS, payload})
     })
     .catch(err => console.log(err))
 }

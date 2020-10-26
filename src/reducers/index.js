@@ -39,6 +39,9 @@ import {
   ADD_FRIEND_REQUEST,
   ADD_FRIEND_SUCCESS,
   ADD_FRIEND_FAILURE,
+  REMOVE_FRIEND_REQUEST,
+  REMOVE_FRIEND_SUCCESS,
+  REMOVE_FRIEND_FAILURE,
   SEND_MESSAGE_REQUEST,
   SEND_MESSAGE_SUCCESS,
   SEND_MESSAGE_FAILURE,
@@ -136,6 +139,7 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case ADD_FRIEND_SUCCESS: {
+      console.log(action.payload.data)
       let index1 = state.users.findIndex(user => user._id === action.payload.data.user._id);
       state.users[index1] = action.payload.data.user;
       let index2 = state.users.findIndex(user => user._id === action.payload.data.friendUser._id);
@@ -143,8 +147,37 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         profileUser: {
-          ...action.payload.data.user
+          ...action.payload.data.friendUser
         },
+        user: {
+            userId: action.payload.data.user._id,
+            login: action.payload.data.user.login,
+            email: action.payload.data.user.email,
+            friends: action.payload.data.user.friends,
+            inbox: action.payload.data.user.inbox,
+            sent: action.payload.data.user.sent
+        }
+      }
+    }
+
+    case REMOVE_FRIEND_REQUEST: {
+      return state;
+    }
+    case REMOVE_FRIEND_SUCCESS: {
+      let index1 = state.users.findIndex(user => user._id === action.payload.data.user._id);
+      state.users[index1] = action.payload.data.user;
+      let index2 = state.users.findIndex(user => user._id === action.payload.data.friendUser._id);
+      state.users[index2] = action.payload.data.friendUser;
+      return {
+        ...state,
+        user: {
+          userId: action.payload.data.user._id,
+          login: action.payload.data.user.login,
+          email: action.payload.data.user.email,
+          friends: action.payload.data.user.friends,
+          inbox: action.payload.data.user.inbox,
+          sent: action.payload.data.user.sent
+        }
       }
     }
 

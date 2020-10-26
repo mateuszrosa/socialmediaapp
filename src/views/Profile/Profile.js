@@ -29,7 +29,7 @@ const Profile = (props) => {
 
     const addToFriends = () => {
         if (!profileUser.friends.includes(user.userId)) {
-            dispatch(addToFriendsAction(profileUser._id, user.userId))
+            dispatch(addToFriendsAction(user.userId, profileUser._id))
         }
     }
 
