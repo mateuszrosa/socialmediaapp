@@ -40,7 +40,7 @@ const Page = () => {
   return (
       <div className={styles.window}>
         <div className={styles.form}>
-          <input readOnly type="text" name="" id="" value="What you think about?" />
+          <input onClick={handlePostBar} readOnly type="text" name="" id="" value="What you think about?" />
           <input onClick={handlePostBar} type="submit" value="Post it"/>
         </div>
         <div className={styles.posts}>
