@@ -7,7 +7,7 @@ const Friends = () => {
 
   const {friends = []} = useSelector(state => ({
     friends: state.user.friends,
-  }))
+  }));
 
   return (
     <div className={styles.container}>    
