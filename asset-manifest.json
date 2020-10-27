@@ -1,9 +1,9 @@
 {
-  "main.css": "/socialmediaapp/static/css/main.8c624f6c.chunk.css",
-  "main.js": "/socialmediaapp/static/js/main.d3bd40d6.chunk.js",
-  "main.js.map": "/socialmediaapp/static/js/main.d3bd40d6.chunk.js.map",
-  "static/js/1.e74968f9.chunk.js": "/socialmediaapp/static/js/1.e74968f9.chunk.js",
-  "static/js/1.e74968f9.chunk.js.map": "/socialmediaapp/static/js/1.e74968f9.chunk.js.map",
+  "main.css": "/socialmediaapp/static/css/main.fcd0bc26.chunk.css",
+  "main.js": "/socialmediaapp/static/js/main.755ec110.chunk.js",
+  "main.js.map": "/socialmediaapp/static/js/main.755ec110.chunk.js.map",
+  "static/js/1.80c01f24.chunk.js": "/socialmediaapp/static/js/1.80c01f24.chunk.js",
+  "static/js/1.80c01f24.chunk.js.map": "/socialmediaapp/static/js/1.80c01f24.chunk.js.map",
   "runtime~main.js": "/socialmediaapp/static/js/runtime~main.3b28988c.js",
   "runtime~main.js.map": "/socialmediaapp/static/js/runtime~main.3b28988c.js.map",
   "static/media/male.svg": "/socialmediaapp/static/media/male.c53369d5.svg",
@@ -16,8 +16,8 @@
   "static/media/expand.svg": "/socialmediaapp/static/media/expand.63c7b0a6.svg",
   "static/media/edit.svg": "/socialmediaapp/static/media/edit.45af15c6.svg",
   "static/media/add.svg": "/socialmediaapp/static/media/add.37032d4b.svg",
-  "static/css/main.8c624f6c.chunk.css.map": "/socialmediaapp/static/css/main.8c624f6c.chunk.css.map",
+  "static/css/main.fcd0bc26.chunk.css.map": "/socialmediaapp/static/css/main.fcd0bc26.chunk.css.map",
   "index.html": "/socialmediaapp/index.html",
-  "precache-manifest.115e90f4e850b75979d286d03f39c886.js": "/socialmediaapp/precache-manifest.115e90f4e850b75979d286d03f39c886.js",
+  "precache-manifest.d9f260baa1dca7448a06ea13e2b90986.js": "/socialmediaapp/precache-manifest.d9f260baa1dca7448a06ea13e2b90986.js",
   "service-worker.js": "/socialmediaapp/service-worker.js"
 }
