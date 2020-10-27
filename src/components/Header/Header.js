@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 import styles from "./Header.module.scss";
 import { useFormik } from "formik";
 import logo from "../../assets/logo.png";
@@ -53,10 +54,12 @@ const Header = (e) => {
 
   return (
     <>
+    <ReactTooltip />
     {redirect && <Redirect exact to={`/profile/${id}`} />}
       <header className={styles.header}>
         <form onSubmit={submit}>
           <input
+            data-tip="search your friend"
             onKeyUp={change}
             type="search"
             name="text"
