@@ -15,6 +15,7 @@ const Header = (e) => {
   const [nicks, setNicks] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [userId, setUserId] = useState("");
+  const [id, setId] = useState("");
 
   const change = (e) => {
     let arr = [];
@@ -33,33 +34,44 @@ const Header = (e) => {
   const chooseNick = e => {
     const input = document.querySelector('input');
     setUserId(e.target.dataset.id);
-    setRedirect(true);
     setNicks([])
     input.value = "";
   }
 
-  // if(redirect) {
-  //   return <Redirect to={`/profile/${userId}`} />
-  // }
+  const submit = e => {
+    e.preventDefault();
+    let input = e.target.querySelector('input');
+    let id;
+    for(const user of users) {
+      if(user.login === input.value) {
+        setId(user._id);
+        setRedirect(true)
+      }
+    }
+    input.value = "";
+  }
 
   return (
-    <header className={styles.header}>
-      <form>
-        <input
-          onKeyUp={change}
-          type="search"
-          name="text"
-          id="text"
-          placeholder="Write here"
-          autoComplete="off"
-        />
-        <input type="submit" value="Search" />
-      <ul>
-          {nicks.map(({login, userId}) => <li key={userId}><Link onClick={chooseNick} to={`profile/${userId}`} data-id={userId}>{login}</Link></li>)}
-      </ul>
-      </form>
-      <img src={logo} alt="" />
-    </header>
+    <>
+    {redirect && <Redirect exact to={`/profile/${id}`} />}
+      <header className={styles.header}>
+        <form onSubmit={submit}>
+          <input
+            onKeyUp={change}
+            type="search"
+            name="text"
+            id="text"
+            placeholder="Write here"
+            autoComplete="off"
+          />
+          <input type="submit" value="Search" />
+        <ul>
+            {nicks.map(({login, userId}) => <li key={userId}><Link onClick={chooseNick} to={`/profile/${userId}`} data-id={userId}>{login}</Link></li>)}
+        </ul>
+        </form>
+        <img src={logo} alt="" />
+      </header>
+    </>
   );
 };
 

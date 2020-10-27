@@ -39,6 +39,7 @@ const Page = () => {
 
   return (
       <div className={styles.window}>
+        {!userId && <Redirect to="/login" />}
         <div className={styles.form}>
           <input onClick={handlePostBar} readOnly type="text" name="" id="" value="What you think about?" />
           <input onClick={handlePostBar} type="submit" value="Post it"/>
