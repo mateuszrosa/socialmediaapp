@@ -1,9 +1,9 @@
 import React from "react";
-import {useSelector} from 'react-redux';
-import "./index.css";
-import { Provider } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LastLocationProvider } from 'react-router-last-location';
+import { Provider } from "react-redux";
 import store from "store";
+import "./index.css";
 import Sidebar from "components/Sidebar/Sidebar";
 import Header from "components/Header/Header";
 import Page from "views/Page/Page";
@@ -11,15 +11,14 @@ import UserPage from "views/UserPage/UserPage";
 import Profile from "views/Profile/Profile";
 import Friends from "views/Friends/Friends";
 import Messages from 'views/Messages/Messages';
-import DetailsPost from 'views/DetailsPost/DetailsPost'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DetailsPost from 'views/DetailsPost/DetailsPost';
 
 const Root = () => {
   let isLogged = false;
 
   return ( 
     <Provider store={store}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <LastLocationProvider>
         <Sidebar />
         <Header />
