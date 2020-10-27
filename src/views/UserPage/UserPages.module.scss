@@ -10,6 +10,7 @@
     .login {
         position: relative;
         height: 50%;
+        max-width: 650px;
         width: 50%;
         border: 1px solid black;
         display: flex;
@@ -25,6 +26,7 @@
 
         form {
             display: flex;
+            max-width: 300px;
             width: 40%;
             //   flex-direction: column;
             justify-content: center;

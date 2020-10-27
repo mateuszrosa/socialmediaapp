@@ -1,28 +1,38 @@
 .message {
     min-height: 140px;
-    border-bottom: 2px solid gray;
-    border-left: 2px solid gray;
-    border-right: 2px solid gray;
+    max-width: 700px;
+    // border-bottom: 3px solid gray;
+    // border-left: 3px solid gray;
+    // border-right: 3px solid gray;
     display: flex;
     align-items: center;
     position: relative;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2.5px 0px rgba(168, 161, 168, 1);
+    background-color: #d2d2d2;
+    margin-bottom: 20px;
+
 
     &:first-of-type {
-        border-top: 2px solid gray;
+        margin-top: 10px;
+    }
+
+    &:last-child {
+        margin-bottom: 10px;
     }
 
     img {
-        width: 25px;
-        height: 25px;
+        width: 35px;
+        height: 35px;
         position: absolute;
         top: 5px;
         right: 5px;
         cursor: pointer;
 
         &:last-of-type {
-            width: 30px;
-            height: 30px;
-            top: 75%;
+            width: 35px;
+            height: 35px;
+            top: 65%;
         }
     }
 

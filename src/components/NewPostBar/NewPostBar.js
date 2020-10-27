@@ -64,7 +64,7 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
                     cols="25"
                     rows="5">
                 </textarea>
-                <input type="submit" value="Post" />
+                <input type="submit" value={message ? "Send" : "Post"} />
             </form>
         </div>
     );
