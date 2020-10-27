@@ -15,6 +15,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        border-radius: 5px;
 
         .comments {
             background-color: #ddd;
@@ -48,7 +49,6 @@
                 align-items: center;
                 flex-grow: 1;
                 width: 100%;
-                background-color: #fff;
             }
         }
     }
