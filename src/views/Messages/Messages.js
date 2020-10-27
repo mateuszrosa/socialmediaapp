@@ -24,13 +24,18 @@ const Messages = () => {
     }
 
     const changeBox = e => {
-        document.querySelectorAll('button').forEach(btn => btn.style.textDecoration = "none");
+        document.querySelectorAll('button').forEach(btn => {
+            btn.style.textDecoration = "none";
+            btn.style.fontWeight = "400";
+        });
         if(e.target.textContent === "Inbox") {
             e.target.style.textDecoration = "underline";
+            e.target.style.fontWeight = "800";
             setWhichBox(false)
         } else {
             setWhichBox(true);
             e.target.style.textDecoration = "underline";
+            e.target.style.fontWeight = "800";
         }
     }
 
