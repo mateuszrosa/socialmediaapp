@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://mateuszrosa.github.io/socialmediaapp/precache-manifest.205d0f480fe38bf1892928703f491b6a.js"
+  "/socialmediaapp/precache-manifest.27ffd46abc230f720b7efa9abd70fb85.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("https://mateuszrosa.github.io/socialmediaapp/index.html", {
+workbox.routing.registerNavigationRoute("/socialmediaapp/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
