@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Post from 'components/Post/Post';
 import NewPostBar from 'components/NewPostBar/NewPostBar';
+import ReactTooltip from 'react-tooltip';
 import { fetchUserProfile, fetchUsersPosts, addToFriends as addToFriendsAction } from 'actions';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -37,6 +38,7 @@ const Profile = (props) => {
 
     return (
         <div className={styles.container}>
+            <ReactTooltip />
             {openMessage && <NewPostBar to={profileUser.login} message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <div className={styles.profile}>
@@ -47,8 +49,8 @@ const Profile = (props) => {
                         <h3>{email}</h3>
                         <p>Friends: <span>{friends.length}</span></p>
                     </div>
-                    {user.login !== login && <img className={friends.includes(user.userId) ? styles.friends : null} onClick={addToFriends} src={addFriend} alt="" />}
-                    {friends.includes(user.userId) && <img onClick={sendMessage} src={message} alt="" />}
+                    {user.login !== login && <img data-tip="add to friends" className={friends.includes(user.userId) ? styles.friends : null} onClick={addToFriends} src={addFriend} alt="" />}
+                    {friends.includes(user.userId) && <img  data-tip="send message" onClick={sendMessage} src={message} alt="" />}
                 </div>
                 <div className={styles.posts}>
                     {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>

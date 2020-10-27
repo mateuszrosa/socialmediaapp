@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPost, addLikes as addLikesAction, removePost as removePostAction } from 'actions';
 import { useLastLocation } from 'react-router-last-location';
 import NewPostBar from 'components/NewPostBar/NewPostBar'
+import ReactTooltip from 'react-tooltip';
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
 import comment from 'assets/comment-blog.svg';
@@ -64,6 +65,7 @@ const Post = (props) => {
         <>
            {isEdited && <NewPostBar id={id} hideBar={editPost} edit/>}
             <div className={styles.post}>
+                <ReactTooltip />
                 <div className={styles.img}></div>
                 {commentPost ?
                     <div className={styles.body}>
@@ -77,20 +79,20 @@ const Post = (props) => {
                     <div className={styles.body}>
                         <div className={styles.text}>
                             {detailPost ?
-                                <img src={close} onClick={closePost} alt="" />
+                                <img data-tip="close" src={close} onClick={closePost} alt="" />
                                 :
-                                <img src={arrows} onClick={openPost} alt="" />
+                                <img data-tip="expand" src={arrows} onClick={openPost} alt="" />
                             }
-                            <h3><Link to={`profile/${userId}`}>{login}</Link></h3>
+                            <h3><Link to={`/profile/${userId}`}>{login}</Link></h3>
                             <span>{date}</span>
                             <p>{text}</p>
                         </div>
                         <div className={styles.interactions}>
                             <button>
                                 {likedBy.includes(userId) ?
-                                    <img src={blackheart} alt="" />
+                                    <img data-tip="liked" src={blackheart} alt="" />
                                     :
-                                    <img onClick={addLikes} src={heart} alt="" />}
+                                    <img data-tip="add like" onClick={addLikes} src={heart} alt="" />}
                             </button>
                             <span>{likes} Likes</span>
                             <button>
@@ -99,11 +101,11 @@ const Post = (props) => {
                             <span>{comments.length} Comments</span>
                             {user === login && 
                                 <button className={styles.actions}>
-                                    <img onClick={editPost} src={edit} alt="" />
+                                    <img data-tip="edit" onClick={editPost} src={edit} alt="" />
                                 </button>}
                             {user === login && 
                             <button className={styles.actions}>
-                                <img onClick={removePost} src={bin} alt="" />
+                                <img data-tip="remove" onClick={removePost} src={bin} alt="" />
                             </button>}
                         </div>
                     </div>}

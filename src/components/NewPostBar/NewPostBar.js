@@ -57,6 +57,7 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
                     </>
                 }
                 <textarea
+                    placeholder={message ? "Write your message" : "Write your text"}
                     onChange={formik.handleChange}
                     value={formik.values.text}
                     name="text"
