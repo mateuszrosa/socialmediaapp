@@ -24,10 +24,13 @@ const Messages = () => {
     }
 
     const changeBox = e => {
+        document.querySelectorAll('button').forEach(btn => btn.style.textDecoration = "none");
         if(e.target.textContent === "Inbox") {
+            e.target.style.textDecoration = "underline";
             setWhichBox(false)
         } else {
-            setWhichBox(true)
+            setWhichBox(true);
+            e.target.style.textDecoration = "underline";
         }
     }
 

@@ -1,14 +1,14 @@
 .card {
-    border: 1px solid gray;
     background-color: #ddd;
     width: 425px;
     min-width: 34%;
     height: 300px;
     margin-top: 50px;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+    box-shadow: 5px 5px 2.5px 0px rgba(168, 161, 168, 1);
 
     .container {
         width: 100%;

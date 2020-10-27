@@ -15,11 +15,15 @@
         text-align: center;
         position: relative;
         margin-top: 10px;
-        background-color: #ddd;
+        background-color: rgb(233, 228, 228);
         min-height: 70%;
-        border-radius: 2.5px;
+        border-radius: 5px;
         padding: 15px 25px;
         box-shadow: 5px 5px 2.5px 0px rgba(168, 161, 168, 1);
+
+        h1 {
+            text-transform: uppercase;
+        }
 
         button {
             width: 100px;
@@ -29,6 +33,10 @@
             background-color: #ddd;
             border-radius: 5px;
             margin: 5px 0 7.5px 0;
+
+            &:first-of-type {
+                text-decoration: underline;
+            }
 
             &:hover {
                 color: gray;
