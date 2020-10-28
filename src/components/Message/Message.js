@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import {useDispatch} from 'react-redux';
 import {deleteMessage} from 'actions';
 import {Link} from 'react-router-dom';
@@ -21,8 +22,9 @@ const Message = ({id, sendMessage, senderId, senderName, date, text, to, sent}) 
 
     return ( 
     <div className={styles.message}>
-        <img onClick={remove} src={close} alt="" />
-        {!sent && <img onClick={() => sendMessage(senderName)} src={message} alt="" />}
+        <ReactTooltip />
+        <img data-tip="remove message" onClick={remove} src={close} alt="" />
+        {!sent && <img data-tip="respond" onClick={() => sendMessage(senderName)} src={message} alt="" />}
         <div className={styles.image}></div>
         <div className={styles.text}>
             <h3>From: <Link to={`profile/${senderId}`}>{senderName}</Link></h3>

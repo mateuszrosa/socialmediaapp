@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { useSelector } from 'react-redux';
 import Message from 'components/Message/Message';
 import NewPostBar from 'components/NewPostBar/NewPostBar';
@@ -41,6 +42,7 @@ const Messages = () => {
 
     return (
         <div className={styles.container}>
+            <ReactTooltip />
             {openMessage && <NewPostBar to={sender} message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <h1>Messages</h1>
@@ -73,7 +75,7 @@ const Messages = () => {
                     />
                 })}
             </div>
-            <div onClick={sendMessage} className={styles.circle}></div>
+            <div data-tip="write message" onClick={sendMessage} className={styles.circle}></div>
         </div>
     );
 }

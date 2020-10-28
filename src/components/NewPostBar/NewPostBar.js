@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from 'components/NewPostBar/NewPostBar.module.scss';
 import close from 'assets/close-fat.svg';
@@ -37,7 +38,8 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
 
     return (
         <div className={styles.bar}>
-            <img onClick={hideBar} src={close} alt="" />
+            <ReactTooltip />
+            <img data-tip="close" onClick={hideBar} src={close} alt="" />
             {post && <h1>Create post</h1>}
             {edit && <h1>Edit post</h1>}
             {message && <h1>Send message</h1>}
