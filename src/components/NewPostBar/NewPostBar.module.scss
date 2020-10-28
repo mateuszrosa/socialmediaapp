@@ -40,10 +40,18 @@
         flex-direction: column;
         align-items: flex-end;
 
+        label {
+            text-transform: uppercase;
+            font-weight: 800;
+            align-self: flex-start;
+        }
+
         textarea {
             font-size: 20px;
             margin-top: 7.5px;
             width: 100%;
+            border-radius: 7.5px;
+            padding: 2.5px;
         }
 
         input {

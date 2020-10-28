@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { removeFromFriends } from 'actions';
 import NewPostBar from 'components/NewPostBar/NewPostBar';
-import { useSelector } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromFriends } from 'actions';
 import { Link } from 'react-router-dom';
 import styles from './Friend.module.scss';
 import message from 'assets/message.svg';
 import close from 'assets/close-fat.svg';
-import { fetchUsers } from '../../actions';
 
 const Friend = ({ userId }) => {
 
@@ -39,6 +38,7 @@ const Friend = ({ userId }) => {
     return (
         <>
             {openMessage && <NewPostBar message to={login} hideBar={sendMessage} />}
+            <ReactTooltip />
             <div className={styles.card}>
                 <div className={styles.container}>
                     <div className={styles.img}></div>
@@ -50,8 +50,8 @@ const Friend = ({ userId }) => {
                     </div>
                 </div>
                 <div className={styles.interactions}>
-                    <img onClick={sendMessage} src={message} alt="" />
-                    <img onClick={remove} src={close} alt="" />
+                    <img data-tip="send message" onClick={sendMessage} src={message} alt="" />
+                    <img data-tip="remove from friends" onClick={remove} src={close} alt="" />
                 </div>
             </div>
         </>
