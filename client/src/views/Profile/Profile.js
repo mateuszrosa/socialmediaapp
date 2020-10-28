@@ -49,8 +49,21 @@ const Profile = (props) => {
                         <h3>{email}</h3>
                         <p>Friends: <span>{friends.length}</span></p>
                     </div>
-                    {user.login !== login && <img data-tip="add to friends" className={friends.includes(user.userId) ? styles.friends : null} onClick={addToFriends} src={addFriend} alt="" />}
-                    {friends.includes(user.userId) && <img  data-tip="send message" onClick={sendMessage} src={message} alt="" />}
+                    {user.login !== login && 
+                    <img 
+                        data-tip="add to friends" 
+                        className={friends.includes(user.userId) ? styles.friends : null} 
+                        onClick={addToFriends} 
+                        src={addFriend} 
+                        alt="" 
+                    />}
+                    {friends.includes(user.userId) && 
+                    <img  
+                        data-tip="send message" 
+                        onClick={sendMessage}
+                        src={message} 
+                        alt="" 
+                    />}
                 </div>
                 <div className={styles.posts}>
                     {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>

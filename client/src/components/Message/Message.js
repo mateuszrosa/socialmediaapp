@@ -14,9 +14,11 @@ const Message = ({ id, sendMessage, senderId, senderName, date, text, to, sent }
     const remove = () => {
         let box;
         if (sent) {
-            dispatch(deleteMessage(id, senderName, box = "sent"))
+            box = "sent";
+            dispatch(deleteMessage(id, senderName, box))
         } else {
-            dispatch(deleteMessage(id, to, box = "inbox"))
+            box = "inbox"
+            dispatch(deleteMessage(id, to, box))
         }
     }
 

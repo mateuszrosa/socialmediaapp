@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {fetchPosts, addComment } from 'actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from "formik";
 import Post from 'components/Post/Post';
-import Comment from 'components/Comment/Comment'
-import face from 'assets/male.svg';
-import comment from 'assets/comment-blog.svg';
-import heart from 'assets/heart-thin.svg';
-import blackheart from 'assets/heart-black.svg';
-import bin from 'assets/bin.svg';
-import close from 'assets/close-fat.svg'
 import styles from './DetailsPost.module.scss';
 
 const DetailsPost = (props) => {

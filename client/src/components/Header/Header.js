@@ -1,9 +1,8 @@
 import React,{useState} from "react";
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 import styles from "./Header.module.scss";
-import { useFormik } from "formik";
 import logo from "../../assets/logo.png";
 
 const Header = (e) => {
@@ -11,11 +10,8 @@ const Header = (e) => {
   const {users} = useSelector(state => ({
     users: state.users
   }))
-
-  const dispatch = useDispatch();
   const [nicks, setNicks] = useState([]);
   const [redirect, setRedirect] = useState(false);
-  const [userId, setUserId] = useState("");
   const [id, setId] = useState("");
 
   const change = (e) => {
@@ -34,7 +30,6 @@ const Header = (e) => {
 
   const chooseNick = e => {
     const input = document.querySelector('input');
-    setUserId(e.target.dataset.id);
     setNicks([])
     input.value = "";
   }
@@ -42,7 +37,6 @@ const Header = (e) => {
   const submit = e => {
     e.preventDefault();
     let input = e.target.querySelector('input');
-    let id;
     for(const user of users) {
       if(user.login === input.value) {
         setId(user._id);

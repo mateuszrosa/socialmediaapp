@@ -83,7 +83,7 @@ const Post = (props) => {
                                 :
                                 <img data-tip="expand" src={arrows} onClick={openPost} alt="" />
                             }
-                            <h3><Link to={`/profile/${userId}`}>{login}</Link></h3>
+                            <h3><Link data-tip="open profile" to={`/profile/${userId}`}>{login}</Link></h3>
                             <span>{date}</span>
                             <p>{text}</p>
                         </div>
