@@ -1,9 +1,6 @@
 .message {
     min-height: 140px;
     max-width: 700px;
-    // border-bottom: 3px solid gray;
-    // border-left: 3px solid gray;
-    // border-right: 3px solid gray;
     display: flex;
     align-items: center;
     position: relative;
@@ -58,6 +55,14 @@
         h3,
         span {
             padding-left: 10px;
+        }
+
+        h3 {
+            span {
+                color: #000;
+                font-weight: 400;
+                font-size: 16px;
+            }
         }
 
         a {
