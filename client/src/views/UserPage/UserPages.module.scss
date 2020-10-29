@@ -30,7 +30,7 @@
         form {
             display: flex;
             max-width: 300px;
-            width: 40%;
+            width: 50%;
             //   flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -38,13 +38,17 @@
 
             label {
                 margin-bottom: 2.5px;
-                width: 60%;
+                width: 100%;
                 text-align: center;
+
+                &.error {
+                    color: #ff0000;
+                }
             }
 
             input {
                 margin-bottom: 7.5px;
-                width: 70%;
+                width: 60%;
 
                 &[type="submit"] {
                     width: 50%;

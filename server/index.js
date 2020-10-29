@@ -20,7 +20,6 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     const db = client.db("social-media-app");
     const usersCollection = db.collection("users");
     const postsCollection = db.collection("posts");
-    const messagesCollection = db.collection("messages");
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json())

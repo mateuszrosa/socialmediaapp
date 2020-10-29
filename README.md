@@ -1,6 +1,6 @@
 <h1>Social Media App</h1>
 
-<p>Full stack, fully-fetured social media app application using React and Express. Serves is Implemented backend REST API server with Node.js and Express. Server side is connected to mongoDB. Application styled by using SCSS. To log in you want login, email and password</p>
+<p>Full stack, fully-featured social media app application using React and Express. Serves is Implemented backend REST API server with Node.js and Express. Server side is connected to mongoDB. Application styled by using SCSS. To log in you want login, email and password</p>
 <p>Working sample account is login: parik and password: 123</p>
 
 <h2>Features:</h2>
