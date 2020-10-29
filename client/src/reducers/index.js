@@ -102,6 +102,12 @@ const rootReducer = (state = initialState, action) => {
         }
       }
     }
+    case REGISTER_FAILURE: {
+      return {
+        ...state,
+        error: action.response.data
+      }
+    }
 
     //LOGOUT
     case LOGOUT: {

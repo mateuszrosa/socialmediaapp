@@ -79,10 +79,8 @@ export const register = (login, password, email) => (dispatch) => {
     .then((payload) => {
       dispatch({ type: REGISTER_SUCCES, payload });
     })
-    .catch((err) => {
-      console.log(err.response);
-      
-      dispatch({ type: REGISTER_FAILURE });
+    .catch(({response}) => {
+      dispatch({ type: REGISTER_FAILURE, response });
     });
 };
 

@@ -8,8 +8,9 @@ import styles from "./UserPages.module.scss";
 const UserPage = ({ isLogged }) => {
 
   const dispatch = useDispatch();
-  const { userId } = useSelector(state => ({
-    userId: state.user.userId
+  const { userId, error } = useSelector(state => ({
+    userId: state.user.userId,
+    error: state.error
   }));
 
   const validate = values => {
@@ -40,8 +41,9 @@ const UserPage = ({ isLogged }) => {
       email: ""
     },
     validate,
-    onSubmit: ({ login, password, email }) => {
+    onSubmit: ({ login, password, email }, { resetForm }) => {
       isLogged ? dispatch(loginAuth(login, password)) : dispatch(registerAuth(login, password, email));
+      resetForm()
     },
   });
   if (userId) {
@@ -51,6 +53,7 @@ const UserPage = ({ isLogged }) => {
     <div className={styles.container}>
       <div className={styles.login}>
         {isLogged ? <h1>Just Log In</h1> : <h1>Register</h1>}
+        {error && <h3>{error}</h3>}
         <form onSubmit={formik.handleSubmit}>
           {isLogged ?
             <label htmlFor="login">Login</label>
@@ -71,7 +74,7 @@ const UserPage = ({ isLogged }) => {
               {isLogged ?
                 <label htmlFor="email">Email</label>
                 :
-                <label className={formik.errors.email && styles.email} htmlFor="email">
+                <label className={formik.errors.email && styles.error} htmlFor="email">
                   {formik.errors.email ? formik.errors.email : "Email"}
                 </label>}
               <input
