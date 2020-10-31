@@ -40,7 +40,7 @@ const UserPage = ({ isLogged }) => {
       password: "",
       email: ""
     },
-    // validate,
+    validate,
     onSubmit: ({ login, password, email }, { resetForm }) => {
       isLogged ? dispatch(loginAuth(login, password)) : dispatch(registerAuth(login, password, email));
       resetForm()
