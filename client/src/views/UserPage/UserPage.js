@@ -25,11 +25,11 @@ const UserPage = ({ isLogged }) => {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address';
     }
-    if (!values.password) {
-      errors.password = "Required"
-    } else if (values.password.length < 3) {
-      errors.password = "Must be at least 4 characters";
-    }
+    // if (!values.password) {
+    //   errors.password = "Required"
+    // } else if (values.password.length < 3) {
+    //   errors.password = "Must be at least 4 characters";
+    // }
 
     return errors;
   }
@@ -40,7 +40,7 @@ const UserPage = ({ isLogged }) => {
       password: "",
       email: ""
     },
-    validate,
+    // validate,
     onSubmit: ({ login, password, email }, { resetForm }) => {
       isLogged ? dispatch(loginAuth(login, password)) : dispatch(registerAuth(login, password, email));
       resetForm()

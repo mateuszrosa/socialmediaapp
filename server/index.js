@@ -35,18 +35,14 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     /////////////////
 
     //LOGGING
-    app.post("/user/login", (req, res) => {
-      usersCollection
-        .findOne(req.query)
-        .then((response) => {
-          if (response !== null) {
-            console.log("Logged in");
-            res.json(response);
-          } else {
-            res.sendStatus(500);
-          }
-        })
-        .catch((err) => console.error(err));
+    app.post("/user/login", async(req, res) => {
+      let user = await usersCollection.findOne(req.query);
+      if(user) {
+        console.log('Logged in')
+        res.json(user)
+      } else {
+        return res.status(404).send("That user does not exists" );
+      }
     });
 
     //REGISTER
@@ -73,71 +69,59 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     // GET USER INFO BY USERID
     app.get('/user', async(req,res) => {
       const {userId} = req.query;
-      await usersCollection
-      .findOne(
-        {_id: ObjectId(userId)}
-      )
-      .then(response => {
-        res.json(response)
-      })
-      .catch(err => console.log(err))
+      let user = await usersCollection.findOne({_id: ObjectId(userId)});
+      if(user) {
+        console.log('User found')
+        res.json(user)
+      } else {
+        console.log('user not found')
+        return res.status(404).send("That user does not exists" );
+      }
     })
 
     //ADD TO FRIENDS
     app.put('/user/friend', async (req,res) => {
       const {userId, friendId} = req.query;
-      let user;
-      let friendUser;
-      await usersCollection
+
+      let user = await usersCollection
         .findOneAndUpdate(
           { _id: ObjectId(userId)},
           { $push: {"friends" : friendId}},
-          {returnOriginal: false, upsert: true})
-          .then((response) => {
-            user = response.value
-          })
-          .catch(err => console.log(err));
-      await usersCollection
+          {returnOriginal: false, upsert: true});
+          
+      let friendUser = await usersCollection
           .findOneAndUpdate(
             { _id: ObjectId(friendId)},
             { $push: {"friends" : userId}},
-            {returnOriginal: false, upsert: true})
-            .then((response) => {
-              friendUser = response.value;
-            })
-            .catch(err => console.log(err));
+            {returnOriginal: false, upsert: true});
+
+      console.log('Added to friends')
       res.json({
-        user,
-        friendUser
+        user: user.value,
+        friendUser: friendUser.value
       })
     })
 
     //REMOVE FRIEND 
     app.put('/user/friend/remove', async (req,res) => {
       const {userId, friendId} = req.query;
-      let user;
-      let friendUser;
-      await usersCollection
+      // let user;
+      // let friendUser;
+      let user = await usersCollection
         .findOneAndUpdate(
           { _id: ObjectId(userId)},
           { $pull: {"friends" : friendId}},
-          {returnOriginal: false, upsert: true})
-          .then((response) => {
-            user = response.value
-          })
-          .catch(err => console.log(err));
-      await usersCollection
-          .findOneAndUpdate(
-            { _id: ObjectId(friendId)},
-            { $pull: {"friends" : userId}},
-            {returnOriginal: false, upsert: true})
-            .then((response) => {
-              friendUser = response.value;
-            })
-            .catch(err => console.log(err));
+          {returnOriginal: false, upsert: true});
+
+      let friendUser = await usersCollection
+        .findOneAndUpdate(
+          { _id: ObjectId(friendId)},
+          { $pull: {"friends" : userId}},
+          {returnOriginal: false, upsert: true});
+          
       res.json({
-        user,
-        friendUser
+        user: user.value,
+        friendUser: friendUser.value
       })
     })
 
