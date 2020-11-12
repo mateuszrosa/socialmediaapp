@@ -13,34 +13,12 @@ const UserPage = ({ isLogged }) => {
     error: state.error
   }));
 
-  const validate = values => {
-    const errors = {};
-    if (!values.login) {
-      errors.login = "Required"
-    } else if (values.login.length < 4) {
-      errors.login = "Must be at least 4 characters";
-    }
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-    // if (!values.password) {
-    //   errors.password = "Required"
-    // } else if (values.password.length < 3) {
-    //   errors.password = "Must be at least 4 characters";
-    // }
-
-    return errors;
-  }
-
   const formik = useFormik({
     initialValues: {
       login: "",
       password: "",
       email: ""
     },
-    validate,
     onSubmit: ({ login, password, email }, { resetForm }) => {
       isLogged ? dispatch(loginAuth(login, password)) : dispatch(registerAuth(login, password, email));
       resetForm()
