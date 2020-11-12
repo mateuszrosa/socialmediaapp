@@ -291,7 +291,7 @@ export const removePost = (id) => dispatch => {
   });
   dispatch({type: REMOVE_POST_REQUEST});
   return axios
-    .delete(`http://localhost:3500/post/?${params}`)
+    .delete(`https://socialmediaapp-backend.herokuapp.com/post/?${params}`)
     .then((payload) => {
       return dispatch({type: REMOVE_POST_SUCCESS, payload})
     })
