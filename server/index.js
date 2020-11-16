@@ -69,6 +69,7 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     // GET USER INFO BY USERID
     app.get('/user', async(req,res) => {
       const {userId} = req.query;
+      console.log(userId)
       let user = await usersCollection.findOne({_id: ObjectId(userId)});
       if(user) {
         console.log('User found')
@@ -105,8 +106,6 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     //REMOVE FRIEND 
     app.put('/user/friend/remove', async (req,res) => {
       const {userId, friendId} = req.query;
-      // let user;
-      // let friendUser;
       let user = await usersCollection
         .findOneAndUpdate(
           { _id: ObjectId(userId)},

@@ -38,7 +38,6 @@ const Profile = (props) => {
 
     return (
         <div className={styles.container}>
-            <ReactTooltip />
             {openMessage && <NewPostBar to={profileUser.login} message hideBar={sendMessage} />}
             <div className={styles.window}>
                 <div className={styles.profile}>
@@ -50,20 +49,26 @@ const Profile = (props) => {
                         <p>Friends: <span>{friends.length}</span></p>
                     </div>
                     {user.login !== login && 
+                    <>
+                    <ReactTooltip />
                     <img 
                         data-tip="add to friends" 
                         className={friends.includes(user.userId) ? styles.friends : null} 
                         onClick={addToFriends} 
                         src={addFriend} 
                         alt="" 
-                    />}
-                    {friends.includes(user.userId) && 
+                    />
+                    </>}
+                    {friends.includes(user.userId) &&
+                    <>
+                    <ReactTooltip />
                     <img  
                         data-tip="send message" 
                         onClick={sendMessage}
                         src={message} 
                         alt="" 
-                    />}
+                    />
+                    </>}
                 </div>
                 <div className={styles.posts}>
                     {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>

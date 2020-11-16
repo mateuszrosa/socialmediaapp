@@ -125,7 +125,7 @@ export const fetchUserProfile = userId => dispatch => {
   });
   dispatch({type: FETCH_USER_REQUEST});
   return axios
-    .get(`https://socialmediaapp-backend.herokuapp.com/?${params}`)
+    .get(`https://socialmediaapp-backend.herokuapp.com/user/?${params}`)
     .then(payload => {
       return dispatch({type: FETCH_USER_SUCCESS, payload})
     })
@@ -140,7 +140,7 @@ export const addToFriends = (userId, friendId) => dispatch => {
   });
   dispatch({type: ADD_FRIEND_REQUEST})
   return axios
-    .put(`https://socialmediaapp-backend.herokuapp.com/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/user/friend/?${params}`)
     .then(payload => {
       return dispatch({type: ADD_FRIEND_SUCCESS, payload})
     })
@@ -156,7 +156,7 @@ export const removeFromFriends = (userId, friendId) => dispatch => {
   });
   dispatch({type: REMOVE_FRIEND_REQUEST})
   return axios
-    .put(`https://socialmediaapp-backend.herokuapp.com/?${params}`)
+    .put(`https://socialmediaapp-backend.herokuapp.com/user/friend/remove/?${params}`)
     .then(payload => {
       return dispatch({type: REMOVE_FRIEND_SUCCESS, payload})
     })
