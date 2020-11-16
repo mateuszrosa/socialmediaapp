@@ -21,7 +21,7 @@ const Messages = () => {
 
     const sendMessage = (senderName) => {
         setOpen(!openMessage)
-        typeof senderName === "string" && setSender(senderName)
+        typeof senderName === "string" ? setSender(senderName) : setSender("");
     }
 
     const changeBox = e => {

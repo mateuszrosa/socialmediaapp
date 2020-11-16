@@ -179,7 +179,7 @@ export const sendMessage = (senderId, senderName, text, to) => dispatch => {
   });
   dispatch({type: SEND_MESSAGE_REQUEST})
   return axios
-    .post(`https://socialmediaapp-backend.herokuapp.com/?${params}`)
+    .post(`https://socialmediaapp-backend.herokuapp.com/messages/?${params}`)
     .then(payload => {
       return dispatch({type: SEND_MESSAGE_SUCCESS, payload})
     })
@@ -194,7 +194,7 @@ export const deleteMessage = (id, user, box) => dispatch => {
   });
   dispatch({type: REMOVE_MESSAGE_REQUEST});
   return axios
-    .delete(`https://socialmediaapp-backend.herokuapp.com/?${params}`)
+    .delete(`https://socialmediaapp-backend.herokuapp.com/messages/?${params}`)
     .then(payload => {
       return dispatch({type: REMOVE_MESSAGE_SUCCESS, payload})
     })
