@@ -52,7 +52,9 @@ const Post = (props) => {
 
     const removePost = () => {
         dispatch(removePostAction(id));
-        setClosed(true);
+        if(detailPost) {
+            setClosed(true)
+        }
     }
 
     if (isOpened) {
