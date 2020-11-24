@@ -26,13 +26,14 @@
             width: 100%;
 
             .img {
-                width: 160px;
+                min-width: 160px;
                 height: 150px;
                 margin-left: 20px;
                 border-radius: 50%;
                 background-image: url();
                 background-image: url("assets/male.svg");
                 background-color: #ddd;
+                background-repeat: no-repeat;
             }
 
             .info {
