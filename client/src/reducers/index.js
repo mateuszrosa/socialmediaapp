@@ -111,8 +111,9 @@ const rootReducer = (state = initialState, action) => {
 
     //LOGOUT
     case LOGOUT: {
-      delete state.user.userId;
-      delete state.user.login;
+      state.user = {};
+      delete state.users;
+      delete state.posts;
       return { ...state };
     }
 
