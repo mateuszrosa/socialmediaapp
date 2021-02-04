@@ -15,7 +15,6 @@ import DetailsPost from 'views/DetailsPost/DetailsPost';
 
 const Root = () => {
   let isLogged = false;
-
   return ( 
     <Provider store={store}>
       <Router basename={process.env.PUBLIC_URL}>

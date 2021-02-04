@@ -55,8 +55,6 @@ import {
 
 const initialState = {
   user: {
-    // userId: "5f8d5dc1def6f818b9b29611",
-    // login: "parik"
   }
 };
 
@@ -114,6 +112,7 @@ const rootReducer = (state = initialState, action) => {
       state.user = {};
       delete state.users;
       delete state.posts;
+      delete state.post;
       return { ...state };
     }
 

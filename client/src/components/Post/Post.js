@@ -22,10 +22,11 @@ const Post = (props) => {
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
-    const { post = [], user } =
+    const { post = [], user, loggedUserId } =
         useSelector(state => ({
             post: state.post,
-            user: state.user.login
+            user: state.user.login,
+            loggedUserId: state.user.userId
         }));
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const Post = (props) => {
     }
 
     const addLikes = () => {
-        dispatch(addLikesAction(id, userId))
+        dispatch(addLikesAction(id, loggedUserId))
     }
 
     const editPost = () => {
@@ -91,10 +92,12 @@ const Post = (props) => {
                         </div>
                         <div className={styles.interactions}>
                             <button>
-                                {likedBy.includes(userId) ?
+                                {
+                                    likedBy.includes(loggedUserId) ?
                                     <img data-tip="liked" src={blackheart} alt="" />
                                     :
-                                    <img data-tip="add like" onClick={addLikes} src={heart} alt="" />}
+                                    <img data-tip="add like" onClick={addLikes} src={heart} alt="" />
+                                }
                             </button>
                             <span>{likes} Likes</span>
                             <button>
