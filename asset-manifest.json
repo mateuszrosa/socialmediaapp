@@ -1,7 +1,7 @@
 {
   "main.css": "/socialmediaapp/static/css/main.f6f61301.chunk.css",
-  "main.js": "/socialmediaapp/static/js/main.8d0a8db7.chunk.js",
-  "main.js.map": "/socialmediaapp/static/js/main.8d0a8db7.chunk.js.map",
+  "main.js": "/socialmediaapp/static/js/main.d176ac10.chunk.js",
+  "main.js.map": "/socialmediaapp/static/js/main.d176ac10.chunk.js.map",
   "static/js/1.481c0976.chunk.js": "/socialmediaapp/static/js/1.481c0976.chunk.js",
   "static/js/1.481c0976.chunk.js.map": "/socialmediaapp/static/js/1.481c0976.chunk.js.map",
   "runtime~main.js": "/socialmediaapp/static/js/runtime~main.3b28988c.js",
@@ -18,6 +18,6 @@
   "static/media/add.svg": "/socialmediaapp/static/media/add.37032d4b.svg",
   "static/css/main.f6f61301.chunk.css.map": "/socialmediaapp/static/css/main.f6f61301.chunk.css.map",
   "index.html": "/socialmediaapp/index.html",
-  "precache-manifest.fbdbe5c632d59c9803dfa40cc243c2f0.js": "/socialmediaapp/precache-manifest.fbdbe5c632d59c9803dfa40cc243c2f0.js",
+  "precache-manifest.10ba2bba29eb3a0a09bd5f4b590d4a04.js": "/socialmediaapp/precache-manifest.10ba2bba29eb3a0a09bd5f4b590d4a04.js",
   "service-worker.js": "/socialmediaapp/service-worker.js"
 }
