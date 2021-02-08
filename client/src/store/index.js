@@ -14,8 +14,6 @@ const store = createStore(
   )
 );
 
-console.log(store.getState())
-
 store.subscribe(() => {
   saveState(store.getState());
 })
