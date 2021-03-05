@@ -10,7 +10,7 @@ const Sidebar = () => {
   const { userId, login } = useSelector(state => ({
     userId: state.user.userId,
     login: state.user.login
-  }))
+  }));
 
   return (
     <div className={styles.menu}>
@@ -28,13 +28,7 @@ const Sidebar = () => {
           <NavLink exact activeClassName={styles.active} to="/messages">messages</NavLink>
         </li>
         <li>
-          {userId ? (
-            <NavLink onClick={() => dispatch(logout(userId, login))} to="/">
-              log Out
-            </NavLink>
-          ) : (
-              <NavLink to="/login">log In</NavLink>
-            )}
+          <NavLink onClick={() => dispatch(logout(userId, login))} to="/">log Out</NavLink>
         </li>
       </ul>
     </div>
