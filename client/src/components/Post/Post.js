@@ -18,7 +18,6 @@ const Post = (props) => {
 
     const lastLocation = useLastLocation();
     const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost, userId } = props;
-    const [isOpened, setOpened] = useState(false);
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
@@ -35,14 +34,6 @@ const Post = (props) => {
         }
     }, []);
 
-    const openPost = () => {
-        setOpened(true);
-    }
-
-    const closePost = () => {
-        setClosed(true);
-    }
-
     const addLikes = () => {
         dispatch(addLikesAction(id, loggedUserId))
     }
@@ -58,9 +49,7 @@ const Post = (props) => {
         }
     }
 
-    if (isOpened) {
-       return <Redirect to={`/post/details/${id}`} />;
-    } else if (isClosed) {
+    if (isClosed) {
       return <Redirect to={lastLocation.pathname} />
     }
 
@@ -82,9 +71,13 @@ const Post = (props) => {
                     <div className={styles.body}>
                         <div className={styles.text}>
                             {detailPost ?
-                                <img data-tip="close" src={close} onClick={closePost} alt="" />
+                                <Link to={lastLocation.pathname}>
+                                    <img data-tip="close" src={close}alt="" />
+                                </Link>
                                 :
-                                <img data-tip="expand" src={arrows} onClick={openPost} alt="" />
+                                <Link to={`/post/details/${id}`}>
+                                    <img data-tip="expand" src={arrows} alt="" />
+                                </Link>
                             }
                             <h3><Link data-tip="open profile" to={`/profile/${userId}`}>{login}</Link></h3>
                             <span>{date}</span>
