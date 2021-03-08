@@ -24,6 +24,9 @@ import {
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
+  REMOVE_COMMENT_REQUEST,
+  REMOVE_COMMENT_SUCCESS,
+  REMOVE_COMMENT_FAILURE,
   EDIT_POST_REQUEST,
   EDIT_POST_SUCCESS,
   EDIT_POST_FAILURE,
@@ -329,6 +332,18 @@ const rootReducer = (state = initialState, action) => {
       state.posts[index] = action.payload.data;
       return state;
     }
+
+    //REMOVE COMMENT
+    case REMOVE_COMMENT_REQUEST: {
+      return state
+    }
+    case REMOVE_COMMENT_SUCCESS: {
+      let index = state.posts.findIndex(post => post._id === action.payload.data._id);
+      state.posts[index] = action.payload.data;
+      state.post = action.payload.data;
+      return state;
+    }
+
     default:
       return state;
   }

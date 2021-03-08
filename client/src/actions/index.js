@@ -41,6 +41,8 @@ export const REMOVE_POST_FAILURE = "REMOVE_POST_FAILURE";
 export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
 export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
 export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
+export const REMOVE_COMMENT_REQUEST = "REMOVE_COMMENT_REQUEST";
+export const REMOVE_COMMENT_SUCCESS = "REMOVE_COMMENT_SUCCESS";
 export const EDIT_POST_REQUEST = "EDIT_POST_REQUEST";
 export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
 export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";
@@ -318,6 +320,20 @@ export const addComment = (text,id, userId, login) => dispatch => {
       return dispatch({type: ADD_COMMENT_SUCCESS, payload});
     })
     .catch(err => console.log(err))
+}
+
+//REMOVE COMMENT 
+export const removeComment = (id, commentId) => dispatch => {
+  const params = new URLSearchParams({
+    id,
+    commentId
+   });
+  return axios
+  .delete(`https://socialmediaapp-backend.herokuapp.com/post/comment/delete/?${params}`)
+  .then(payload => {
+    return dispatch({type: REMOVE_COMMENT_SUCCESS, payload});
+  })
+  .catch(err => console.log(err));
 }
 
 //FETCH ALL POSTS ADDED BY SINGLE USER

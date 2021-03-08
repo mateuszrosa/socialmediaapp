@@ -57,11 +57,13 @@ const DetailsPost = (props) => {
                         <input type="submit" value="Send" />
                     </form>
                     <div className={styles.commentsList}>
-                        {comments.map(({date,id,login,text,userId}) => <Post
+                        {comments.map(({date,id: commentId,login,text,userId}) => <Post
                             text={text}
                             date={date} 
                             login={login} 
-                            key={id}
+                            key={commentId}
+                            commentId={commentId}
+                            id={id}
                             commentPost
                         />)}
                     </div>

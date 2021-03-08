@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, withRouter, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPost, addLikes as addLikesAction, removePost as removePostAction } from 'actions';
+import { fetchPost, addLikes as addLikesAction, removePost as removePostAction, removeComment as removeCommentAction } from 'actions';
 import { useLastLocation } from 'react-router-last-location';
 import NewPostBar from 'components/NewPostBar/NewPostBar'
 import ReactTooltip from 'react-tooltip';
@@ -17,7 +17,7 @@ import styles from './Post.module.scss';
 const Post = (props) => {
 
     const lastLocation = useLastLocation();
-    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentPost, userId } = props;
+    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentId, commentPost, userId } = props;
     const [isClosed, setClosed] = useState(false);
     const[isEdited, setEdited] = useState(false);
     const dispatch = useDispatch();
@@ -49,6 +49,10 @@ const Post = (props) => {
         }
     }
 
+    const removeComment = () => {
+        dispatch(removeCommentAction(id, commentId));
+    }
+
     if (isClosed) {
       return <Redirect to={lastLocation.pathname} />
     }
@@ -65,6 +69,7 @@ const Post = (props) => {
                             <h3>{login}</h3>
                             <span>{date}</span>
                             <p>{text}</p>
+                            {user === login && <img onClick={removeComment} data-tip="close" src={close}alt="" />}
                         </div>
                     </div>
                     :

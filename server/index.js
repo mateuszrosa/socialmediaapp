@@ -276,6 +276,24 @@ MongoClient.connect(process.env.NODE_DATABASE, {
       .catch(err => console.log(err))
     })
 
+    //REMOVE COMMENT
+    app.delete("/post/comment/delete", async(req,res) => {
+      const {id, commentId} = req.query;
+      const comments = "comments";
+      await postsCollection
+        .findOneAndUpdate(
+          {_id: ObjectId(id)},
+          {$pull: {[comments] :
+            {id: ObjectId(commentId)}
+          }},
+            {returnOriginal: false, upsert: true}
+          )
+          .then(response => {
+            res.json(response.value)
+          })
+          .catch(err => console.log(err))
+    })
+
     // GET SINGLE POST
     app.get("/post", async(req,res) => {
       const {id} = req.query;
