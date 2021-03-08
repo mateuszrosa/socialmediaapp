@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getDate} from "helpers";
 
 //USER ACTIONS
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
@@ -74,7 +75,7 @@ export const register = (login, password, email) => (dispatch) => {
       friends: [],
       inbox: [],
       sent:[],
-      date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+      date: getDate(date)
     })
     .then((payload) => {
       dispatch({ type: REGISTER_SUCCES, payload });
@@ -175,7 +176,7 @@ export const sendMessage = (senderId, senderName, text, to) => dispatch => {
     senderName,
     text,
     to,
-    date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+    date: getDate(date)
   });
   dispatch({type: SEND_MESSAGE_REQUEST})
   return axios
@@ -234,6 +235,8 @@ export const fetchPost = id => dispatch => {
 //ADD NEW POST
 export const addPost = (text) => (dispatch, getState) => {
   const date = new Date();
+  // const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  // const month = date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
   dispatch({type: ADD_POST_REQUEST})
   return axios
     .post(`https://socialmediaapp-backend.herokuapp.com/post/?`, {
@@ -243,7 +246,7 @@ export const addPost = (text) => (dispatch, getState) => {
       likes: 0,
       likedBy: [],
       comments: [],
-      date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+      date: getDate(date)
     })
     .then((payload) => {
       return dispatch({type: ADD_POST_SUCCESS, payload})
@@ -306,7 +309,7 @@ export const addComment = (text,id, userId, login) => dispatch => {
    id,
    userId, 
    login,
-   date: `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+   date: getDate(date)
   });
   dispatch({type: ADD_COMMENT_REQUEST});
   return axios
