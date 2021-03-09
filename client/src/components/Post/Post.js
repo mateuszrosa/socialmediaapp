@@ -57,6 +57,8 @@ const Post = (props) => {
       return <Redirect to={lastLocation.pathname} />
     }
 
+    const previous = lastLocation ? lastLocation.pathname : "/";
+
     return (
         <>
            {isEdited && <NewPostBar id={id} hideBar={editPost} edit/>}
@@ -76,7 +78,7 @@ const Post = (props) => {
                     <div className={styles.body}>
                         <div className={styles.text}>
                             {detailPost ?
-                                <Link to={lastLocation.pathname}>
+                                <Link to={previous}>
                                     <img data-tip="close" src={close}alt="" />
                                 </Link>
                                 :
