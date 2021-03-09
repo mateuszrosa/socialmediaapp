@@ -12,7 +12,7 @@ const DetailsPost = (props) => {
         useSelector(state => ({
             post: state.post,
             userId: state.user.userId,
-            user: state.user.login
+            user: state.user.login,
         }));
 
     const formik = useFormik({
@@ -58,7 +58,8 @@ const DetailsPost = (props) => {
                         <input type="submit" value="Send" />
                     </form>
                     <div className={styles.commentsList}>
-                        {comments.map(({date,id: commentId,login,text,userId}) => <Post
+                        {comments.map(({date,id: commentId,login,text,userId}) => 
+                        <Post
                             text={text}
                             date={date} 
                             login={login} 

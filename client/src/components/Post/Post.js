@@ -71,7 +71,7 @@ const Post = (props) => {
                             <h3>{login}</h3>
                             <span>{date}</span>
                             <p>{text}</p>
-                            {user === login && <img onClick={removeComment} data-tip="close" src={close}alt="" />}
+                            {(user === login ||user === post.login) && <img onClick={removeComment} data-tip="close" src={close}alt="" />}
                         </div>
                     </div>
                     :
