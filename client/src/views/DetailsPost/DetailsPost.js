@@ -22,8 +22,9 @@ const DetailsPost = (props) => {
 
         onSubmit: ({ comment }) => {
             if (comment) {
-                dispatch(addComment(comment, id, userId, user))
-                dispatch(fetchPosts())
+                dispatch(addComment(comment, id, userId, user));
+                dispatch(fetchPosts());
+                formik.resetForm();
             }
         }
     });
