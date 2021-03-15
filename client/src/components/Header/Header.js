@@ -7,7 +7,8 @@ import logo from "../../assets/logo.png";
 
 const Header = (e) => {
 
-  const {users} = useSelector(state => ({
+  const {user, users} = useSelector(state => ({
+    user: state.user,
     users: state.users
   }))
   const [nicks, setNicks] = useState([]);
@@ -54,7 +55,7 @@ const Header = (e) => {
         <form onSubmit={submit}>
           <input
             data-tip="search your friend"
-            onKeyUp={change}
+            onKeyUp={user.login ? change : null}
             type="search"
             name="text"
             id="text"
