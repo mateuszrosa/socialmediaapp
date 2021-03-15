@@ -86,8 +86,8 @@ export const register = (login, password, email) => (dispatch) => {
     .then((payload) => {
       dispatch({ type: REGISTER_SUCCES, payload });
     })
-    .catch((err) => {
-      dispatch({ type: REGISTER_FAILURE, error: "This username already exists"});
+    .catch(({response}) => {
+      dispatch({ type: REGISTER_FAILURE, error: response.data.text });
     });
 };
 
@@ -103,8 +103,8 @@ export const login = (login, password) => (dispatch) => {
     .then((payload) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })
-    .catch((err) => {
-      dispatch({ type: LOGIN_FAILURE, error: "This user does not exists" });
+    .catch(({response}) => {
+      dispatch({ type: LOGIN_FAILURE, error: response.data.text });
     });
 };
 
