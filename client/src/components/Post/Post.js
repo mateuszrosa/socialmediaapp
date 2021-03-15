@@ -19,7 +19,8 @@ const Post = (props) => {
     const lastLocation = useLastLocation();
     const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentId, commentPost, userId } = props;
     const [isClosed, setClosed] = useState(false);
-    const[isEdited, setEdited] = useState(false);
+    const [isEdited, setEdited] = useState(false);
+    const [isEditedComment, setEditedComment] = useState(false);
     const dispatch = useDispatch();
     const { post = [], user, loggedUserId } =
         useSelector(state => ({
@@ -42,6 +43,10 @@ const Post = (props) => {
         setEdited(!isEdited);
     }
 
+    const editComment = () => {
+        setEditedComment(!isEditedComment);
+    }
+
     const removePost = () => {
         dispatch(removePostAction(id));
         if(detailPost) {
@@ -62,6 +67,7 @@ const Post = (props) => {
     return (
         <>
            {isEdited && <NewPostBar id={id} hideBar={editPost} edit/>}
+           {isEditedComment && <NewPostBar id={id} commentId={commentId} hideBar={editComment} comment/>}
             <div className={styles.post}>
                 <ReactTooltip />
                 <div className={styles.img}></div>
@@ -71,7 +77,10 @@ const Post = (props) => {
                             <h3>{login}</h3>
                             <span>{date}</span>
                             <p>{text}</p>
-                            {(user === login ||user === post.login) && <img onClick={removeComment} data-tip="close" src={close}alt="" />}
+                            {(user === login ||user === post.login) &&
+                                <img onClick={removeComment} data-tip="close" src={close}alt="" />}
+                            {user === login && 
+                                <img data-tip="edit" onClick={editComment} src={edit} alt="" />}
                         </div>
                     </div>
                     :

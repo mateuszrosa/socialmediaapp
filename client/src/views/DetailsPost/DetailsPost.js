@@ -46,7 +46,7 @@ const DetailsPost = (props) => {
                 detailPost
             />
             <div className={styles.comments}>
-                    <form onSubmit={formik.handleSubmit}>
+                    <form className={styles.form} onSubmit={formik.handleSubmit}>
                         <label htmlFor="comment">Write your comment</label>
                         <input
                             onChange={formik.handleChange}

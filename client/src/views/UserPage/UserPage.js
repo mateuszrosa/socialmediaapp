@@ -79,7 +79,9 @@ const UserPage = ({ isLogged }) => {
           ) : (
               <input type="submit" value="Register" />
             )}
-          {isLogged ? <Link to="/register">I want my account!</Link> : null}
+          {isLogged ? 
+          <Link to="/register">I want my account!</Link> 
+          : <Link to="/login">I want to log in!</Link> }
         </form>
       </div>
     </div>

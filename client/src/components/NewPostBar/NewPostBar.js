@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from 'components/NewPostBar/NewPostBar.module.scss';
 import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
-import { addPost as addPostAction, editPost as editPostAction, sendMessage } from 'actions';
+import { addPost as addPostAction, editPost as editPostAction, editComment as editCommentAction, sendMessage } from 'actions';
 
-const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
+const NewPostBar = ({ hideBar, id, commentId, edit, comment, post, message, to }) => {
 
 
     const dispatch = useDispatch();
@@ -27,7 +27,13 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
                 if (message) {
                     dispatch(sendMessage(senderId, senderName, text, to));
                 } else {
-                    edit ? dispatch(editPostAction(id, text)) : dispatch(addPostAction(text))
+                    if(edit) {
+                        dispatch(editPostAction(id, text))
+                    } else if(comment) {
+                        dispatch(editCommentAction(id, commentId, text));
+                    } else {
+                        dispatch(addPostAction(text));
+                    }
                 }
                 hideBar()
             } else {
@@ -42,6 +48,7 @@ const NewPostBar = ({ hideBar, id, edit, post, message, to }) => {
             <img data-tip="close" onClick={hideBar} src={close} alt="" />
             {post && <h1>Create post</h1>}
             {edit && <h1>Edit post</h1>}
+            {comment && <h1>Edit comment</h1>}
             {message && <h1>Send message</h1>}
             {valid && <p>You can't send empty post!</p>}
             <form onSubmit={formik.handleSubmit}>

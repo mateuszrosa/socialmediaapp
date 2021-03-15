@@ -27,6 +27,9 @@ import {
   REMOVE_COMMENT_REQUEST,
   REMOVE_COMMENT_SUCCESS,
   REMOVE_COMMENT_FAILURE,
+  EDIT_COMMENT_REQUEST,
+  EDIT_COMMENT_SUCCESS,
+  EDIT_COMMENT_FAILURE,
   EDIT_POST_REQUEST,
   EDIT_POST_SUCCESS,
   EDIT_POST_FAILURE,
@@ -73,8 +76,9 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case LOGIN_SUCCES: {
+      delete state.error;
       return {
-         ...state, 
+         ...state,
          user: {
           userId: action.payload.data._id,
           login: action.payload.data.login,
@@ -86,7 +90,10 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case LOGIN_FAILURE: {
-      return state
+      return {
+        ...state,
+        error: action.error
+      }
     }
 
     //REGISTER
@@ -94,6 +101,7 @@ const rootReducer = (state = initialState, action) => {
       return;
     }
     case REGISTER_SUCCES: {
+      delete state.error;
       return {
         ...state,
         user: {
@@ -106,7 +114,7 @@ const rootReducer = (state = initialState, action) => {
     case REGISTER_FAILURE: {
       return {
         ...state,
-        error: action.response.data
+        error: action.error
       }
     }
 
@@ -116,6 +124,7 @@ const rootReducer = (state = initialState, action) => {
       delete state.users;
       delete state.posts;
       delete state.post;
+      delete state.error;
       return { ...state };
     }
 
@@ -343,6 +352,19 @@ const rootReducer = (state = initialState, action) => {
       state.post = action.payload.data;
       return state;
     }
+
+    //EDIT COMMENT
+    case EDIT_COMMENT_REQUEST: {
+      return state
+    }
+    case EDIT_COMMENT_SUCCESS: {
+      let index = state.posts.findIndex(post => post._id === action.payload.data._id);
+      state.post = action.payload.data;
+      state.posts[index] = action.payload.data;
+      return state;
+    }
+
+    
 
     default:
       return state;

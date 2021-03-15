@@ -36,6 +36,12 @@
                 font-size: 12.5px;
                 color: gray
             }
+
+            img {
+                &:nth-last-of-type(1) {
+                    top: 55px;
+                }
+            }
         }
 
         .text {
@@ -60,6 +66,7 @@
 
         .commentText,
         .text {
+
             img {
                 position: absolute;
                 top: -5px;
