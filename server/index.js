@@ -20,6 +20,7 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     const db = client.db("social-media-app");
     const usersCollection = db.collection("users");
     const postsCollection = db.collection("posts");
+    const studentsCollection = db.collection("students");
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json())
@@ -35,13 +36,13 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     /////////////////
 
     //LOGGING
-    app.post("/user/login", async(req, res) => {
+    app.get("/user/login", async(req, res) => {
       let user = await usersCollection.findOne(req.query);
       if(user) {
         console.log('Logged in')
         res.json(user)
       } else {
-        return res.status(404).send("That user does not exists" );
+        res.status(404).json({"text": "Wrong username or password"});
       }
     });
 
@@ -49,7 +50,7 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     app.post("/user/register", async (req, res) => {
       let user = await usersCollection.findOne({ login: req.body.login });
       if (user) {
-        return res.status(400).send("That user already exists" );
+        res.status(400).json({"text": "This username already exists"});
       } else {
         usersCollection
           .insertOne(req.body)
@@ -69,13 +70,10 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     // GET USER INFO BY USERID
     app.get('/user', async(req,res) => {
       const {userId} = req.query;
-      console.log(userId)
       let user = await usersCollection.findOne({_id: ObjectId(userId)});
       if(user) {
-        console.log('User found')
         res.json(user)
       } else {
-        console.log('user not found')
         return res.status(404).send("That user does not exists" );
       }
     })
@@ -144,7 +142,8 @@ MongoClient.connect(process.env.NODE_DATABASE, {
           }}},
           {returnOriginal: false, upsert: true})
         .then(response => console.log('Send message'))
-        .catch(err =>  console.log(err))
+        .catch(err =>  console.log(err));
+
       await usersCollection
           .findOneAndUpdate(
             {_id: ObjectId(senderId)},
@@ -249,7 +248,6 @@ MongoClient.connect(process.env.NODE_DATABASE, {
         { $inc: { "likes" : 1 } , $push: {"likedBy" : userId}},
         {returnOriginal: false, upsert: true})
         .then((response) => {
-          console.log(response.value)
           res.json(response.value)
         })
         .catch(err => console.log(err))
@@ -279,11 +277,10 @@ MongoClient.connect(process.env.NODE_DATABASE, {
     //REMOVE COMMENT
     app.delete("/post/comment/delete", async(req,res) => {
       const {id, commentId} = req.query;
-      const comments = "comments";
       await postsCollection
         .findOneAndUpdate(
           {_id: ObjectId(id)},
-          {$pull: {[comments] :
+          {$pull: {"comments" :
             {id: ObjectId(commentId)}
           }},
             {returnOriginal: false, upsert: true}
@@ -292,6 +289,21 @@ MongoClient.connect(process.env.NODE_DATABASE, {
             res.json(response.value)
           })
           .catch(err => console.log(err))
+    })
+
+    //EDIT COMMENT
+    app.put("/post/comment/edit", async(req,res) => {
+      const {id,commentId, text, date} = req.query;
+      await postsCollection
+        .findOneAndUpdate(
+          {_id: ObjectId(id), "comments.id": ObjectId(commentId)},
+          {$set: {"comments.$.text": text, "comments.$.date": date}},
+          {returnOriginal: false, upsert: true}
+        )
+        .then(response => {
+          res.json(response.value);
+        })
+        .catch(err => console.log(err))
     })
 
     // GET SINGLE POST
