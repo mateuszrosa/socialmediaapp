@@ -273,7 +273,7 @@ const rootReducer = (state = initialState, action) => {
     case FETCH_USER_POSTS_SUCCESS: {
       return {
         ...state,
-        posts: action.payload.data
+        posts: action.payload.data.reverse()
       }
     }
 
