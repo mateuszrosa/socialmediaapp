@@ -75,8 +75,8 @@ const rootReducer = (state = initialState, action) => {
     case LOGIN_SUCCES: {
       delete state.error;
       return {
-         ...state,
-         user: {
+        ...state,
+        user: {
           userId: action.payload.data._id,
           login: action.payload.data.login,
           email: action.payload.data.email,
@@ -170,12 +170,12 @@ const rootReducer = (state = initialState, action) => {
           ...action.payload.data.friendUser
         },
         user: {
-            userId: action.payload.data.user._id,
-            login: action.payload.data.user.login,
-            email: action.payload.data.user.email,
-            friends: action.payload.data.user.friends,
-            inbox: action.payload.data.user.inbox,
-            sent: action.payload.data.user.sent
+          userId: action.payload.data.user._id,
+          login: action.payload.data.user.login,
+          email: action.payload.data.user.email,
+          friends: action.payload.data.user.friends,
+          inbox: action.payload.data.user.inbox,
+          sent: action.payload.data.user.sent
         }
       }
     }
@@ -210,17 +210,17 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
     case SEND_MESSAGE_SUCCESS: {
-        return {
-          ...state,
-          user: {
-            userId: action.payload.data._id,
-            login: action.payload.data.login,
-            email: action.payload.data.email,
-            friends: action.payload.data.friends,
-            inbox: action.payload.data.inbox,
-            sent: action.payload.data.sent
-          }
+      return {
+        ...state,
+        user: {
+          userId: action.payload.data._id,
+          login: action.payload.data.login,
+          email: action.payload.data.email,
+          friends: action.payload.data.friends,
+          inbox: action.payload.data.inbox,
+          sent: action.payload.data.sent
         }
+      }
     }
 
     case REMOVE_MESSAGE_REQUEST: {
@@ -251,7 +251,7 @@ const rootReducer = (state = initialState, action) => {
     case FETCH_POSTS_SUCCESS: {
       return {
         ...state,
-        posts: [...action.payload.data]
+        posts: [...action.payload.data.reverse()]
       }
     }
 
@@ -278,13 +278,13 @@ const rootReducer = (state = initialState, action) => {
     }
 
     //ADD POST
-    case ADD_POST_REQUEST:{
+    case ADD_POST_REQUEST: {
       return state;
     }
-    case ADD_POST_SUCCESS:{
+    case ADD_POST_SUCCESS: {
       return {
         ...state,
-        posts: [...state.posts, action.payload.data],
+        posts: [action.payload.data, ...state.posts],
       };
     }
     case ADD_POST_FAILURE: {
@@ -361,7 +361,7 @@ const rootReducer = (state = initialState, action) => {
       return state;
     }
 
-    
+
 
     default:
       return state;

@@ -9,9 +9,9 @@ const Messages = () => {
 
     const { inbox = [], sent = []
     } = useSelector(state => ({
-            inbox: state.user.inbox,
-            sent: state.user.sent
-        })
+        inbox: state.user.inbox.reverse(),
+        sent: state.user.sent.reverse()
+    })
     );
 
 
@@ -29,7 +29,7 @@ const Messages = () => {
             btn.style.textDecoration = "none";
             btn.style.fontWeight = "400";
         });
-        if(e.target.textContent === "Inbox") {
+        if (e.target.textContent === "Inbox") {
             e.target.style.textDecoration = "underline";
             e.target.style.fontWeight = "800";
             setWhichBox(false)
@@ -48,32 +48,32 @@ const Messages = () => {
                 <h1>Messages</h1>
                 <button onClick={changeBox}>Inbox</button>
                 <button onClick={changeBox}>Sent</button>
-                {box ? 
-                sent.map(({ senderId, senderName, text, date, id, to }) => {
-                    return <Message
-                        id={id}
-                        key={id}
-                        senderId={senderId}
-                        senderName={senderName}
-                        text={text}
-                        date={date}
-                        sendMessage={sendMessage}
-                        to={to}
-                        sent
-                    />
-                }):
-                inbox.map(({ senderId, senderName, text, date, id, to }) => {
-                    return <Message
-                        id={id}
-                        key={id}
-                        senderId={senderId}
-                        senderName={senderName}
-                        text={text}
-                        date={date}
-                        sendMessage={sendMessage}
-                        to={to}
-                    />
-                })}
+                {box ?
+                    sent.map(({ senderId, senderName, text, date, id, to }) => {
+                        return <Message
+                            id={id}
+                            key={id}
+                            senderId={senderId}
+                            senderName={senderName}
+                            text={text}
+                            date={date}
+                            sendMessage={sendMessage}
+                            to={to}
+                            sent
+                        />
+                    }) :
+                    inbox.map(({ senderId, senderName, text, date, id, to }) => {
+                        return <Message
+                            id={id}
+                            key={id}
+                            senderId={senderId}
+                            senderName={senderName}
+                            text={text}
+                            date={date}
+                            sendMessage={sendMessage}
+                            to={to}
+                        />
+                    })}
             </div>
             <div data-tip="write message" onClick={sendMessage} className={styles.circle}></div>
         </div>
