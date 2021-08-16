@@ -5,12 +5,11 @@ import { NavLink } from "react-router-dom";
 import { logout } from "actions";
 
 const Sidebar = () => {
-
   const dispatch = useDispatch();
-  const { userId, login } = useSelector(state => ({
-    userId: state.user.userId,
-    login: state.user.login
-  }));
+  const {userId, login} = useSelector(({userReducer}) => ({
+    userId: userReducer.user.userId,
+    login: userReducer.user.login
+  }))
 
   return (
     <div className={styles.menu}>

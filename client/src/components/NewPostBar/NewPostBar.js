@@ -11,9 +11,9 @@ const NewPostBar = ({ hideBar, id, commentId, edit, comment, post, message, to }
 
     const dispatch = useDispatch();
     const [valid, setValid] = useState(false);
-    const { senderId, senderName } = useSelector(state => ({
-        senderId: state.user.userId,
-        senderName: state.user.login
+    const { senderId, senderName } = useSelector(({ userReducer }) => ({
+        senderId: userReducer.user.userId,
+        senderName: userReducer.user.login
     }));
 
     const formik = useFormik({
@@ -27,9 +27,9 @@ const NewPostBar = ({ hideBar, id, commentId, edit, comment, post, message, to }
                 if (message) {
                     dispatch(sendMessage(senderId, senderName, text, to));
                 } else {
-                    if(edit) {
+                    if (edit) {
                         dispatch(editPostAction(id, text))
-                    } else if(comment) {
+                    } else if (comment) {
                         dispatch(editCommentAction(id, commentId, text));
                     } else {
                         dispatch(addPostAction(text));

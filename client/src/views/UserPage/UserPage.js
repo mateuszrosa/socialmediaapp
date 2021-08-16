@@ -8,9 +8,9 @@ import styles from "./UserPages.module.scss";
 const UserPage = ({ isLogged }) => {
 
   const dispatch = useDispatch();
-  const { userId, error } = useSelector(state => ({
-    userId: state.user.userId,
-    error: state.error
+  const { userId, error } = useSelector(({userReducer}) => ({
+    userId: userReducer.user.userId,
+    error: userReducer.error
   }));
 
   const formik = useFormik({

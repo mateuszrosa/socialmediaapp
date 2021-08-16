@@ -17,16 +17,17 @@ import styles from './Post.module.scss';
 const Post = (props) => {
 
     const lastLocation = useLastLocation();
-    const { date, id, likedBy = [], likes, login, text, detailPost, comments=[], commentId, commentPost, userId } = props;
+    const { date, id, likedBy = [], likes, login, text, detailPost, comments = [], commentId, commentPost, userId } = props;
     const [isClosed, setClosed] = useState(false);
     const [isEdited, setEdited] = useState(false);
     const [isEditedComment, setEditedComment] = useState(false);
     const dispatch = useDispatch();
+
     const { post = [], user, loggedUserId } =
-        useSelector(state => ({
-            post: state.post,
-            user: state.user.login,
-            loggedUserId: state.user.userId
+        useSelector(({ userReducer, testReducer }) => ({
+            post: testReducer.post,
+            user: userReducer.user.login,
+            loggedUserId: userReducer.user.userId
         }));
 
     useEffect(() => {
@@ -49,7 +50,7 @@ const Post = (props) => {
 
     const removePost = () => {
         dispatch(removePostAction(id));
-        if(detailPost) {
+        if (detailPost) {
             setClosed(true)
         }
     }
@@ -59,15 +60,15 @@ const Post = (props) => {
     }
 
     if (isClosed) {
-      return <Redirect to={lastLocation.pathname} />
+        return <Redirect to={lastLocation.pathname} />
     }
 
     const previous = lastLocation ? lastLocation.pathname : "/";
 
     return (
         <>
-           {isEdited && <NewPostBar id={id} hideBar={editPost} edit/>}
-           {isEditedComment && <NewPostBar id={id} commentId={commentId} hideBar={editComment} comment/>}
+            {isEdited && <NewPostBar id={id} hideBar={editPost} edit />}
+            {isEditedComment && <NewPostBar id={id} commentId={commentId} hideBar={editComment} comment />}
             <div className={styles.post}>
                 <ReactTooltip />
                 <div className={styles.img}></div>
@@ -77,9 +78,9 @@ const Post = (props) => {
                             <h3>{login}</h3>
                             <span>{date}</span>
                             <p>{text}</p>
-                            {(user === login ||user === post.login) &&
-                                <img onClick={removeComment} data-tip="close" src={close}alt="" />}
-                            {user === login && 
+                            {(user === login || user === post.login) &&
+                                <img onClick={removeComment} data-tip="close" src={close} alt="" />}
+                            {user === login &&
                                 <img data-tip="edit" onClick={editComment} src={edit} alt="" />}
                         </div>
                     </div>
@@ -88,7 +89,7 @@ const Post = (props) => {
                         <div className={styles.text}>
                             {detailPost ?
                                 <Link to={previous}>
-                                    <img data-tip="close" src={close}alt="" />
+                                    <img data-tip="close" src={close} alt="" />
                                 </Link>
                                 :
                                 <Link to={`/post/details/${id}`}>
@@ -103,9 +104,9 @@ const Post = (props) => {
                             <button>
                                 {
                                     likedBy.includes(loggedUserId) ?
-                                    <img data-tip="liked" src={blackheart} alt="" />
-                                    :
-                                    <img data-tip="add like" onClick={addLikes} src={heart} alt="" />
+                                        <img data-tip="liked" src={blackheart} alt="" />
+                                        :
+                                        <img data-tip="add like" onClick={addLikes} src={heart} alt="" />
                                 }
                             </button>
                             <span>{likes} Likes</span>
@@ -113,14 +114,14 @@ const Post = (props) => {
                                 <img src={comment} alt="" />
                             </button>
                             <span>{comments.length} Comments</span>
-                            {user === login && 
+                            {user === login &&
                                 <button className={styles.actions}>
                                     <img data-tip="edit" onClick={editPost} src={edit} alt="" />
                                 </button>}
-                            {user === login && 
-                            <button className={styles.actions}>
-                                <img data-tip="remove" onClick={removePost} src={bin} alt="" />
-                            </button>}
+                            {user === login &&
+                                <button className={styles.actions}>
+                                    <img data-tip="remove" onClick={removePost} src={bin} alt="" />
+                                </button>}
                         </div>
                     </div>}
             </div>

@@ -13,10 +13,10 @@ const Profile = (props) => {
 
     const dispatch = useDispatch();
     let userId = props.match.params.id;
-    const { user = [], profileUser = [], posts = [] } = useSelector(state => ({
-        user: state.user,
-        profileUser: state.profileUser,
-        posts: state.posts
+    const { user = [], profileUser = [], posts = [] } = useSelector(({ userReducer, testReducer }) => ({
+        user: userReducer.user,
+        profileUser: userReducer.profileUser,
+        posts: testReducer.posts
     }));
     const [openMessage, setOpen] = useState(false);
     const sendMessage = (e) => {
@@ -48,27 +48,27 @@ const Profile = (props) => {
                         <h3>{email}</h3>
                         <p>Friends: <span>{friends.length}</span></p>
                     </div>
-                    {user.login !== login && 
-                    <>
-                    <ReactTooltip />
-                    <img 
-                        data-tip="add to friends" 
-                        className={friends.includes(user.userId) ? styles.friends : null} 
-                        onClick={addToFriends} 
-                        src={addFriend} 
-                        alt="" 
-                    />
-                    </>}
+                    {user.login !== login &&
+                        <>
+                            <ReactTooltip />
+                            <img
+                                data-tip="add to friends"
+                                className={friends.includes(user.userId) ? styles.friends : null}
+                                onClick={addToFriends}
+                                src={addFriend}
+                                alt=""
+                            />
+                        </>}
                     {friends.includes(user.userId) &&
-                    <>
-                    <ReactTooltip />
-                    <img  
-                        data-tip="send message" 
-                        onClick={sendMessage}
-                        src={message} 
-                        alt="" 
-                    />
-                    </>}
+                        <>
+                            <ReactTooltip />
+                            <img
+                                data-tip="send message"
+                                onClick={sendMessage}
+                                src={message}
+                                alt=""
+                            />
+                        </>}
                 </div>
                 <div className={styles.posts}>
                     {posts.map(({ text, login, _id: id, likes, likedBy, date, comments }) =>

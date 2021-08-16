@@ -8,9 +8,9 @@ import styles from './Messages.module.scss';
 const Messages = () => {
 
     const { inbox = [], sent = []
-    } = useSelector(state => ({
-        inbox: state.user.inbox.reverse(),
-        sent: state.user.sent.reverse()
+    } = useSelector(({ userReducer }) => ({
+        inbox: userReducer.user.inbox.reverse(),
+        sent: userReducer.user.sent.reverse()
     })
     );
 

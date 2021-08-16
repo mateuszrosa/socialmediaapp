@@ -12,9 +12,9 @@ const Friend = ({ userId }) => {
 
     const dispatch = useDispatch()
 
-    const { users = [], user } = useSelector(state => ({
-        users: state.users,
-        user: state.user
+    const { users = [], user } = useSelector(({ userReducer }) => ({
+        users: userReducer.users,
+        user: userReducer.user
     }))
 
     const [friend, setFriend] = useState([]);

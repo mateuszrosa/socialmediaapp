@@ -7,9 +7,9 @@ import logo from "../../assets/logo.png";
 
 const Header = (e) => {
 
-  const {user, users} = useSelector(state => ({
-    user: state.user,
-    users: state.users
+  const {user, users} = useSelector(({userReducer}) => ({
+    user: userReducer.user,
+    users: userReducer.users
   }))
   const [nicks, setNicks] = useState([]);
   const [redirect, setRedirect] = useState(false);
