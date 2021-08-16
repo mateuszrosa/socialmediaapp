@@ -9,8 +9,8 @@ const DetailsPost = (props) => {
 
     const dispatch = useDispatch()
     const { post = [], userId, user } =
-        useSelector(({ userReducer, testReducer }) => ({
-            post: testReducer.post,
+        useSelector(({ userReducer, postsReducer }) => ({
+            post: postsReducer.post,
             userId: userReducer.user.userId,
             user: userReducer.user.login,
         }));

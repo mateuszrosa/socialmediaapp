@@ -13,10 +13,10 @@ const Profile = (props) => {
 
     const dispatch = useDispatch();
     let userId = props.match.params.id;
-    const { user = [], profileUser = [], posts = [] } = useSelector(({ userReducer, testReducer }) => ({
+    const { user = [], profileUser = [], posts = [] } = useSelector(({ userReducer, postsReducer }) => ({
         user: userReducer.user,
         profileUser: userReducer.profileUser,
-        posts: testReducer.posts
+        posts: postsReducer.posts
     }));
     const [openMessage, setOpen] = useState(false);
     const sendMessage = (e) => {

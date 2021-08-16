@@ -9,9 +9,9 @@ import { Redirect } from "react-router-dom";
 const Page = () => {
 
   const { userId, posts = [] } =
-    useSelector(({ userReducer, testReducer }) => ({
+    useSelector(({ userReducer, postsReducer }) => ({
       userId: userReducer.user.userId,
-      posts: testReducer.posts,
+      posts: postsReducer.posts,
     }));
 
   const dispatch = useDispatch();

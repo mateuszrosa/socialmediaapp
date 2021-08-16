@@ -17,7 +17,13 @@ import {
     ADD_FRIEND_FAILURE,
     REMOVE_FRIEND_REQUEST,
     REMOVE_FRIEND_SUCCESS,
-    REMOVE_FRIEND_FAILURE
+    REMOVE_FRIEND_FAILURE,
+    SEND_MESSAGE_REQUEST,
+    SEND_MESSAGE_SUCCESS,
+    SEND_MESSAGE_FAILURE,
+    REMOVE_MESSAGE_REQUEST,
+    REMOVE_MESSAGE_SUCCESS,
+    REMOVE_MESSAGE_FAILURE
 } from 'actions';
 
 const initialState = {
@@ -156,7 +162,41 @@ const userReducer = (state = initialState, action) => {
                     sent: action.payload.data.user.sent
                 }
             }
+        }//SEND MESSAGE
+        case SEND_MESSAGE_REQUEST: {
+            return state;
         }
+        case SEND_MESSAGE_SUCCESS: {
+            return {
+                ...state,
+                user: {
+                    userId: action.payload.data._id,
+                    login: action.payload.data.login,
+                    email: action.payload.data.email,
+                    friends: action.payload.data.friends,
+                    inbox: action.payload.data.inbox,
+                    sent: action.payload.data.sent
+                }
+            }
+        }
+
+        case REMOVE_MESSAGE_REQUEST: {
+            return state;
+        }
+        case REMOVE_MESSAGE_SUCCESS: {
+            return {
+                ...state,
+                user: {
+                    userId: action.payload.data._id,
+                    login: action.payload.data.login,
+                    email: action.payload.data.email,
+                    friends: action.payload.data.friends,
+                    inbox: action.payload.data.inbox,
+                    sent: action.payload.data.sent
+                }
+            }
+        }
+
         default:
             return state;
     }

@@ -24,8 +24,8 @@ const Post = (props) => {
     const dispatch = useDispatch();
 
     const { post = [], user, loggedUserId } =
-        useSelector(({ userReducer, testReducer }) => ({
-            post: testReducer.post,
+        useSelector(({ userReducer, postsReducer }) => ({
+            post: postsReducer.post,
             user: userReducer.user.login,
             loggedUserId: userReducer.user.userId
         }));
