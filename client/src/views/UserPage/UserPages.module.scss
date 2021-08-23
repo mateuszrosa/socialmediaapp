@@ -6,12 +6,13 @@
     align-items: center;
     z-index: 1;
     background-color: #ddd;
+    padding-top: 120px;
 
     .login {
         position: relative;
-        height: 50%;
-        max-width: 650px;
-        width: 50%;
+        height: 70%;
+        max-width: 500px;
+        width: 90%;
         border: 3px solid gray;
         border-radius: 5px;
         display: flex;
@@ -20,6 +21,11 @@
         align-items: center;
         padding: 30px;
         background-color: rgb(236, 230, 230);
+
+        @media (min-width: 481px) {
+            width: 60%;
+            height: 50%;
+        }
 
         h1 {
             font-size: 45px;
@@ -56,6 +62,7 @@
             input {
                 margin-bottom: 7.5px;
                 width: 60%;
+                font-size: 20px;
 
                 &[type="submit"] {
                     width: 50%;
