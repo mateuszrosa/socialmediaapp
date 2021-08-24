@@ -10,9 +10,9 @@
 
     .login {
         position: relative;
-        height: 70%;
+        height: 60%;
         max-width: 500px;
-        width: 90%;
+        width: 80%;
         border: 3px solid gray;
         border-radius: 5px;
         display: flex;
@@ -28,9 +28,13 @@
         }
 
         h1 {
-            font-size: 45px;
+            font-size: 35px;
             position: absolute;
             top: 10px;
+
+            @media (min-width: 720px) {
+                font-size: 45px;
+            }
         }
 
         h3 {
