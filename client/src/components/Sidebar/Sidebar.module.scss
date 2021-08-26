@@ -2,6 +2,7 @@
        height: 100%;
        width: 70px;
        position: fixed;
+       z-index: 5;
 
        @media (min-width: 481px) {
            width: 150px;

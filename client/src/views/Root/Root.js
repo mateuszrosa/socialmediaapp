@@ -15,35 +15,35 @@ import DetailsPost from 'views/DetailsPost/DetailsPost';
 
 const Root = () => {
   let isLogged = false;
-  return ( 
+  return (
     <Provider store={store}>
       <Router basename={process.env.PUBLIC_URL}>
         <LastLocationProvider>
-        <Sidebar />
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Page />
-          </Route>
-          <Route exact path="/profile/:id">
-            <Profile />
-          </Route>
-          <Route path="/friends">
-            <Friends />
-          </Route>
-          <Route path="/messages">
-            <Messages />
-          </Route>
-          <Route path="/login">
-            <UserPage isLogged={!isLogged} />
-          </Route>
-          <Route path="/register">
-            <UserPage isLogged={isLogged} />
-          </Route>
-          <Route exact path="/post/details/:id">
-            <DetailsPost />
-          </Route>
-        </Switch>
+          <Sidebar />
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <Page />
+            </Route>
+            <Route exact path="/profile/:id">
+              <Profile />
+            </Route>
+            <Route path="/friends">
+              <Friends />
+            </Route>
+            <Route path="/messages">
+              <Messages />
+            </Route>
+            <Route path="/login">
+              <UserPage isLogged={!isLogged} />
+            </Route>
+            <Route path="/register">
+              <UserPage isLogged={isLogged} />
+            </Route>
+            <Route exact path="/post/details/:id">
+              <DetailsPost />
+            </Route>
+          </Switch>
         </LastLocationProvider>
       </Router>
     </Provider>
