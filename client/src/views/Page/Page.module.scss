@@ -62,6 +62,10 @@
         justify-content: center;
         align-items: center;
 
+        @media (min-width: 768px) {
+            width: 400px;
+        }
+
         @media (min-width: 1024px) {
             width: 600px;
         }
@@ -69,12 +73,21 @@
         input {
             font-size: 17px;
 
+            @media (min-width: 768px) {
+                font-size: 23px;
+            }
+
             @media (min-width: 1024px) {
                 font-size: 25px;
             }
 
             &[type="text"] {
                 width: 180px;
+
+                @media (min-width: 768px) {
+                    width: 240px;
+                    margin-right: 10px;
+                }
 
                 @media (min-width: 1024px) {
                     width: 350px;

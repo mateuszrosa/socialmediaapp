@@ -11,6 +11,10 @@
     border-radius: 10px;
     box-shadow: 5px 5px 2.5px 0px rgba(168, 161, 168, 1);
 
+    @media (min-width: 768px) {
+        width: 60%;
+    }
+
     @media (min-width: 1024px) {
         width: auto;
     }
@@ -28,7 +32,7 @@
             width: 40px;
             height: 40px;
 
-            @media (min-width: 1024px) {
+            @media (min-width: 768px) {
                 width: 80px;
                 height: 80px;
             }
@@ -41,6 +45,10 @@
             h1 {
                 font-size: 25px;
 
+                @media (min-width: 768px) {
+                    font-size: 30px;
+                }
+
                 @media (min-width: 1024px) {
                     font-size: 35px;
                 }
@@ -48,6 +56,10 @@
 
             h3 {
                 font-size: 14.5px;
+
+                @media (min-width: 768px) {
+                    font-size: 20px;
+                }
 
                 @media (min-width: 1024px) {
                     font-size: 25px;
@@ -81,7 +93,7 @@
             height: 40px;
             width: 40px;
 
-            @media (min-width: 1024px) {
+            @media (min-width: 768px) {
                 height: 55px;
                 width: 55px;
             }

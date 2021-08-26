@@ -9,7 +9,7 @@ header {
     background: rgb(227, 211, 237);
     background: linear-gradient(90deg, rgba(227, 211, 237, 1) 0%, rgba(221, 221, 221, 1) 50%, rgba(134, 131, 127, 1) 100%);
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
         padding-left: 150px;
         height: 120px;
     }
