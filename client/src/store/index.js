@@ -5,7 +5,7 @@ import rootReducer from "../reducers";
 import { loadState, saveState } from "./sessionStorage";
 
 const persistedState = loadState();
-const store = createStore(
+export const store = createStore(
   rootReducer,
   persistedState,
   composeWithDevTools(
@@ -17,5 +17,3 @@ const store = createStore(
 store.subscribe(() => {
   saveState(store.getState());
 })
-
-export default store;

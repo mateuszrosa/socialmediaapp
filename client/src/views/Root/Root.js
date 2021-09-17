@@ -2,8 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LastLocationProvider } from 'react-router-last-location';
 import { Provider } from "react-redux";
-import store from "store";
+import { store } from "store";
+
 import "./index.css";
+
 import { Sidebar } from "components/Sidebar/Sidebar";
 import { Header } from "components/Header/Header";
 import { Page } from "views/Page/Page";
