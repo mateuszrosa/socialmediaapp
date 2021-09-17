@@ -33,7 +33,7 @@ import {
 
 const initialState = {};
 
-const postsReducer = (state = initialState, action) => {
+export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         //FETCH POSTS
         case FETCH_POSTS_REQUEST: {
@@ -154,5 +154,3 @@ const postsReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export default postsReducer;

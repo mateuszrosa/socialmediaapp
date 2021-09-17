@@ -6,7 +6,7 @@ import close from 'assets/close-fat.svg';
 import { useFormik } from "formik";
 import { addPost as addPostAction, editPost as editPostAction, editComment as editCommentAction, sendMessage } from 'actions';
 
-const NewPostBar = ({ hideBar, id, commentId, edit, comment, post, message, to }) => {
+export const NewPostBar = ({ hideBar, id, commentId, edit, comment, post, message, to }) => {
 
 
     const dispatch = useDispatch();
@@ -79,5 +79,3 @@ const NewPostBar = ({ hideBar, id, commentId, edit, comment, post, message, to }
         </div>
     );
 }
-
-export default NewPostBar;

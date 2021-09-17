@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Post from 'components/Post/Post';
-import NewPostBar from 'components/NewPostBar/NewPostBar';
+import { Post } from 'components/Post/Post';
+import { NewPostBar } from 'components/NewPostBar/NewPostBar';
 import ReactTooltip from 'react-tooltip';
 import { fetchUserProfile, fetchUsersPosts, addToFriends as addToFriendsAction } from 'actions';
 import { withRouter } from 'react-router-dom';
@@ -9,7 +9,8 @@ import addFriend from 'assets/add.svg';
 import message from 'assets/message.svg'
 import styles from './Profile.module.scss';
 
-const Profile = (props) => {
+
+export const Profile = withRouter((props) => {
 
     const dispatch = useDispatch();
     let userId = props.match.params.id;
@@ -88,6 +89,4 @@ const Profile = (props) => {
             </div>
         </div>
     );
-}
-
-export default withRouter(Profile);
+});

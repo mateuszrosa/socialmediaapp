@@ -5,10 +5,10 @@ import { useFormik } from "formik";
 import { Link, Redirect } from "react-router-dom";
 import styles from "./UserPages.module.scss";
 
-const UserPage = ({ isLogged }) => {
+export const UserPage = ({ isLogged }) => {
 
   const dispatch = useDispatch();
-  const { userId, error } = useSelector(({userReducer}) => ({
+  const { userId, error } = useSelector(({ userReducer }) => ({
     userId: userReducer.user.userId,
     error: userReducer.error
   }));
@@ -77,15 +77,13 @@ const UserPage = ({ isLogged }) => {
           {isLogged ? (
             <input type="submit" value="Log In" />
           ) : (
-              <input type="submit" value="Register" />
-            )}
-          {isLogged ? 
-          <Link to="/register">I want my account!</Link> 
-          : <Link to="/login">I want to log in!</Link> }
+            <input type="submit" value="Register" />
+          )}
+          {isLogged ?
+            <Link to="/register">I want my account!</Link>
+            : <Link to="/login">I want to log in!</Link>}
         </form>
       </div>
     </div>
   );
 };
-
-export default UserPage;

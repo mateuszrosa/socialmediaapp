@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import styles from "./Header.module.scss";
 import logo from "../../assets/logo.png";
 
-const Header = (e) => {
+export const Header = (e) => {
 
   const { user, users } = useSelector(({ userReducer }) => ({
     user: userReducer.user,
@@ -73,5 +73,3 @@ const Header = (e) => {
     </>
   );
 };
-
-export default Header;

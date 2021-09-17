@@ -4,16 +4,16 @@ import { LastLocationProvider } from 'react-router-last-location';
 import { Provider } from "react-redux";
 import store from "store";
 import "./index.css";
-import Sidebar from "components/Sidebar/Sidebar";
-import Header from "components/Header/Header";
-import Page from "views/Page/Page";
-import UserPage from "views/UserPage/UserPage";
-import Profile from "views/Profile/Profile";
-import Friends from "views/Friends/Friends";
-import Messages from 'views/Messages/Messages';
-import DetailsPost from 'views/DetailsPost/DetailsPost';
+import { Sidebar } from "components/Sidebar/Sidebar";
+import { Header } from "components/Header/Header";
+import { Page } from "views/Page/Page";
+import { UserPage } from "views/UserPage/UserPage";
+import { Profile } from "views/Profile/Profile";
+import { Friends } from "views/Friends/Friends";
+import { Messages } from 'views/Messages/Messages';
+import { DetailsPost } from 'views/DetailsPost/DetailsPost';
 
-const Root = () => {
+export const Root = () => {
   let isLogged = false;
   return (
     <Provider store={store}>
@@ -49,5 +49,3 @@ const Root = () => {
     </Provider>
   );
 }
-
-export default Root;

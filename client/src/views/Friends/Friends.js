@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
-import Friend from 'components/Friend/Friend';
+import { Friend } from 'components/Friend/Friend';
 import styles from "./Friends.module.scss";
 
-const Friends = () => {
+export const Friends = () => {
 
   const { friends = [] } = useSelector(({ userReducer }) => ({
     friends: userReducer.user.friends,
@@ -15,5 +15,3 @@ const Friends = () => {
     </div>
   );
 };
-
-export default Friends;

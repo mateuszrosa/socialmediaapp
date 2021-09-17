@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { useSelector } from 'react-redux';
-import Message from 'components/Message/Message';
-import NewPostBar from 'components/NewPostBar/NewPostBar';
+import { Message } from 'components/Message/Message';
+import { NewPostBar } from 'components/NewPostBar/NewPostBar';
 import styles from './Messages.module.scss';
 
-const Messages = () => {
+export const Messages = () => {
 
     const { inbox = [], sent = []
     } = useSelector(({ userReducer }) => ({
@@ -79,5 +79,3 @@ const Messages = () => {
         </div>
     );
 }
-
-export default Messages;

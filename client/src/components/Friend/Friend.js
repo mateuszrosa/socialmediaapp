@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NewPostBar from 'components/NewPostBar/NewPostBar';
+import { NewPostBar } from 'components/NewPostBar/NewPostBar';
 import ReactTooltip from 'react-tooltip';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromFriends } from 'actions';
@@ -8,7 +8,7 @@ import styles from './Friend.module.scss';
 import message from 'assets/message.svg';
 import close from 'assets/close-fat.svg';
 
-const Friend = ({ userId }) => {
+export const Friend = ({ userId }) => {
 
     const dispatch = useDispatch()
 
@@ -56,6 +56,4 @@ const Friend = ({ userId }) => {
             </div>
         </>
     );
-}
-
-export default Friend;
+};

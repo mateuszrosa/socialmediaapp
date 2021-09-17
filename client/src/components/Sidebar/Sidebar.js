@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "actions";
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const dispatch = useDispatch();
   const { userId, login } = useSelector(({ userReducer }) => ({
     userId: userReducer.user.userId,
@@ -35,5 +35,3 @@ const Sidebar = () => {
     </>
   );
 };
-
-export default Sidebar;

@@ -7,7 +7,7 @@ import styles from './Message.module.scss';
 import close from 'assets/close-fat.svg';
 import message from 'assets/message.svg';
 
-const Message = ({ id, sendMessage, senderId, senderName, date, text, to, sent }) => {
+export const Message = ({ id, sendMessage, senderId, senderName, date, text, to, sent }) => {
 
 
     const dispatch = useDispatch()
@@ -39,5 +39,3 @@ const Message = ({ id, sendMessage, senderId, senderName, date, text, to, sent }
             </div>
         </div>);
 }
-
-export default Message;

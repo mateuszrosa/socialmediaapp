@@ -2,10 +2,10 @@ import React from 'react';
 import { fetchPosts, addComment } from 'actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from "formik";
-import Post from 'components/Post/Post';
+import { Post } from 'components/Post/Post';
 import styles from './DetailsPost.module.scss';
 
-const DetailsPost = (props) => {
+export const DetailsPost = (props) => {
 
     const dispatch = useDispatch()
     const { post = [], userId, user } =
@@ -74,5 +74,3 @@ const DetailsPost = (props) => {
         </div>
     );
 }
-
-export default DetailsPost;

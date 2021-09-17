@@ -3,7 +3,7 @@ import { Redirect, withRouter, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPost, addLikes as addLikesAction, removePost as removePostAction, removeComment as removeCommentAction } from 'actions';
 import { useLastLocation } from 'react-router-last-location';
-import NewPostBar from 'components/NewPostBar/NewPostBar'
+import { NewPostBar } from 'components/NewPostBar/NewPostBar'
 import ReactTooltip from 'react-tooltip';
 import heart from 'assets/heart-thin.svg';
 import blackheart from 'assets/heart-black.svg';
@@ -14,7 +14,7 @@ import edit from 'assets/edit.svg';
 import close from 'assets/close-fat.svg'
 import styles from './Post.module.scss';
 
-const Post = (props) => {
+export const Post = withRouter((props) => {
 
     const lastLocation = useLastLocation();
     const { date, id, likedBy = [], likes, login, text, detailPost, comments = [], commentId, commentPost, userId } = props;
@@ -127,6 +127,4 @@ const Post = (props) => {
             </div>
         </>
     );
-}
-
-export default withRouter(Post);
+});

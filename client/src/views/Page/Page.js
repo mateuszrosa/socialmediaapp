@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./Page.module.scss";
-import NewPostBar from 'components/NewPostBar/NewPostBar';
-import Post from 'components/Post/Post';
+import { NewPostBar } from 'components/NewPostBar/NewPostBar';
+import { Post } from 'components/Post/Post';
 import { fetchPosts, fetchUsers } from 'actions'
 import { Redirect } from "react-router-dom";
 
-const Page = () => {
+export const Page = () => {
 
   const { userId, posts = [] } =
     useSelector(({ userReducer, postsReducer }) => ({
@@ -21,7 +21,7 @@ const Page = () => {
       dispatch(fetchPosts());
       dispatch(fetchUsers())
     }
-  }, []);
+  }, [userId]);
 
   const [isVisible, setVisible] = useState(false);
 
@@ -63,5 +63,3 @@ const Page = () => {
     </div>
   );
 };
-
-export default Page;
