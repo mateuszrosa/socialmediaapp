@@ -58,7 +58,7 @@ export const userReducer = (state = initialState, action) => {
 
         //REGISTER
         case REGISTER_REQUEST: {
-            return;
+            return state;
         }
         case REGISTER_SUCCES: {
             delete state.error;
@@ -81,6 +81,7 @@ export const userReducer = (state = initialState, action) => {
         //LOGOUT
         case LOGOUT: {
             state.user = {};
+            state.profileUser = {};
             delete state.users;
             delete state.posts;
             delete state.post;
@@ -122,7 +123,6 @@ export const userReducer = (state = initialState, action) => {
             return state;
         }
         case ADD_FRIEND_SUCCESS: {
-            console.log(action.payload.data)
             let index1 = state.users.findIndex(user => user._id === action.payload.data.user._id);
             state.users[index1] = action.payload.data.user;
             let index2 = state.users.findIndex(user => user._id === action.payload.data.friendUser._id);

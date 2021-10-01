@@ -1,141 +1,148 @@
 import pkg from 'mongodb';
 const { ObjectId } = pkg;
+import { User } from '../models';
 
 export const user = {
-    login: async (req, res, usersCollection) => {
-        let user = await usersCollection.findOne(req.query);
+    login: async (req, res) => {
+        let user = await User.findOne(req.query);
         if (user) {
             console.log('Logged in')
             res.json(user)
         } else {
-            res.status(404).json({ "text": "Wrong username or password" });
+            res.status(404).json({ "text": "Wrong username or password!" });
         }
     },
-    register: async (req, res, usersCollection) => {
-        let user = await usersCollection.findOne({ login: req.body.login });
-        if (user) {
+    register: async (req, res) => {
+        let isUser = await User.findOne({ login: req.body.login });
+        if (isUser) {
             res.status(400).json({ "text": "This username already exists" });
         } else {
-            usersCollection
-                .insertOne(req.body)
-                .then((response) => res.json(...response.ops));
+            const user = new User(req.body);
+            try {
+                const newUser = await user.save();
+                res.json(newUser);
+            } catch (e) {
+                console.log(e)
+            }
         }
     },
-    getUsers: (req, res, usersCollection) => {
-        usersCollection
-            .find()
-            .toArray()
-            .then(response => res.json(response))
-            .catch(err => console.log(err))
+    getUsers: async (req, res) => {
+        try {
+            const users = await User.find({});
+            res.json(users)
+        } catch (e) {
+            console.log(e);
+        }
     },
-    getUser: async (req, res, usersCollection) => {
+    getUser: async (req, res) => {
         const { userId } = req.query;
-        let user = await usersCollection.findOne({ _id: ObjectId(userId) });
+        let user = await User.findById(ObjectId(userId));
         if (user) {
             res.json(user)
         } else {
             return res.status(404).send("That user does not exists");
         }
     },
-    addFriend: async (req, res, usersCollection) => {
+    addFriend: async (req, res) => {
         const { userId, friendId } = req.query;
-        let user = await usersCollection
-            .findOneAndUpdate(
-                { _id: ObjectId(userId) },
+        let user = await User
+            .findByIdAndUpdate(
+                ObjectId(userId),
                 { $push: { "friends": friendId } },
                 { returnOriginal: false, upsert: true });
 
-        let friendUser = await usersCollection
-            .findOneAndUpdate(
-                { _id: ObjectId(friendId) },
+        let friendUser = await User
+            .findByIdAndUpdate(
+                ObjectId(friendId),
                 { $push: { "friends": userId } },
                 { returnOriginal: false, upsert: true });
-
-        console.log('Added to friends')
         res.json({
-            user: user.value,
-            friendUser: friendUser.value
+            user,
+            friendUser
         })
     },
-    removeFriend: async (req, res, usersCollection) => {
+    removeFriend: async (req, res) => {
         const { userId, friendId } = req.query;
-        let user = await usersCollection
-            .findOneAndUpdate(
-                { _id: ObjectId(userId) },
+        let user = await User
+            .findByIdAndUpdate(
+                ObjectId(userId),
                 { $pull: { "friends": friendId } },
                 { returnOriginal: false, upsert: true });
 
-        let friendUser = await usersCollection
-            .findOneAndUpdate(
-                { _id: ObjectId(friendId) },
+        let friendUser = await User
+            .findByIdAndUpdate(
+                ObjectId(friendId),
                 { $pull: { "friends": userId } },
                 { returnOriginal: false, upsert: true });
 
         if (user && friendUser) {
             res.json({
-                user: user.value,
-                friendUser: friendUser.value
+                user,
+                friendUser
             })
         } else {
             return res.status(404).send("These users does not exists");
         }
     },
-    sendMessage: async (req, res, usersCollection) => {
+    sendMessage: async (req, res) => {
         const { senderId, senderName, text, to, date } = req.query;
-        await usersCollection
-            .findOneAndUpdate(
-                { login: to },
-                {
-                    $push: {
-                        "inbox": {
-                            senderId,
-                            senderName,
-                            text,
-                            to,
-                            date,
-                            id: new ObjectId()
+        try {
+            await User
+                .findOneAndUpdate(
+                    { login: to },
+                    {
+                        $push: {
+                            "inbox": {
+                                senderId,
+                                senderName,
+                                text,
+                                to,
+                                date,
+                                id: new ObjectId()
+                            }
                         }
-                    }
-                },
-                { returnOriginal: false, upsert: true })
-            .then(response => console.log('Message sent'))
-            .catch(err => console.log(err));
+                    },
+                    { returnOriginal: false, upsert: true })
 
-        await usersCollection
-            .findOneAndUpdate(
-                { _id: ObjectId(senderId) },
-                {
-                    $push: {
-                        "sent": {
-                            senderId,
-                            senderName,
-                            text,
-                            to,
-                            date,
-                            id: new ObjectId()
+            const sender = await User
+                .findOneAndUpdate(
+                    { _id: ObjectId(senderId) },
+                    {
+                        $push: {
+                            "sent": {
+                                senderId,
+                                senderName,
+                                text,
+                                to,
+                                date,
+                                id: new ObjectId()
+                            }
                         }
-                    }
-                },
-                { returnOriginal: false, upsert: true })
-            .then(response => { res.json(response.value) })
-            .catch(err => console.log(err));
+                    },
+                    { returnOriginal: false, upsert: true })
+            res.json(sender);
+        } catch (e) {
+            console.log(e);
+        }
     },
-    removeMessage: async (req, res, usersCollection) => {
+    removeMessage: async (req, res) => {
         const { id, login, box } = req.query;
-        await usersCollection
-            .findOneAndUpdate(
-                { login },
-                {
-                    $pull: {
-                        [box]:
-                            { id: ObjectId(id) }
-                    }
-                },
-                { returnOriginal: false, upsert: true }
-            )
-            .then(response => {
-                res.json(response.value)
-            })
-            .catch(err => console.log(err))
+        try {
+            const user = await User
+                .findOneAndUpdate(
+                    { login },
+                    {
+                        $pull: {
+                            [box]:
+                                { id: ObjectId(id) }
+                        }
+                    },
+                    { returnOriginal: false, upsert: true }
+                )
+            res.json(user);
+        } catch (e) {
+            console.log(e);
+        }
+
     }
 }
