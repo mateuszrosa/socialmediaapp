@@ -21,7 +21,7 @@ export const Header = (e) => {
       arr = [];
     } else {
       for (const user of users) {
-        if (user.login.startsWith(e.target.value)) {
+        if (user.login.startsWith(e.target.value.toLowerCase())) {
           !arr.includes(user.login) && arr.push({ login: user.login, userId: user._id })
         }
       }
@@ -39,7 +39,7 @@ export const Header = (e) => {
     e.preventDefault();
     let input = e.target.querySelector('input');
     for (const user of users) {
-      if (user.login === input.value) {
+      if (user.login === input.value.toLowerCase()) {
         setId(user._id);
         setRedirect(true)
       }
