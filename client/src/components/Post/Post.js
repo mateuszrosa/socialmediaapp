@@ -79,7 +79,7 @@ export const Post = withRouter((props) => {
                             <span>{date}</span>
                             <p>{text}</p>
                             {(user === login || user === post.login) &&
-                                <img onClick={removeComment} data-tip="close" src={close} alt="" />}
+                                <img onClick={removeComment} data-tip="remove" src={bin} alt="" />}
                             {user === login &&
                                 <img data-tip="edit" onClick={editComment} src={edit} alt="" />}
                         </div>
