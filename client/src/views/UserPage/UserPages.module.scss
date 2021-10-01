@@ -10,7 +10,7 @@
 
     .login {
         position: relative;
-        height: 60%;
+        height: 80%;
         max-width: 500px;
         width: 80%;
         border: 3px solid gray;
@@ -21,6 +21,10 @@
         align-items: center;
         padding: 30px;
         background-color: rgb(236, 230, 230);
+
+        @media (min-height: 400px) {
+            height: 60%;
+        }
 
         @media (min-width: 481px) {
             width: 60%;
