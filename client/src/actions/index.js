@@ -69,7 +69,6 @@ export const REMOVE_MESSAGE_FAILURE = "REMOVE_MESSAGE_FAILURE";
 //REGISTER
 export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
-  console.log('object');
   dispatch({ type: REGISTER_REQUEST });
   return axios
     .post(`https://socialmediaapp-backend.herokuapp.com/user/register/?`, {
@@ -85,7 +84,7 @@ export const register = (login, password, email) => (dispatch) => {
       dispatch({ type: REGISTER_SUCCES, payload });
     })
     .catch(({ response }) => {
-      dispatch({ type: REGISTER_FAILURE, error: response.data.text });
+      dispatch({ type: REGISTER_FAILURE, error: response.data.message });
     });
 };
 

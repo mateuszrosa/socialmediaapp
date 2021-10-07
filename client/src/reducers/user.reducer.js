@@ -72,6 +72,7 @@ export const userReducer = (state = initialState, action) => {
             }
         }
         case REGISTER_FAILURE: {
+            console.log(action);
             return {
                 ...state,
                 error: action.error

@@ -4,26 +4,27 @@ import { User } from '../models';
 
 export const user = {
     login: async (req, res) => {
-        let user = await User.findOne(req.query);
-        if (user) {
-            console.log('Logged in')
-            res.json(user)
-        } else {
-            res.status(404).json({ "text": "Wrong username or password!" });
+        // let user = await User.findOne(req.query);
+        // if (user) {
+        //     console.log('Logged in')
+        //     res.json(user)
+        // } else {
+        //     res.status(404).json({ "text": "Wrong username or password!" });
+        // }
+        try {
+
+            let user = await User.findOne(req.query);
+        } catch (error) {
+            console.log(e);
         }
     },
     register: async (req, res) => {
-        let isUser = await User.findOne({ login: req.body.login });
-        if (isUser) {
-            res.status(400).json({ "text": "This username already exists" });
-        } else {
-            const user = new User(req.body);
-            try {
-                const newUser = await user.save();
-                res.json(newUser);
-            } catch (e) {
-                console.log(e)
-            }
+        const user = new User(req.body);
+        try {
+            const newUser = await user.save();
+            res.json(newUser);
+        } catch (e) {
+            res.status(400).json(e.errors);
         }
     },
     getUsers: async (req, res) => {

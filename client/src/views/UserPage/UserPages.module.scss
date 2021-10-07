@@ -32,9 +32,9 @@
         }
 
         h1 {
-            font-size: 35px;
-            position: absolute;
-            top: 10px;
+            font-size: 27.5px;
+            // position: absolute;
+            // top: 10px;
 
             @media (min-width: 720px) {
                 font-size: 45px;
@@ -42,8 +42,7 @@
         }
 
         h3 {
-            position: absolute;
-            top: 80px;
+            font-size: 17.5px;
             text-decoration: underline;
             color: #ff0000
         }
