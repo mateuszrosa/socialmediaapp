@@ -13,6 +13,7 @@ export const UserPage = ({ isLogged }) => {
     error: userReducer.error
   }));
 
+
   const formik = useFormik({
     initialValues: {
       login: "",
@@ -31,7 +32,7 @@ export const UserPage = ({ isLogged }) => {
     <div className={styles.container}>
       <div className={styles.login}>
         {isLogged ? <h1>Just Log In</h1> : <h1>Register</h1>}
-        {error && <h3>{error}</h3>}
+        {error && <h3>{error.message}</h3>}
         <form onSubmit={formik.handleSubmit}>
           {isLogged ?
             <label htmlFor="login">Login</label>

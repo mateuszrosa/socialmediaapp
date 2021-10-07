@@ -4,18 +4,12 @@ import { User } from '../models';
 
 export const user = {
     login: async (req, res) => {
-        // let user = await User.findOne(req.query);
-        // if (user) {
-        //     console.log('Logged in')
-        //     res.json(user)
-        // } else {
-        //     res.status(404).json({ "text": "Wrong username or password!" });
-        // }
-        try {
-
-            let user = await User.findOne(req.query);
-        } catch (error) {
-            console.log(e);
+        let user = await User.findOne(req.query);
+        if (user) {
+            console.log('Logged in')
+            res.json(user)
+        } else {
+            res.status(404).json({ "text": "Wrong username or password!" });
         }
     },
     register: async (req, res) => {

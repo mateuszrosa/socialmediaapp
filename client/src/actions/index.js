@@ -71,7 +71,7 @@ export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`https://socialmediaapp-backend.herokuapp.com/user/register/?`, {
+    .post(`http://localhost:3500/user/register/?`, {
       login,
       password,
       email,
@@ -84,7 +84,7 @@ export const register = (login, password, email) => (dispatch) => {
       dispatch({ type: REGISTER_SUCCES, payload });
     })
     .catch(({ response }) => {
-      dispatch({ type: REGISTER_FAILURE, error: response.data.message });
+      dispatch({ type: REGISTER_FAILURE, error: response.data });
     });
 };
 

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { validateEmail } from './validators';
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
@@ -16,6 +17,7 @@ const schema = new Schema({
         type: String,
         required: true,
         unique: true,
+        validate: [validateEmail, 'Email is not correct']
     },
     friends: {
         type: Array
@@ -40,6 +42,8 @@ schema.post('save', function (error, doc, next) {
                 error.errors = { message: 'That login is already used' }
             }
         }
+    } else if (error) {
+        error.errors = { message: error.message.split(": ")[2] }
     }
     next(error);
 })
