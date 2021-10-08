@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 import { validateEmail } from './validators';
 const Schema = mongoose.Schema;
 
@@ -12,6 +13,7 @@ const schema = new Schema({
     password: {
         type: String,
         required: true,
+        select: false,
     },
     email: {
         type: String,
@@ -31,6 +33,16 @@ const schema = new Schema({
     sent: {
         type: Array
     }
+})
+
+schema.pre('save', function (next) {
+    const user = this;
+    console.log(user);
+    const salt = bcrypt.genSaltSync(10);
+    if (!user.isModified('password')) return next();
+    const hash = bcrypt.hashSync(user.password, salt);
+    user.password = hash;
+    next();
 })
 
 schema.post('save', function (error, doc, next) {

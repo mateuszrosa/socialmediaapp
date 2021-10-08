@@ -41,11 +41,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 user: {
                     userId: action.payload.data._id,
-                    login: action.payload.data.login,
-                    email: action.payload.data.email,
-                    friends: action.payload.data.friends,
-                    inbox: action.payload.data.inbox,
-                    sent: action.payload.data.sent
+                    ...action.payload.data
                 }
             };
         }
@@ -72,7 +68,6 @@ export const userReducer = (state = initialState, action) => {
             }
         }
         case REGISTER_FAILURE: {
-            console.log(action);
             return {
                 ...state,
                 error: action.error

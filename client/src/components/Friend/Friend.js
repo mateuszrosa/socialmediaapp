@@ -10,6 +10,7 @@ import close from 'assets/close-fat.svg';
 
 export const Friend = ({ userId }) => {
 
+
     const dispatch = useDispatch()
 
     const { users = [], user } = useSelector(({ userReducer }) => ({
@@ -22,8 +23,9 @@ export const Friend = ({ userId }) => {
 
     useEffect(() => {
         let user = users.filter(user => user._id === userId);
-        setFriend(...user)
+        setFriend(...user);
     }, [])
+
 
     const sendMessage = () => {
         setOpen(!openMessage)

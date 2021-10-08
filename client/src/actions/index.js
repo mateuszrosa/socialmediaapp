@@ -71,7 +71,7 @@ export const register = (login, password, email) => (dispatch) => {
   const date = new Date();
   dispatch({ type: REGISTER_REQUEST });
   return axios
-    .post(`https://socialmediaapp-backend.herokuapp.com/register/?`, {
+    .post(`https://socialmediaapp-backend.herokuapp.com/user/register/?`, {
       login,
       password,
       email,
