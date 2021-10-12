@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,AAAC,CACP,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,WAAW,CAAE,MAAM,CACnB,OAAO,CAAE,aAAa,CAQzB,AANG,MAAM,EAAE,SAAS,EAAE,MAAM,EAR7B,AAAA,UAAU,AAAC,CASH,OAAO,CAAE,mBAAmB,CAC5B,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,cAAc,CACrC,UAAU,CAAE,KAAK,CAExB",
-    "sources": [
-        "../client/src/views/Friends/Friends.module.scss"
-    ],
-    "names": [],
-    "file": "Friends.module.css"
-}
