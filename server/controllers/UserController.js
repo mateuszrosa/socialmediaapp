@@ -4,13 +4,17 @@ import { User } from '../models';
 
 export const user = {
     login: async (req, res) => {
-        let user = await User.findOne(req.query);
-        if (user) {
-            console.log('Logged in')
-            res.json(user)
-        } else {
-            res.status(404).json({ "text": "Wrong username or password!" });
+        let user = await User.findOne({ login: req.query.login }).select('+password');
+        if (!user) {
+            return res.status(404).json({ "text": "Wrong login!" });
         }
+        const isPasswordValid = user.comparePassword(req.query.password);
+        if (!isPasswordValid) {
+            return res.status(404).json({ "text": "Wrong password!" });
+        }
+        console.log('Logged In!');
+        user.password = undefined;
+        res.json(user);
     },
     register: async (req, res) => {
         const user = new User(req.body);

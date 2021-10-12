@@ -35,6 +35,7 @@ const schema = new Schema({
     }
 })
 
+
 schema.pre('save', function (next) {
     const user = this;
     console.log(user);
@@ -59,5 +60,11 @@ schema.post('save', function (error, doc, next) {
     }
     next(error);
 })
+
+schema.methods = {
+    comparePassword(password) {
+        return bcrypt.compareSync(password, this.password);
+    }
+}
 
 export const User = mongoose.model('user', schema);
