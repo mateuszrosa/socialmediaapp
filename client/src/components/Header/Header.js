@@ -7,7 +7,7 @@ import logo from "../../assets/logo.png";
 
 export const Header = (e) => {
 
-  const { user, users } = useSelector(({ userReducer }) => ({
+  const { user, users = [] } = useSelector(({ userReducer }) => ({
     user: userReducer.user,
     users: userReducer.users
   }))

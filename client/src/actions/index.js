@@ -8,7 +8,7 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
-export const LOGOUT = "LOGOUT";
+export const LOGOUT_USER = "LOGOUT";
 export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
 export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
@@ -53,6 +53,7 @@ export const EDIT_POST_FAILURE = "EDIT_POST_FAILURE";
 export const FETCH_USER_POSTS_REQUEST = "FETCH_USER_POSTS_REQUEST";
 export const FETCH_USER_POSTS_SUCCESS = "FETCH_USER_POSTS_SUCCESS";
 export const FETCH_USER_POSTS_FAILURE = "FETCH_USER_POSTS_FAILURE";
+export const LOGOUT_POSTS = 'LOGOUT_POSTS';
 
 //MESSAGE ACTIONS
 export const SEND_MESSAGE_REQUEST = "SEND_MESSAGE_REQUEST";
@@ -101,13 +102,13 @@ export const login = (login, password) => (dispatch) => {
       dispatch({ type: LOGIN_SUCCES, payload });
     })
     .catch(({ response }) => {
-      dispatch({ type: LOGIN_FAILURE, error: response.data.text });
+      dispatch({ type: LOGIN_FAILURE, error: response.data });
     });
 };
 
 //LOGOUT
 export const logout = (userId, login) => (dispatch) => {
-  return dispatch({ type: LOGOUT, payload: { userId, login } });
+  return dispatch({ type: LOGOUT_USER });
 };
 
 //FETCH ALL USERS
@@ -118,7 +119,9 @@ export const fetchUsers = () => dispatch => {
     .then(payload => {
       return dispatch({ type: FETCH_USERS_SUCCESS, payload })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      return dispatch({ type: FETCH_USERS_FAILURE })
+    })
 }
 
 //FETCH SINGLE USER

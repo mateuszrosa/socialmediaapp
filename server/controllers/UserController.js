@@ -6,11 +6,11 @@ export const user = {
     login: async (req, res) => {
         let user = await User.findOne({ login: req.query.login }).select('+password');
         if (!user) {
-            return res.status(404).json({ "text": "Wrong login!" });
+            return res.status(404).json({ "message": "Wrong login!" });
         }
         const isPasswordValid = user.comparePassword(req.query.password);
         if (!isPasswordValid) {
-            return res.status(404).json({ "text": "Wrong password!" });
+            return res.status(404).json({ "message": "Wrong password!" });
         }
         console.log('Logged In!');
         user.password = undefined;
@@ -22,7 +22,7 @@ export const user = {
             const newUser = await user.save();
             res.json(newUser);
         } catch (e) {
-            res.status(400).json(e.errors);
+            return res.status(400).json(e.errors);
         }
     },
     getUsers: async (req, res) => {
@@ -30,7 +30,7 @@ export const user = {
             const users = await User.find({});
             res.json(users)
         } catch (e) {
-            console.log(e);
+            return res.sendStatus(400)
         }
     },
     getUser: async (req, res) => {
@@ -39,48 +39,54 @@ export const user = {
         if (user) {
             res.json(user)
         } else {
-            return res.status(404).send("That user does not exists");
+            return res.status(404).json({ "message": "That user does not exists" });
         }
     },
     addFriend: async (req, res) => {
         const { userId, friendId } = req.query;
-        let user = await User
-            .findByIdAndUpdate(
-                ObjectId(userId),
-                { $push: { "friends": friendId } },
-                { returnOriginal: false, upsert: true });
+        try {
+            let user = await User
+                .findByIdAndUpdate(
+                    ObjectId(userId),
+                    { $push: { "friends": friendId } },
+                    { returnOriginal: false, upsert: true });
 
-        let friendUser = await User
-            .findByIdAndUpdate(
-                ObjectId(friendId),
-                { $push: { "friends": userId } },
-                { returnOriginal: false, upsert: true });
-        res.json({
-            user,
-            friendUser
-        })
-    },
-    removeFriend: async (req, res) => {
-        const { userId, friendId } = req.query;
-        let user = await User
-            .findByIdAndUpdate(
-                ObjectId(userId),
-                { $pull: { "friends": friendId } },
-                { returnOriginal: false, upsert: true });
-
-        let friendUser = await User
-            .findByIdAndUpdate(
-                ObjectId(friendId),
-                { $pull: { "friends": userId } },
-                { returnOriginal: false, upsert: true });
-
-        if (user && friendUser) {
+            let friendUser = await User
+                .findByIdAndUpdate(
+                    ObjectId(friendId),
+                    { $push: { "friends": userId } },
+                    { returnOriginal: false, upsert: true });
             res.json({
                 user,
                 friendUser
             })
-        } else {
-            return res.status(404).send("These users does not exists");
+        } catch (e) {
+            return res.status(404).json({ "message": "These users does not exists" });
+        }
+    },
+    removeFriend: async (req, res) => {
+        const { userId, friendId } = req.query;
+        try {
+            let user = await User
+                .findByIdAndUpdate(
+                    ObjectId(userId),
+                    { $pull: { "friends": friendId } },
+                    { returnOriginal: false, upsert: true });
+            let friendUser = await User
+                .findByIdAndUpdate(
+                    ObjectId(friendId),
+                    { $pull: { "friends": useffrId } },
+                    { returnOriginal: false, upsert: true });
+            if (user && friendUser) {
+                res.json({
+                    user,
+                    friendUser
+                })
+            } else {
+                console.log('object');
+            }
+        } catch (error) {
+            return res.status(404).json({ "message": "These users does not exists" });
         }
     },
     sendMessage: async (req, res) => {
@@ -121,7 +127,7 @@ export const user = {
                     { returnOriginal: false, upsert: true })
             res.json(sender);
         } catch (e) {
-            console.log(e);
+            res.status(400).json({ "message": "Can not send that message" })
         }
     },
     removeMessage: async (req, res) => {
@@ -140,7 +146,7 @@ export const user = {
                 )
             res.json(user);
         } catch (e) {
-            console.log(e);
+            res.status(400).json({ "message": "Can not remove that message" })
         }
 
     }

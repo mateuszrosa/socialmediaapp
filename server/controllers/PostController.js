@@ -8,7 +8,7 @@ export const post = {
             const post = await new Post(req.body).save()
             res.json(post);
         } catch (e) {
-            console.log(e);
+            res.sendStatus(400)
         }
     },
     removePost: async (req, res) => {
@@ -17,7 +17,7 @@ export const post = {
             const post = await Post
                 .findByIdAndDelete(ObjectId(id))
             if (!post) {
-                res.sendStatus(404);
+                res.status(404).json({ "message": "Cannot find post to remove" });
             } else {
                 res.json(post)
             }
@@ -34,12 +34,12 @@ export const post = {
                     { $set: { "text": text } },
                     { returnOriginal: false, upsert: true })
             if (!post) {
-                res.sendStatus(404);
+                res.status(404).json({ "message": "Cannot find post to edit" });
             } else {
                 res.json(post);
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500)
         }
     },
     addLikeToPost: async (req, res) => {
@@ -51,12 +51,12 @@ export const post = {
                     { $inc: { "likes": 1 }, $push: { "likedBy": userId } },
                     { returnOriginal: false, upsert: true })
             if (!post) {
-                res.sendStatus(404);
+                res.status(404).json({ "message": "Cannot find post to add like" });
             } else {
                 res.json(post);
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500)
         }
     },
     addComment: async (req, res) => {
@@ -79,12 +79,12 @@ export const post = {
                     { returnOriginal: false, upsert: true }
                 )
             if (!post) {
-                res.sendStatus(404);
+                res.status(404).json({ "message": "Cannot find post to add comment" });
             } else {
                 res.json(post);
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500);
         }
     },
     removeComment: async (req, res) => {
@@ -102,12 +102,12 @@ export const post = {
                     { returnOriginal: false, upsert: true }
                 )
             if (!post) {
-                res.sendStatus(404);
+                res.status(404).json({ "message": "Cannot find post to remove comment" });
             } else {
                 res.json(post)
             }
         } catch (e) {
-            console.log(e)
+            res.sendStatus(500);
         }
     },
     editComment: async (req, res) => {
@@ -119,12 +119,12 @@ export const post = {
                     { $set: { "comments.$.text": text, "comments.$.date": date } },
                     { returnOriginal: false, upsert: true })
             if (!post) {
-                res.sendStatus(404)
+                res.status(404).json({ "message": "Cannot find post to edit comment" })
             } else {
                 res.json(post)
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500);
         }
 
     },
@@ -134,12 +134,12 @@ export const post = {
             const post = await Post
                 .findById(ObjectId(id))
             if (!post) {
-                res.sendStatus(404);
+                res.status(404).json({ "message": "Cannot find post" });
             } else {
                 res.json(post)
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500);
         }
     },
     getUsersPosts: async (req, res) => {
@@ -148,12 +148,12 @@ export const post = {
             const posts = await Post
                 .find({ userId })
             if (!posts) {
-                res.sendStatus(404)
+                res.status(404).json({ "message": "Cannot find user's posts" });
             } else {
-                res.json(posts)
+                res.json(posts);
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500);
         }
 
     },
@@ -162,12 +162,12 @@ export const post = {
             const posts = await Post
                 .find()
             if (!posts) {
-                res.sendStatus(404)
+                res.status(404).json({ "message": "Cannot find posts" });
             } else {
                 res.json(posts)
             }
         } catch (e) {
-            console.log(e);
+            res.sendStatus(500);
         }
     }
 }

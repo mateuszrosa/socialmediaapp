@@ -5,25 +5,25 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCES,
     LOGIN_FAILURE,
-    LOGOUT,
+    LOGOUT_USER,
     FETCH_USERS_REQUEST,
     FETCH_USERS_SUCCESS,
-    // FETCH_USERS_FAILURE,
+    FETCH_USERS_FAILURE,
     FETCH_USER_REQUEST,
     FETCH_USER_SUCCESS,
-    // FETCH_USER_FAILURE,
+    FETCH_USER_FAILURE,
     ADD_FRIEND_REQUEST,
     ADD_FRIEND_SUCCESS,
-    // ADD_FRIEND_FAILURE,
+    ADD_FRIEND_FAILURE,
     REMOVE_FRIEND_REQUEST,
     REMOVE_FRIEND_SUCCESS,
-    // REMOVE_FRIEND_FAILURE,
+    REMOVE_FRIEND_FAILURE,
     SEND_MESSAGE_REQUEST,
     SEND_MESSAGE_SUCCESS,
-    // SEND_MESSAGE_FAILURE,
+    SEND_MESSAGE_FAILURE,
     REMOVE_MESSAGE_REQUEST,
     REMOVE_MESSAGE_SUCCESS,
-    // REMOVE_MESSAGE_FAILURE
+    REMOVE_MESSAGE_FAILURE
 } from 'actions';
 
 const initialState = {
@@ -75,13 +75,11 @@ export const userReducer = (state = initialState, action) => {
         }
 
         //LOGOUT
-        case LOGOUT: {
+        case LOGOUT_USER: {
             state.user = {};
+            state.users = {};
+            state.error = {};
             state.profileUser = {};
-            delete state.users;
-            delete state.posts;
-            delete state.post;
-            delete state.error;
             return { ...state };
         }
 
@@ -93,6 +91,14 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.payload.data
+            }
+        }
+        case FETCH_USERS_FAILURE: {
+            return {
+                ...state,
+                error: {
+                    message: 'Can not fetch users!'
+                }
             }
         }
 
@@ -111,6 +117,12 @@ export const userReducer = (state = initialState, action) => {
                     inbox: action.payload.data.inbox,
                     sent: action.payload.data.sent
                 }
+            }
+        }
+        case FETCH_USER_FAILURE: {
+            return {
+                ...state,
+                error: action.error
             }
         }
 
@@ -138,6 +150,12 @@ export const userReducer = (state = initialState, action) => {
                 }
             }
         }
+        case ADD_FRIEND_FAILURE: {
+            return {
+                ...state,
+                error: action.error
+            }
+        }
 
         case REMOVE_FRIEND_REQUEST: {
             return state;
@@ -158,7 +176,15 @@ export const userReducer = (state = initialState, action) => {
                     sent: action.payload.data.user.sent
                 }
             }
-        }//SEND MESSAGE
+        }
+        case REMOVE_FRIEND_FAILURE: {
+            return {
+                ...state,
+                error: action.error
+            }
+        }
+
+        //SEND MESSAGE
         case SEND_MESSAGE_REQUEST: {
             return state;
         }
@@ -173,6 +199,12 @@ export const userReducer = (state = initialState, action) => {
                     inbox: action.payload.data.inbox,
                     sent: action.payload.data.sent
                 }
+            }
+        }
+        case SEND_MESSAGE_FAILURE: {
+            return {
+                ...state,
+                error: action.error
             }
         }
 
@@ -190,6 +222,12 @@ export const userReducer = (state = initialState, action) => {
                     inbox: action.payload.data.inbox,
                     sent: action.payload.data.sent
                 }
+            }
+        }
+        case REMOVE_MESSAGE_FAILURE: {
+            return {
+                ...state,
+                error: action.error
             }
         }
 
