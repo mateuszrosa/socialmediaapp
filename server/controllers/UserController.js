@@ -75,7 +75,7 @@ export const user = {
             let friendUser = await User
                 .findByIdAndUpdate(
                     ObjectId(friendId),
-                    { $pull: { "friends": useffrId } },
+                    { $pull: { "friends": userId } },
                     { returnOriginal: false, upsert: true });
             if (user && friendUser) {
                 res.json({
