@@ -1,9 +1,9 @@
 {
-  "main.css": "/socialmediaapp/static/css/main.3c99f05e.chunk.css",
-  "main.js": "/socialmediaapp/static/js/main.b52f9850.chunk.js",
-  "main.js.map": "/socialmediaapp/static/js/main.b52f9850.chunk.js.map",
-  "static/js/1.d9481133.chunk.js": "/socialmediaapp/static/js/1.d9481133.chunk.js",
-  "static/js/1.d9481133.chunk.js.map": "/socialmediaapp/static/js/1.d9481133.chunk.js.map",
+  "main.css": "/socialmediaapp/static/css/main.ef4e32ac.chunk.css",
+  "main.js": "/socialmediaapp/static/js/main.68cb8f15.chunk.js",
+  "main.js.map": "/socialmediaapp/static/js/main.68cb8f15.chunk.js.map",
+  "static/js/1.5ec6a9f7.chunk.js": "/socialmediaapp/static/js/1.5ec6a9f7.chunk.js",
+  "static/js/1.5ec6a9f7.chunk.js.map": "/socialmediaapp/static/js/1.5ec6a9f7.chunk.js.map",
   "runtime~main.js": "/socialmediaapp/static/js/runtime~main.3b28988c.js",
   "runtime~main.js.map": "/socialmediaapp/static/js/runtime~main.3b28988c.js.map",
   "static/media/Message.module.scss": "/socialmediaapp/static/media/male.c53369d5.svg",
@@ -16,8 +16,8 @@
   "static/media/comment-blog.svg": "/socialmediaapp/static/media/comment-blog.23e1294f.svg",
   "static/media/expand.svg": "/socialmediaapp/static/media/expand.63c7b0a6.svg",
   "static/media/add.svg": "/socialmediaapp/static/media/add.37032d4b.svg",
-  "static/css/main.3c99f05e.chunk.css.map": "/socialmediaapp/static/css/main.3c99f05e.chunk.css.map",
+  "static/css/main.ef4e32ac.chunk.css.map": "/socialmediaapp/static/css/main.ef4e32ac.chunk.css.map",
   "index.html": "/socialmediaapp/index.html",
-  "precache-manifest.638681730ee284f17a38c019b2167f3e.js": "/socialmediaapp/precache-manifest.638681730ee284f17a38c019b2167f3e.js",
+  "precache-manifest.68cd15bccfc9c2209ad0a185939b9865.js": "/socialmediaapp/precache-manifest.68cd15bccfc9c2209ad0a185939b9865.js",
   "service-worker.js": "/socialmediaapp/service-worker.js"
 }
