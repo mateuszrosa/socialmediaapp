@@ -56,12 +56,16 @@ export const user = {
                     ObjectId(friendId),
                     { $push: { "friends": userId } },
                     { returnOriginal: false, upsert: true });
-            res.json({
-                user,
-                friendUser
-            })
+            if (user && friendUser) {
+                res.json({
+                    user,
+                    friendUser
+                })
+            } else {
+                return res.status(404).json({ "message": "These users does not exists" });
+            }
         } catch (e) {
-            return res.status(404).json({ "message": "These users does not exists" });
+            res.sendStatus(500);
         }
     },
     removeFriend: async (req, res) => {
@@ -83,10 +87,10 @@ export const user = {
                     friendUser
                 })
             } else {
-                console.log('object');
+                return res.status(404).json({ "message": "These users does not exists" });
             }
         } catch (error) {
-            return res.status(404).json({ "message": "These users does not exists" });
+            return res.sendStatus(500);
         }
     },
     sendMessage: async (req, res) => {

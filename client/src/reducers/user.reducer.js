@@ -27,7 +27,8 @@ import {
 } from 'actions';
 
 const initialState = {
-    user: {}
+    user: {
+    }
 };
 
 export const userReducer = (state = initialState, action) => {
