@@ -5,7 +5,7 @@ import { router } from './routes'
 
 dotenv.config();
 
-const port = process.env.PORT || 3500;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
